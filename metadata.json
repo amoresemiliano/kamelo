@@ -1,0 +1,6 @@
+{
+  "name": "Kamelo Aromáticos",
+  "description": "Plataforma interna de gestión para Kamelo Aromáticos: laboratorio de fórmulas, compras agrupadas por proveedor, inteligencia de mercado ARS y catálogo interactivo con compartir por WhatsApp.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

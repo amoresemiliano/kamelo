@@ -9,14 +9,19 @@ module.exports = {
     extend: {
       colors: {
         kamelo: {
-          espresso: "#2A1E17",
-          terracotta: "#C86D51",
-          amber: "#D9822B",
-          sage: "#6E8B74",
-          linen: "#F7F4EE",
-          sand: "#E6DFC8",
-          card: "#FFFFFF",
-          muted: "#7A6B61"
+          espresso: "#4B4038",
+          dark: "#3E342F",
+          terracotta: "#C98F7A",
+          salmon: "#DFA28F",
+          amber: "#D6A36D",
+          sage: "#7D9882",
+          linen: "#F7F3EE",
+          sand: "#D8C7B8",
+          beigemed: "#CBB8A6",
+          card: "#FBF8F4",
+          border: "#E7DDD4",
+          muted: "#7A6E65",
+          text: "#4B4038",
         }
       }
     },

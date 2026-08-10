@@ -1,41 +1,49 @@
 import React from 'react';
 
-export function LotusIcon({ className = "w-6 h-6", color = "currentColor" }: { className?: string; color?: string }) {
+export function LotusIcon({ className = "w-7 h-7", primaryColor = "#C98F7A", secondaryColor = "#DFA28F", accentColor = "#D6A36D", leafColor = "#7D9882" }: { className?: string; primaryColor?: string; secondaryColor?: string; accentColor?: string; leafColor?: string }) {
   return (
-    <svg className={className} viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-      {/* Lotus Center Bud/Petal */}
+    <svg className={className} viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+      {/* Outer base leaf line */}
       <path
-        d="M16 4C14.5 9 13.8 12.5 16 18C18.2 12.5 17.5 9 16 4Z"
-        fill="#D9822B"
-      />
-      {/* Left Inner Petal */}
-      <path
-        d="M16 18C12 13.5 8 12 6 15C4.5 17.2 6 20.5 11 21C13 21 15 19.5 16 18Z"
-        fill="#C86D51"
-      />
-      {/* Right Inner Petal */}
-      <path
-        d="M16 18C20 13.5 24 12 26 15C27.5 17.2 26 20.5 21 21C19 21 17 19.5 16 18Z"
-        fill="#C86D51"
-      />
-      {/* Left Outer Base Petal */}
-      <path
-        d="M16 19.5C10.5 17 5 18 3 21C1.5 23 3 25.5 8 25.5C12 25.5 14.8 22 16 19.5Z"
-        fill="#2A1E17"
-        opacity="0.85"
-      />
-      {/* Right Outer Base Petal */}
-      <path
-        d="M16 19.5C21.5 17 27 18 29 21C30.5 23 29 25.5 24 25.5C20 25.5 17.2 22 16 19.5Z"
-        fill="#2A1E17"
-        opacity="0.85"
-      />
-      {/* Water Lotus Leaf Base Curve */}
-      <path
-        d="M4 26.5C11 28.5 21 28.5 28 26.5"
-        stroke="#6E8B74"
-        strokeWidth="2"
+        d="M4 29.5C12 32.5 24 32.5 32 29.5"
+        stroke={leafColor}
+        strokeWidth="2.2"
         strokeLinecap="round"
+      />
+      {/* Central Petal Bud */}
+      <path
+        d="M18 4C16.2 9.5 15.2 14 18 21C20.8 14 19.8 9.5 18 4Z"
+        fill={accentColor}
+        stroke="#4B4038"
+        strokeWidth="0.8"
+      />
+      {/* Inner Left Petal */}
+      <path
+        d="M18 21C13.5 15.5 8.5 14 6.5 17.5C5 20 7 23.5 12.5 24.2C14.8 24.5 16.8 22.8 18 21Z"
+        fill={primaryColor}
+        stroke="#4B4038"
+        strokeWidth="0.8"
+      />
+      {/* Inner Right Petal */}
+      <path
+        d="M18 21C22.5 15.5 27.5 14 29.5 17.5C31 20 29 23.5 23.5 24.2C21.2 24.5 19.2 22.8 18 21Z"
+        fill={primaryColor}
+        stroke="#4B4038"
+        strokeWidth="0.8"
+      />
+      {/* Lower Left Petal */}
+      <path
+        d="M18 22.5C11.5 20 5.5 21 3.5 24.2C2 26.5 3.8 28.5 9.5 28.5C14 28.5 16.8 25 18 22.5Z"
+        fill={secondaryColor}
+        stroke="#4B4038"
+        strokeWidth="0.8"
+      />
+      {/* Lower Right Petal */}
+      <path
+        d="M18 22.5C24.5 20 30.5 21 32.5 24.2C34 26.5 32.2 28.5 26.5 28.5C22 28.5 19.2 25 18 22.5Z"
+        fill={secondaryColor}
+        stroke="#4B4038"
+        strokeWidth="0.8"
       />
     </svg>
   );
@@ -43,20 +51,20 @@ export function LotusIcon({ className = "w-6 h-6", color = "currentColor" }: { c
 
 export function LotusLogoHeader({ className = "" }: { className?: string }) {
   return (
-    <div className={`flex items-center gap-2.5 ${className}`}>
-      <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#2A1E17] via-[#3D2C22] to-[#2A1E17] p-2 flex items-center justify-center border border-[#C86D51]/30 shadow-sm">
-        <LotusIcon className="w-6 h-6" />
+    <div className={`flex items-center gap-3 ${className}`}>
+      <div className="w-10 h-10 rounded-2xl bg-[#4B4038] p-1.5 flex items-center justify-center border border-[#C98F7A]/40 shadow-sm transition-transform group-hover:scale-105">
+        <LotusIcon className="w-7 h-7" primaryColor="#DFA28F" secondaryColor="#C98F7A" accentColor="#D6A36D" leafColor="#7D9882" />
       </div>
       <div>
-        <div className="flex items-center gap-1.5">
-          <span className="font-serif font-bold text-lg tracking-wider text-[#F7F4EE]">
+        <div className="flex items-center gap-2">
+          <span className="font-serif font-bold text-lg tracking-wider text-[#FBF8F4]">
             KAMELO
           </span>
-          <span className="text-[10px] bg-[#C86D51]/30 text-[#E6DFC8] px-2 py-0.5 rounded-full border border-[#C86D51]/40 font-mono">
+          <span className="text-[10px] bg-[#C98F7A]/30 text-[#DFA28F] px-2 py-0.5 rounded-full border border-[#C98F7A]/40 font-mono font-medium">
             Aromáticos
           </span>
         </div>
-        <p className="text-[9px] text-[#E6DFC8]/70 tracking-widest uppercase font-medium">
+        <p className="text-[9px] text-[#D8C7B8] tracking-widest uppercase font-medium">
           Laboratorio & Perfumería
         </p>
       </div>

@@ -25,27 +25,27 @@ export default function ConfirmDialog({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4 animate-in fade-in">
-      <div className="bg-[#2A1E17] text-[#F7F4EE] border border-[#C86D51]/40 rounded-2xl max-w-md w-full p-6 shadow-2xl relative">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-xs p-4 animate-in fade-in">
+      <div className="bg-[#3E342F] text-[#FBF8F4] border border-[#C98F7A]/40 rounded-2xl max-w-md w-full p-6 shadow-xl relative">
         <button
           onClick={onCancel}
-          className="absolute top-4 right-4 text-[#E6DFC8]/60 hover:text-white transition-colors"
+          className="absolute top-4 right-4 text-[#D8C7B8]/70 hover:text-white transition-colors"
         >
           <X className="w-5 h-5" />
         </button>
 
         <div className="flex items-start gap-4">
-          <div className="w-10 h-10 rounded-full bg-[#C86D51]/20 border border-[#C86D51]/40 flex items-center justify-center shrink-0">
-            <AlertTriangle className="w-5 h-5 text-[#C86D51]" />
+          <div className="w-10 h-10 rounded-full bg-[#C98F7A]/20 border border-[#C98F7A]/40 flex items-center justify-center shrink-0">
+            <AlertTriangle className="w-5 h-5 text-[#C98F7A]" />
           </div>
           <div>
-            <h3 className="font-serif font-bold text-lg text-[#F7F4EE] mb-1">{title}</h3>
-            <p className="text-xs text-[#E6DFC8]/80 leading-relaxed mb-6">{message}</p>
+            <h3 className="font-serif font-bold text-lg text-[#FBF8F4] mb-1">{title}</h3>
+            <p className="text-xs text-[#D8C7B8] leading-relaxed mb-6">{message}</p>
 
             <div className="flex items-center justify-end gap-3">
               <button
                 onClick={onCancel}
-                className="px-4 py-2 rounded-xl text-xs font-medium text-[#E6DFC8] bg-[#3D2C22] hover:bg-[#523B2E] transition-colors"
+                className="px-4 py-2 rounded-xl text-xs font-medium text-[#D8C7B8] bg-[#4B4038] hover:bg-[#5a4e45] transition-colors"
               >
                 {cancelLabel}
               </button>
@@ -54,7 +54,7 @@ export default function ConfirmDialog({
                   onConfirm();
                   onCancel();
                 }}
-                className="px-4 py-2 rounded-xl text-xs font-semibold text-white bg-[#C86D51] hover:bg-[#a85239] transition-colors shadow-md"
+                className="px-4 py-2 rounded-xl text-xs font-semibold text-white bg-[#C98F7A] hover:bg-[#b87e6a] transition-colors shadow-xs"
               >
                 {confirmLabel}
               </button>

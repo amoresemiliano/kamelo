@@ -99,6 +99,7 @@ interface KameloContextType {
   addMarketQuery: (query: Omit<MarketQuery, 'id'>) => MarketQuery;
   updateMarketQuery: (id: string, query: Partial<MarketQuery>) => void;
   deleteMarketQuery: (id: string) => void;
+  duplicateMarketQuery: (id: string) => void;
   toggleMarketQueryStatus: (id: string) => void;
   runMarketQueries: () => void;
   adjustBenchmarkPrice: (benchmarkId: string, newPriceARS: number) => void;
@@ -651,6 +652,20 @@ export const KameloProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     }
   };
 
+  const duplicateMarketQuery = (id: string) => {
+    const target = marketQueries.find((q) => q.id === id);
+    if (!target) return;
+    const duplicated: MarketQuery = {
+      ...target,
+      id: `mq-${Date.now()}`,
+      name: `${target.name} (Copia)`,
+      lastRun: undefined,
+    };
+    setMarketQueries((prev) => [duplicated, ...prev]);
+    addActivityLog('Consulta Duplicada', `Consulta "${target.name}" duplicada.`, 'market');
+    showToast(`Consulta duplicada como "${duplicated.name}".`);
+  };
+
   const toggleMarketQueryStatus = (id: string) => {
     setMarketQueries((prev) =>
       prev.map((q) =>
@@ -759,6 +774,7 @@ export const KameloProvider: React.FC<{ children: React.ReactNode }> = ({ childr
         addMarketQuery,
         updateMarketQuery,
         deleteMarketQuery,
+        duplicateMarketQuery,
         toggleMarketQueryStatus,
         runMarketQueries,
         adjustBenchmarkPrice,

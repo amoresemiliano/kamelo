@@ -169,10 +169,14 @@ export interface CatalogProduct {
 export interface MarketQuery {
   id: string;
   name: string;
-  category: string;
-  keywords: string;
-  zone: 'CABA' | 'Zona Norte' | 'Buenos Aires' | 'Argentina';
-  source: 'Mercado Libre' | 'Ecommerce' | 'Marca concreta' | 'Otra';
+  category?: string;
+  keywords?: string;
+  zone?: 'CABA' | 'Zona Norte' | 'Buenos Aires' | 'Argentina' | string;
+  source?: 'Mercado Libre' | 'Ecommerce' | 'Marca concreta' | 'Otra' | string;
+  sources?: string[];
+  selectedProducts?: string[];
+  selectedSupplies?: string[];
+  freeText?: string;
   status: 'Activo' | 'Inactivo';
   lastRun?: string;
 }

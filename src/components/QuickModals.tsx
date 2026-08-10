@@ -260,11 +260,11 @@ export default function QuickModals() {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4 overflow-y-auto animate-in fade-in">
-      <div className="bg-[#2A1E17] text-[#F7F4EE] border border-[#C86D51]/40 rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl relative my-8">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-xs p-4 overflow-y-auto animate-in fade-in">
+      <div className="bg-[#3E342F] text-[#FBF8F4] border border-[#C98F7A]/40 rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-xl relative my-8">
         <button
           onClick={() => setActiveModal(null)}
-          className="absolute top-5 right-5 text-[#E6DFC8]/60 hover:text-white p-1 rounded-full bg-[#3D2C22] transition-colors"
+          className="absolute top-5 right-5 text-[#D8C7B8]/70 hover:text-white p-1.5 rounded-full bg-[#4B4038] transition-colors"
         >
           <X className="w-5 h-5" />
         </button>

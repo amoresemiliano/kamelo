@@ -159,6 +159,7 @@ export interface CatalogProduct {
   formulaId?: string;
   formulaName?: string;
   imageUrl?: string;
+  images?: string[];
   variants: ProductVariant[];
   badge?: string;
   topNotes?: string;

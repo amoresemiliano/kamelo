@@ -55,6 +55,7 @@ export default function QuickModals() {
     variantSize: '200 g',
     variantPrice: 18500,
     variantCost: 5800,
+    imageUrl: '',
   });
 
   // ---------------------------------------------------------------------------
@@ -155,6 +156,15 @@ export default function QuickModals() {
       return;
     }
 
+    const defaultCategoryImages: Record<string, string> = {
+      'Velas Botánicas': 'https://images.unsplash.com/photo-1603006905003-be475563bc59?auto=format&fit=crop&w=1000&q=80',
+      'Difusores de Ambiente': 'https://images.unsplash.com/photo-1616949755610-8c9bbc08f138?auto=format&fit=crop&w=1000&q=80',
+      'Perfumes Finos': 'https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=1000&q=80',
+      'Cosmética Natural': 'https://images.unsplash.com/photo-1598880940371-c756e015fea1?auto=format&fit=crop&w=1000&q=80',
+    };
+
+    const finalImg = productForm.imageUrl.trim() || defaultCategoryImages[productForm.category] || defaultCategoryImages['Velas Botánicas'];
+
     addProduct({
       sku: productForm.sku,
       name: productForm.name,
@@ -164,6 +174,8 @@ export default function QuickModals() {
       collection: productForm.collection,
       fragranceFamily: productForm.fragranceFamily,
       status: productForm.status,
+      imageUrl: finalImg,
+      images: [finalImg],
       variants: [
         {
           id: `var-${Date.now()}`,
@@ -540,6 +552,17 @@ export default function QuickModals() {
                   placeholder="Ej. Cera de soja 100% pura en vaso de cristal."
                   value={productForm.shortDescription}
                   onChange={(e) => setProductForm({ ...productForm, shortDescription: e.target.value })}
+                  className="w-full bg-[#3D2C22] border border-[#523B2E] rounded-xl px-3.5 py-2 text-xs text-white focus:outline-none focus:border-[#D9822B]"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs font-semibold text-[#E6DFC8] mb-1">URL de Imagen del Producto (Opcional)</label>
+                <input
+                  type="url"
+                  placeholder="https://images.unsplash.com/... (Dejar vacío para usar imagen automática)"
+                  value={productForm.imageUrl}
+                  onChange={(e) => setProductForm({ ...productForm, imageUrl: e.target.value })}
                   className="w-full bg-[#3D2C22] border border-[#523B2E] rounded-xl px-3.5 py-2 text-xs text-white focus:outline-none focus:border-[#D9822B]"
                 />
               </div>

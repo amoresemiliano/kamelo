@@ -27,6 +27,7 @@ import {
 } from 'lucide-react';
 import { useKamelo } from '@/context/KameloContext';
 import { MarketBenchmark, MarketQuery } from '@/types';
+import SectionHero from '@/components/SectionHero';
 
 export default function MercadoPage() {
   const {
@@ -219,27 +220,22 @@ export default function MercadoPage() {
   return (
     <div className="space-y-8 animate-in fade-in pb-12">
       {/* Header Banner */}
-      <div className="bg-[#FBF8F4] p-6 sm:p-8 rounded-3xl border border-[#E7DDD4] flex flex-col md:flex-row md:items-center justify-between gap-6 shadow-xs">
-        <div>
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#DFA28F]/20 text-[#C98F7A] text-xs font-semibold mb-2 border border-[#DFA28F]/30">
-            <TrendingUp className="w-3.5 h-3.5" /> Módulo de Inteligencia Comercial ARS
-          </div>
-          <h1 className="text-2xl sm:text-3xl font-serif font-bold text-[#4B4038]">
-            Inteligencia de Mercado & Precios
-          </h1>
-          <p className="text-xs sm:text-sm text-[#7A6E65] mt-1 leading-relaxed max-w-3xl">
-            Herramienta interactiva para investigar precios de referencia, insumos y marcas competidoras en Argentina. Configurá tus consultas a medida.
-          </p>
-        </div>
-
+      <SectionHero
+        title="Inteligencia de Mercado & Precios"
+        subtitle="Herramienta interactiva para investigar precios de referencia, insumos y marcas competidoras en Argentina. Configurá tus consultas a medida."
+        badgeText="Módulo de Inteligencia Comercial ARS"
+        badgeIcon={<TrendingUp className="w-3.5 h-3.5 text-[#C98F7A]" />}
+        bgImage="https://images.unsplash.com/photo-1616949755610-8c9bbc08f138?auto=format&fit=crop&w=1600&q=80"
+        noticeText="Simulación de relevamiento activa"
+      >
         {/* Notice Badge */}
-        <div className="flex items-center gap-2 bg-[#FAF3E8] px-3.5 py-2 rounded-2xl border border-[#D6A36D]/30 text-xs shrink-0">
+        <div className="flex items-center gap-2 bg-[#2D2521]/90 backdrop-blur-md px-3.5 py-2 rounded-2xl border border-[#D8C7B8]/20 text-xs shrink-0 shadow-lg">
           <Info className="w-4 h-4 text-[#D6A36D] shrink-0" />
-          <span className="text-[#7A6E65] font-medium text-[11px]">
+          <span className="text-[#D8C7B8] font-medium text-[11px]">
             Datos simulados para validación del MVP
           </span>
         </div>
-      </div>
+      </SectionHero>
 
       {/* --------------------------------------------------------------------- */}
       {/* 1. BLOQUE NUEVA CONSULTA DE MERCADO */}

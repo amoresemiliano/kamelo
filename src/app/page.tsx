@@ -19,6 +19,7 @@ import {
 } from 'lucide-react';
 import { useKamelo } from '@/context/KameloContext';
 import { LotusIcon } from '@/components/LotusLogo';
+import SectionHero from '@/components/SectionHero';
 
 export default function DashboardPage() {
   const {
@@ -45,61 +46,51 @@ export default function DashboardPage() {
   return (
     <div className="space-y-8 animate-in fade-in">
       {/* Header Banner */}
-      <div className="bg-gradient-to-r from-[#3E342F] via-[#4B4038] to-[#3E342F] text-[#FBF8F4] rounded-3xl p-6 sm:p-8 shadow-sm border border-[#4B4038] relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-[#C98F7A]/15 rounded-full blur-3xl pointer-events-none" />
-        
-        <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
-          <div className="max-w-2xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#C98F7A]/20 text-[#D8C7B8] text-xs font-semibold border border-[#C98F7A]/30 mb-3">
-              <LotusIcon className="w-4 h-4 text-[#D6A36D]" /> Panel Operativo — Kamelo Aromáticos
-            </div>
-            <h1 className="text-2xl sm:text-3xl font-serif font-bold text-white mb-2 leading-tight">
-              Control General de Laboratorio & Compras ARS
-            </h1>
-            <p className="text-xs sm:text-sm text-[#D8C7B8]/90 leading-relaxed">
-              Plataforma interactiva para desarrollo de fragancias, cálculo de batches, agrupación de pedidos a proveedores por mínimos de compra y monitoreo competitivo de precios.
-            </p>
-          </div>
+      <SectionHero
+        title="Control General de Laboratorio & Compras ARS"
+        subtitle="Plataforma interactiva para desarrollo de fragancias, cálculo de batches, agrupación de pedidos a proveedores por mínimos de compra y monitoreo competitivo de precios."
+        badgeText="Panel Operativo — Kamelo Aromáticos"
+        badgeIcon={<LotusIcon className="w-4 h-4 text-[#D6A36D]" />}
+        bgImage="https://images.unsplash.com/photo-1603006905003-be475563bc59?auto=format&fit=crop&w=1600&q=80"
+      >
+        {/* Quick Actions Bar */}
+        <div className="flex flex-wrap items-center gap-2 bg-[#2D2521]/90 backdrop-blur-md p-3 rounded-2xl border border-[#D8C7B8]/20 shrink-0 shadow-lg">
+          <button
+            onClick={() => setActiveModal('formula')}
+            className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-[#C98F7A] hover:bg-[#b87e6a] text-white text-xs font-semibold shadow-xs transition-all active:scale-95"
+          >
+            <Plus className="w-3.5 h-3.5" /> Crear Fórmula
+          </button>
 
-          {/* Quick Actions Bar */}
-          <div className="flex flex-wrap items-center gap-2 bg-[#2D2521]/80 p-3 rounded-2xl border border-[#4B4038] shrink-0">
-            <button
-              onClick={() => setActiveModal('formula')}
-              className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-[#C98F7A] hover:bg-[#b87e6a] text-white text-xs font-semibold shadow-xs transition-all active:scale-95"
-            >
-              <Plus className="w-3.5 h-3.5" /> Crear Fórmula
-            </button>
+          <button
+            onClick={() => setActiveModal('product')}
+            className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-[#D6A36D] hover:bg-[#c5935d] text-white text-xs font-semibold shadow-xs transition-all active:scale-95"
+          >
+            <Package className="w-3.5 h-3.5" /> Crear Producto
+          </button>
 
-            <button
-              onClick={() => setActiveModal('product')}
-              className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-[#D6A36D] hover:bg-[#c5935d] text-white text-xs font-semibold shadow-xs transition-all active:scale-95"
-            >
-              <Package className="w-3.5 h-3.5" /> Crear Producto
-            </button>
+          <button
+            onClick={() => setActiveModal('purchaseOrder')}
+            className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-[#7D9882] hover:bg-[#6b8570] text-white text-xs font-semibold shadow-xs transition-all active:scale-95"
+          >
+            <ShoppingBag className="w-3.5 h-3.5" /> Crear Orden
+          </button>
 
-            <button
-              onClick={() => setActiveModal('purchaseOrder')}
-              className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-[#7D9882] hover:bg-[#6b8570] text-white text-xs font-semibold shadow-xs transition-all active:scale-95"
-            >
-              <ShoppingBag className="w-3.5 h-3.5" /> Crear Orden
-            </button>
+          <button
+            onClick={() => setActiveModal('supplier')}
+            className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-[#4B4038] hover:bg-[#5a4e45] text-[#D8C7B8] text-xs font-semibold border border-[#D8C7B8]/20 transition-all"
+          >
+            <Building2 className="w-3.5 h-3.5" /> Proveedor
+          </button>
 
-            <button
-              onClick={() => setActiveModal('supplier')}
-              className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-[#4B4038] hover:bg-[#5a4e45] text-[#D8C7B8] text-xs font-semibold border border-[#D8C7B8]/20 transition-all"
-            >
-              <Building2 className="w-3.5 h-3.5" /> Proveedor
-            </button>
-
-            <button
-              onClick={() => runMarketQueries()}
-              className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-[#D6A36D]/20 hover:bg-[#D6A36D]/30 text-[#D6A36D] text-xs font-semibold border border-[#D6A36D]/40 transition-all"
-            >
-              <Play className="w-3.5 h-3.5" /> Consultar Mercado
-            </button>
-          </div>
+          <button
+            onClick={() => runMarketQueries()}
+            className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-[#D6A36D]/20 hover:bg-[#D6A36D]/30 text-[#D6A36D] text-xs font-semibold border border-[#D6A36D]/40 transition-all"
+          >
+            <Play className="w-3.5 h-3.5" /> Consultar Mercado
+          </button>
         </div>
-      </div>
+      </SectionHero>
 
       {/* KPI & Operational Alerts Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">

@@ -23,6 +23,7 @@ import {
 import { useKamelo } from '@/context/KameloContext';
 import { Formula, Ingredient, BatchTest, InsumoCategory } from '@/types';
 import ConfirmDialog from '@/components/ConfirmDialog';
+import SectionHero from '@/components/SectionHero';
 
 export default function LaboratorioPage() {
   const {
@@ -214,27 +215,21 @@ export default function LaboratorioPage() {
   return (
     <div className="space-y-8 animate-in fade-in">
       {/* Page Header */}
-      <div className="bg-white p-6 sm:p-8 rounded-3xl shadow-xs border border-[#E6DFC8] flex flex-col md:flex-row md:items-center justify-between gap-6">
-        <div>
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#C86D51]/10 text-[#C86D51] text-xs font-semibold mb-2">
-            <FlaskConical className="w-3.5 h-3.5" /> Módulo de Laboratorio & Desarrollo
-          </div>
-          <h1 className="text-2xl sm:text-3xl font-serif font-bold text-[#2A1E17]">
-            Laboratorio Olfativo & Insumos
-          </h1>
-          <p className="text-xs sm:text-sm text-[#7A6B61] mt-1">
-            Diseño de pirámides olfativas, guía de formulación por categoría, inventario de insumos y evaluación de lotes de prueba.
-          </p>
-        </div>
-
+      <SectionHero
+        title="Laboratorio Olfativo & Insumos"
+        subtitle="Diseño de pirámides olfativas, guía de formulación por categoría, inventario de insumos y evaluación de lotes de prueba."
+        badgeText="Módulo de Laboratorio & Desarrollo"
+        badgeIcon={<FlaskConical className="w-3.5 h-3.5 text-[#C98F7A]" />}
+        bgImage="https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&fit=crop&w=1600&q=80"
+      >
         {/* Tab Selector Controls */}
-        <div className="flex items-center gap-1.5 bg-[#F7F4EE] p-1.5 rounded-2xl border border-[#E6DFC8]">
+        <div className="flex items-center gap-1.5 bg-[#2D2521]/90 backdrop-blur-md p-1.5 rounded-2xl border border-[#D8C7B8]/20 shadow-lg">
           <button
             onClick={() => setActiveTab('formulas')}
             className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all ${
               activeTab === 'formulas'
-                ? 'bg-[#2A1E17] text-white shadow-sm'
-                : 'text-[#7A6B61] hover:text-[#2A1E17]'
+                ? 'bg-[#C98F7A] text-white shadow-xs'
+                : 'text-[#D8C7B8] hover:text-white'
             }`}
           >
             Fórmulas ({formulas.length})
@@ -244,8 +239,8 @@ export default function LaboratorioPage() {
             onClick={() => setActiveTab('insumos')}
             className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all ${
               activeTab === 'insumos'
-                ? 'bg-[#2A1E17] text-white shadow-sm'
-                : 'text-[#7A6B61] hover:text-[#2A1E17]'
+                ? 'bg-[#C98F7A] text-white shadow-xs'
+                : 'text-[#D8C7B8] hover:text-white'
             }`}
           >
             Insumos ({ingredients.length})
@@ -255,14 +250,14 @@ export default function LaboratorioPage() {
             onClick={() => setActiveTab('batches')}
             className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all ${
               activeTab === 'batches'
-                ? 'bg-[#2A1E17] text-white shadow-sm'
-                : 'text-[#7A6B61] hover:text-[#2A1E17]'
+                ? 'bg-[#C98F7A] text-white shadow-xs'
+                : 'text-[#D8C7B8] hover:text-white'
             }`}
           >
             Pruebas / Batches ({batchTests.length})
           </button>
         </div>
-      </div>
+      </SectionHero>
 
       {/* =================================================================== */}
       {/* TAB 1: FORMULAS & PRODUCTION CALCULATOR */}

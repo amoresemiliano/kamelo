@@ -22,6 +22,7 @@ import {
 import { useKamelo } from '@/context/KameloContext';
 import { Supplier, PurchaseOrder } from '@/types';
 import ConfirmDialog from '@/components/ConfirmDialog';
+import SectionHero from '@/components/SectionHero';
 
 export default function ComprasPage() {
   const {
@@ -68,27 +69,21 @@ export default function ComprasPage() {
   return (
     <div className="space-y-8 animate-in fade-in">
       {/* Header Banner */}
-      <div className="bg-white p-6 sm:p-8 rounded-3xl shadow-xs border border-[#E6DFC8] flex flex-col md:flex-row md:items-center justify-between gap-6">
-        <div>
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#6E8B74]/20 text-[#6E8B74] text-xs font-semibold mb-2">
-            <ShoppingBag className="w-3.5 h-3.5" /> Módulo de Logística & Adquisiciones
-          </div>
-          <h1 className="text-2xl sm:text-3xl font-serif font-bold text-[#2A1E17]">
-            Compras & Gestión de Proveedores
-          </h1>
-          <p className="text-xs sm:text-sm text-[#7A6B61] mt-1">
-            Agrupación de requerimientos por proveedor para alcanzar mínimos de compra en ARS, emisor de órdenes y directorio de proveedores.
-          </p>
-        </div>
-
+      <SectionHero
+        title="Compras & Gestión de Proveedores"
+        subtitle="Agrupación de requerimientos por proveedor para alcanzar mínimos de compra en ARS, emisor de órdenes y directorio de proveedores."
+        badgeText="Módulo de Logística & Adquisiciones"
+        badgeIcon={<ShoppingBag className="w-3.5 h-3.5 text-[#7D9882]" />}
+        bgImage="https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?auto=format&fit=crop&w=1600&q=80"
+      >
         {/* Tab Controls */}
-        <div className="flex items-center gap-1.5 bg-[#F7F4EE] p-1.5 rounded-2xl border border-[#E6DFC8]">
+        <div className="flex items-center gap-1.5 bg-[#2D2521]/90 backdrop-blur-md p-1.5 rounded-2xl border border-[#D8C7B8]/20 shadow-lg">
           <button
             onClick={() => setActiveTab('necesidades')}
             className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all ${
               activeTab === 'necesidades'
-                ? 'bg-[#2A1E17] text-white shadow-sm'
-                : 'text-[#7A6B61] hover:text-[#2A1E17]'
+                ? 'bg-[#7D9882] text-white shadow-xs'
+                : 'text-[#D8C7B8] hover:text-white'
             }`}
           >
             Necesidades ({requirements.length})
@@ -98,8 +93,8 @@ export default function ComprasPage() {
             onClick={() => setActiveTab('ordenes')}
             className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all ${
               activeTab === 'ordenes'
-                ? 'bg-[#2A1E17] text-white shadow-sm'
-                : 'text-[#7A6B61] hover:text-[#2A1E17]'
+                ? 'bg-[#7D9882] text-white shadow-xs'
+                : 'text-[#D8C7B8] hover:text-white'
             }`}
           >
             Órdenes ({purchaseOrders.length})
@@ -109,14 +104,14 @@ export default function ComprasPage() {
             onClick={() => setActiveTab('proveedores')}
             className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all ${
               activeTab === 'proveedores'
-                ? 'bg-[#2A1E17] text-white shadow-sm'
-                : 'text-[#7A6B61] hover:text-[#2A1E17]'
+                ? 'bg-[#7D9882] text-white shadow-xs'
+                : 'text-[#D8C7B8] hover:text-white'
             }`}
           >
             Proveedores ({suppliers.length})
           </button>
         </div>
-      </div>
+      </SectionHero>
 
       {/* =================================================================== */}
       {/* SUBSECTION 1: NECESIDADES DE PRODUCCIÓN (REQUERIMIENTOS AGRUPADOS) */}

@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { useKamelo } from '@/context/KameloContext';
 import { Formula, Ingredient, BatchTest, InsumoCategory } from '@/types';
+import { formatCurrency } from '@/utils/formatters';
 import ConfirmDialog from '@/components/ConfirmDialog';
 import SectionHero from '@/components/SectionHero';
 import {
@@ -296,9 +297,9 @@ export default function LaboratorioPage() {
             </button>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 min-w-0">
             {/* Left Column: Formulas List */}
-            <div className="space-y-3">
+            <div className="space-y-3 min-w-0">
               <span className="text-[10px] uppercase tracking-wider text-mejunje-secundario block font-bold">
                 Archivo de Fórmulas ({filteredFormulas.length})
               </span>
@@ -365,7 +366,7 @@ export default function LaboratorioPage() {
 
             {/* Right Column: Active Formula Workstation */}
             {activeFormula && (
-              <div className="lg:col-span-2 space-y-6">
+              <div className="lg:col-span-2 space-y-6 min-w-0">
                 <div className="atelier-sheet p-6 sm:p-7 space-y-6">
                   {/* Active Header */}
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-mejunje-border">
@@ -466,15 +467,15 @@ export default function LaboratorioPage() {
                     <h3 className="text-[11px] uppercase tracking-wider text-mejunje-secundario font-bold mb-3">
                       Composición & Desglose para {batchProductionUnits} unidades ({Math.round(currentBatchGrams)}g/ml totales)
                     </h3>
-                    <div className="overflow-x-auto border border-mejunje-border rounded-2xl">
-                      <table className="w-full text-left text-xs">
+                    <div className="overflow-x-auto border border-mejunje-border rounded-2xl max-w-full">
+                      <table className="w-full text-left text-xs min-w-[500px]">
                         <thead className="bg-mejunje-papel text-mejunje-carbon text-[10px] uppercase tracking-wider border-b border-mejunje-border">
                           <tr>
                             <th className="p-3 font-bold">Materia Prima</th>
                             <th className="p-3 font-bold">Proveedor</th>
                             <th className="p-3 font-bold text-center">Proporción</th>
                             <th className="p-3 font-bold text-center">Cantidad Recalculada</th>
-                            <th className="p-3 font-bold text-right">Subtotal ARS</th>
+                            <th className="p-3 font-bold text-right">Subtotal</th>
                           </tr>
                         </thead>
                         <tbody className="divide-y divide-mejunje-border bg-white">
@@ -491,7 +492,7 @@ export default function LaboratorioPage() {
                                 <td className="p-3 text-center font-bold text-mejunje-verdeprofundo">
                                   {calculatedQty} {item.unit}
                                 </td>
-                                <td className="p-3 text-right font-bold text-mejunje-carbon">${subtotal.toLocaleString('es-AR')}</td>
+                                <td className="p-3 text-right font-bold text-mejunje-carbon">{formatCurrency(subtotal)}</td>
                               </tr>
                             );
                           })}
@@ -505,10 +506,10 @@ export default function LaboratorioPage() {
                     <div>
                       <span className="text-[10px] uppercase tracking-wider text-mejunje-secundario font-bold">Costo Total del Batch ({batchProductionUnits} unidades):</span>
                       <div className="text-xl sm:text-2xl font-bold text-mejunje-carbon">
-                        ${Math.round(totalBatchCostARS).toLocaleString('es-AR')} ARS
+                        {formatCurrency(totalBatchCostARS)}
                       </div>
                       <p className="text-[11px] text-mejunje-secundario mt-0.5">
-                        Costo unitario de producción: <strong className="text-mejunje-carbon font-bold">${Math.round(unitCostARS).toLocaleString('es-AR')} ARS</strong>
+                        Costo unitario de producción: <strong className="text-mejunje-carbon font-bold">{formatCurrency(unitCostARS)}</strong>
                       </p>
                     </div>
 
@@ -598,7 +599,7 @@ export default function LaboratorioPage() {
                     <th className="p-3.5 font-bold">Materia Prima</th>
                     <th className="p-3.5 font-bold">Categoría</th>
                     <th className="p-3.5 font-bold">Proveedor</th>
-                    <th className="p-3.5 font-bold text-right">Precio Compra ARS</th>
+                    <th className="p-3.5 font-bold text-right">Precio Compra</th>
                     <th className="p-3.5 font-bold text-right">Costo Unitario Calculado</th>
                     <th className="p-3.5 font-bold text-center">Stock Actual</th>
                     <th className="p-3.5 font-bold text-center">Acciones</th>
@@ -624,10 +625,10 @@ export default function LaboratorioPage() {
                       </td>
                       <td className="p-3.5 text-mejunje-secundario">{ing.supplierName}</td>
                       <td className="p-3.5 text-right font-medium text-mejunje-carbon">
-                        ${ing.purchasePriceARS.toLocaleString('es-AR')} x {ing.referenceQty} {ing.unit}
+                        {formatCurrency(ing.purchasePriceARS)} x {ing.referenceQty} {ing.unit}
                       </td>
                       <td className="p-3.5 text-right font-bold text-mejunje-verdeprofundo">
-                        ${ing.unitCostARS.toLocaleString('es-AR')} / {ing.unit === 'kg' ? 'g' : ing.unit === 'l' ? 'ml' : ing.unit}
+                        {formatCurrency(ing.unitCostARS)} / {ing.unit === 'kg' ? 'g' : ing.unit === 'l' ? 'ml' : ing.unit}
                       </td>
                       <td className="p-3.5 text-center">
                         <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold ${ing.stock <= ing.minStock ? 'bg-amber-50 text-mejunje-ambar border border-amber-200' : 'bg-emerald-50 text-emerald-800 border border-emerald-200'}`}>
@@ -863,7 +864,7 @@ export default function LaboratorioPage() {
 
               <div className="grid grid-cols-2 gap-2">
                 <div>
-                  <label className="block text-mejunje-secundario mb-1 text-[10px] uppercase font-bold">Precio Compra ARS</label>
+                  <label className="block text-mejunje-secundario mb-1 text-[10px] uppercase font-bold">Precio Compra ($)</label>
                   <input
                     type="number"
                     value={newInsumoForm.purchasePriceARS}

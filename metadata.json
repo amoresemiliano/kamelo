@@ -1,6 +1,6 @@
 {
   "name": "Mejunje",
-  "description": "Plataforma interna de gestión para MEJUNJE — Atelier de perfumería artesanal en Palermo, Buenos Aires: laboratorio de fórmulas, archivo de insumos, compras agrupadas y catálogo editorial.",
+  "description": "Plataforma interna de gestión para MEJUNJE — Atelier de Aromas en Buenos Aires: laboratorio de fórmulas, archivo de insumos, compras agrupadas, clientes, proveedores y catálogo editorial.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

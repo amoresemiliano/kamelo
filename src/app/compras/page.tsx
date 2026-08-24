@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { useKamelo } from '@/context/KameloContext';
 import { Supplier, PurchaseOrder } from '@/types';
+import { formatCurrency } from '@/utils/formatters';
 import ConfirmDialog from '@/components/ConfirmDialog';
 import SectionHero from '@/components/SectionHero';
 import {
@@ -69,7 +70,7 @@ export default function ComprasPage() {
       {/* Header Banner */}
       <SectionHero
         title="Abastecimiento & Directorio de Proveedores"
-        subtitle="Consolidación de materias primas por proveedor para alcanzar mínimos de compra en ARS, emisor de órdenes de compra y contacto directo de taller."
+        subtitle="Consolidación de materias primas por proveedor para alcanzar mínimos de compra, emisor de órdenes de compra y contacto directo de taller."
         badgeText="MEJUNJE · ABASTECIMIENTO & MATERIAS PRIMAS"
         badgeIcon={<ShoppingBag className="w-3.5 h-3.5 text-mejunje-verdeseco" />}
         bgImage="https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?auto=format&fit=crop&w=1600&q=80"
@@ -158,12 +159,12 @@ export default function ComprasPage() {
                             </span>
                           ) : (
                             <span className="px-2.5 py-0.5 rounded-full bg-amber-50 text-mejunje-ambar text-[10px] font-bold flex items-center gap-1 border border-amber-200">
-                              <AlertTriangle className="w-3.5 h-3.5 text-mejunje-ambar" /> Faltan ${(group.minPurchaseARS - group.totalARS).toLocaleString('es-AR')} ARS
+                              <AlertTriangle className="w-3.5 h-3.5 text-mejunje-ambar" /> Faltan {formatCurrency(group.minPurchaseARS - group.totalARS)}
                             </span>
                           )}
                         </div>
                         <p className="text-xs text-mejunje-secundario mt-0.5">
-                          Compra Mínima Requerida: <strong className="text-mejunje-carbon font-bold">${group.minPurchaseARS.toLocaleString('es-AR')} ARS</strong>
+                          Compra Mínima Requerida: <strong className="text-mejunje-carbon font-bold">{formatCurrency(group.minPurchaseARS)}</strong>
                         </p>
                       </div>
                     </div>
@@ -172,7 +173,7 @@ export default function ComprasPage() {
                       <div className="text-right">
                         <span className="text-[10px] uppercase text-mejunje-secundario font-bold">Total Acumulado:</span>
                         <div className="text-lg sm:text-xl font-bold text-mejunje-verdeprofundo">
-                          ${group.totalARS.toLocaleString('es-AR')} ARS
+                          {formatCurrency(group.totalARS)}
                         </div>
                       </div>
                       <div className="p-2 rounded-xl bg-mejunje-papel text-mejunje-carbon border border-mejunje-border">
@@ -313,7 +314,7 @@ export default function ComprasPage() {
                   {po.items.map((item, idx) => (
                     <div key={idx} className="flex items-center justify-between text-[11px]">
                       <span className="text-mejunje-carbon font-bold">{item.ingredientName} ({item.requiredQty} {item.unit})</span>
-                      <span className="font-bold text-mejunje-verdeprofundo">${item.subtotalARS.toLocaleString('es-AR')} ARS</span>
+                      <span className="font-bold text-mejunje-verdeprofundo">{formatCurrency(item.subtotalARS)}</span>
                     </div>
                   ))}
                 </div>
@@ -322,7 +323,7 @@ export default function ComprasPage() {
                   <div>
                     <span className="text-[9px] uppercase text-mejunje-secundario font-bold">Total Orden:</span>
                     <div className="text-base sm:text-lg text-mejunje-carbon font-bold">
-                      ${po.totalARS.toLocaleString('es-AR')} ARS
+                      {formatCurrency(po.totalARS)}
                     </div>
                   </div>
 
@@ -371,7 +372,7 @@ export default function ComprasPage() {
             {suppliers.map((s) => {
               const waClean = s.phoneWhatsApp.replace(/[^0-9]/g, '');
               const waUrl = `https://wa.me/${waClean}?text=${encodeURIComponent(
-                `Hola ${s.contactPerson}! Te escribo de MEJUNJE (Atelier de Perfumería, Palermo) para consultar por materias primas.`
+                `Hola ${s.contactPerson}! Te escribo de MEJUNJE (Atelier de Aromas, Buenos Aires) para consultar por materias primas.`
               )}`;
 
               return (
@@ -414,7 +415,7 @@ export default function ComprasPage() {
                         <Clock className="w-3.5 h-3.5 text-mejunje-verdeprofundo" /> Plazo de entrega: <strong className="text-mejunje-carbon font-bold">{s.deliveryTimeDays} días</strong>
                       </div>
                       <div>
-                        Compra Mínima ARS: <strong className="text-mejunje-carbon font-bold">${s.minPurchaseARS.toLocaleString('es-AR')}</strong>
+                        Compra Mínima: <strong className="text-mejunje-carbon font-bold">{formatCurrency(s.minPurchaseARS)}</strong>
                       </div>
                     </div>
 

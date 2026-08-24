@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { useKamelo } from '@/context/KameloContext';
 import { CatalogProduct, ProductVariant } from '@/types';
+import { formatCurrency } from '@/utils/formatters';
 import ConfirmDialog from '@/components/ConfirmDialog';
 import SectionHero from '@/components/SectionHero';
 import {
@@ -57,15 +58,15 @@ export default function CatalogoPage() {
     return matchesCategory && matchesSearch;
   });
 
-  // Generate WhatsApp Message with Palermo Atelier Signature
+  // Generate WhatsApp Message with Atelier Signature
   const buildWhatsAppText = () => {
     if (!sharingProduct) return '';
-    const variantInfo = selectedVariant ? `\n📦 *Presentación:* ${selectedVariant.size} ($${selectedVariant.salePriceARS.toLocaleString('es-AR')} ARS)` : '';
+    const variantInfo = selectedVariant ? `\n📦 *Presentación:* ${selectedVariant.size} (${formatCurrency(selectedVariant.salePriceARS)})` : '';
     const greeting = clientName ? `Hola *${clientName}*! ` : 'Hola! ';
     const displayPrice = selectedVariant ? selectedVariant.salePriceARS : (sharingProduct.variants?.[0]?.salePriceARS || 18500);
 
     return (
-      `${greeting}Te comparto la ficha de autor de *MEJUNJE · Atelier de Perfumería Artesanal* 🌿\n\n` +
+      `${greeting}Te comparto la ficha de autor de *MEJUNJE · Atelier de Aromas* 🌿\n\n` +
       `🕯️ *${sharingProduct.name}*\n` +
       `📌 *Categoría:* ${sharingProduct.category}\n` +
       `🏺 *Familia Olfativa:* ${sharingProduct.fragranceFamily}${variantInfo}\n\n` +
@@ -73,8 +74,8 @@ export default function CatalogoPage() {
       `- Salida: ${sharingProduct.topNotes}\n` +
       `- Corazón: ${sharingProduct.heartNotes}\n` +
       `- Fondo: ${sharingProduct.baseNotes}\n\n` +
-      `✨ *Precio:* $${displayPrice.toLocaleString('es-AR')} ARS\n\n` +
-      `_MEJUNJE · mezcla · intención · aroma · Palermo Soho, Buenos Aires_\n` +
+      `✨ *Precio:* ${formatCurrency(displayPrice)}\n\n` +
+      `_MEJUNJE · mezcla · intención · aroma · Buenos Aires_\n` +
       `¿Te gustaría encargar esta pieza de taller o recibir asesoramiento olfativo personalizado?`
     );
   };
@@ -276,7 +277,7 @@ export default function CatalogoPage() {
                           {product.variants.map((v) => (
                             <div key={v.id} className="flex items-center justify-between text-[11px] bg-mejunje-papel px-3 py-1.5 rounded-xl border border-mejunje-border">
                               <span className="font-bold text-mejunje-carbon">{v.size} ({v.aroma})</span>
-                              <span className="font-bold text-mejunje-verdeprofundo">${v.salePriceARS.toLocaleString('es-AR')} ARS</span>
+                              <span className="font-bold text-mejunje-verdeprofundo">{formatCurrency(v.salePriceARS)}</span>
                             </div>
                           ))}
                         </div>
@@ -288,9 +289,9 @@ export default function CatalogoPage() {
                 {/* Card Footer */}
                 <div className="p-4 bg-white border-t border-mejunje-border flex items-center justify-between gap-2">
                   <div>
-                    <span className="text-[9px] uppercase text-mejunje-secundario block font-bold">Precio Base ARS</span>
+                    <span className="text-[9px] uppercase text-mejunje-secundario block font-bold">Precio Base</span>
                     <span className="text-base sm:text-lg font-bold text-mejunje-carbon">
-                      ${basePrice.toLocaleString('es-AR')}
+                      {formatCurrency(basePrice)}
                     </span>
                   </div>
 
@@ -487,9 +488,9 @@ export default function CatalogoPage() {
 
                 <div className="pt-4 border-t border-mejunje-border flex items-center justify-between gap-3">
                   <div>
-                    <span className="text-[9px] uppercase text-mejunje-secundario block font-bold">Precio Base ARS</span>
+                    <span className="text-[9px] uppercase text-mejunje-secundario block font-bold">Precio Base</span>
                     <span className="text-lg sm:text-xl font-bold text-mejunje-carbon">
-                      ${(detailProduct.variants?.[0]?.salePriceARS || 18500).toLocaleString('es-AR')}
+                      {formatCurrency(detailProduct.variants?.[0]?.salePriceARS || 18500)}
                     </span>
                   </div>
 
@@ -578,7 +579,7 @@ export default function CatalogoPage() {
                   >
                     {sharingProduct.variants.map((v) => (
                       <option key={v.id} value={v.id}>
-                        {v.size} ({v.aroma}) — ${v.salePriceARS.toLocaleString('es-AR')} ARS
+                        {v.size} ({v.aroma}) — {formatCurrency(v.salePriceARS)}
                       </option>
                     ))}
                   </select>

@@ -8,6 +8,8 @@ import {
   ShoppingBag,
   TrendingUp,
   BookOpen,
+  Users,
+  Building2,
 } from '@/components/Icons';
 import { LotusLogoHeader } from '@/components/LotusLogo';
 import { useKamelo } from '@/context/KameloContext';
@@ -15,8 +17,10 @@ import { useKamelo } from '@/context/KameloContext';
 const navItems = [
   { href: '/', label: 'Atelier', icon: LayoutDashboard },
   { href: '/laboratorio', label: 'Laboratorio', icon: FlaskConical },
-  { href: '/compras', label: 'Abastecimiento', icon: ShoppingBag },
   { href: '/catalogo', label: 'Catálogo', icon: BookOpen },
+  { href: '/clientes', label: 'Clientes', icon: Users },
+  { href: '/proveedores', label: 'Proveedores', icon: Building2 },
+  { href: '/compras', label: 'Abastecimiento', icon: ShoppingBag },
   { href: '/mercado', label: 'Observatorio', icon: TrendingUp },
 ];
 
@@ -33,12 +37,12 @@ export default function Navigation() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Mejunje Typewriter Wordmark & Subtitle */}
-          <Link href="/" className="group focus:outline-none">
+          <Link href="/" className="group focus:outline-none shrink-0">
             <LotusLogoHeader />
           </Link>
 
           {/* Desktop Nav Links */}
-          <nav className="hidden md:flex items-center space-x-1.5">
+          <nav className="hidden md:flex items-center space-x-1 lg:space-x-1.5 overflow-x-auto py-1">
             {navItems.map((item) => {
               const Icon = item.icon;
               const isActive = pathname === item.href;
@@ -49,7 +53,7 @@ export default function Navigation() {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`relative flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs transition-all font-typewriter ${
+                  className={`relative flex items-center gap-1.5 lg:gap-2 px-2.5 lg:px-3 py-1.5 rounded-xl text-xs transition-all font-typewriter whitespace-nowrap ${
                     isActive
                       ? 'bg-mejunje-papel text-mejunje-verdeprofundo border border-mejunje-borderarena font-bold shadow-xs'
                       : 'text-mejunje-secundario hover:bg-mejunje-papel hover:text-mejunje-carbon'
@@ -65,18 +69,18 @@ export default function Navigation() {
             })}
           </nav>
 
-          {/* Discrete Palermo Tag */}
-          <div className="hidden lg:flex items-center gap-2 bg-mejunje-papel px-3 py-1 rounded-full border border-mejunje-border text-xs">
+          {/* Discrete Buenos Aires Tag */}
+          <div className="hidden xl:flex items-center gap-2 bg-mejunje-papel px-3 py-1 rounded-full border border-mejunje-border text-xs shrink-0">
             <span className="w-1.5 h-1.5 rounded-full bg-mejunje-verdeseco" />
             <span className="text-mejunje-verdeprofundo font-typewriter text-[10px] tracking-widest uppercase font-bold">
-              Palermo Soho · CABA
+              Buenos Aires · Atelier
             </span>
           </div>
         </div>
       </div>
 
       {/* Mobile Navigation Bar */}
-      <div className="md:hidden bg-white/95 border-t border-mejunje-border px-2 py-1.5 flex items-center justify-around overflow-x-auto font-typewriter">
+      <div className="md:hidden bg-white/95 border-t border-mejunje-border px-2 py-1.5 flex items-center justify-around overflow-x-auto font-typewriter gap-1">
         {navItems.map((item) => {
           const Icon = item.icon;
           const isActive = pathname === item.href;
@@ -84,7 +88,7 @@ export default function Navigation() {
             <Link
               key={item.href}
               href={item.href}
-              className={`flex flex-col items-center gap-0.5 px-2.5 py-1 rounded text-[10px] tracking-wider whitespace-nowrap transition-colors ${
+              className={`flex flex-col items-center gap-0.5 px-2 py-1 rounded text-[10px] tracking-wider whitespace-nowrap transition-colors ${
                 isActive
                   ? 'text-mejunje-verdeprofundo font-bold'
                   : 'text-mejunje-secundario hover:text-mejunje-carbon'

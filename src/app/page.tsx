@@ -3,6 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { useKamelo } from '@/context/KameloContext';
+import { formatCurrency } from '@/utils/formatters';
 import { LotusIcon } from '@/components/LotusLogo';
 import SectionHero from '@/components/SectionHero';
 import {
@@ -46,9 +47,9 @@ export default function DashboardPage() {
     <div className="space-y-10 animate-in fade-in pb-12">
       {/* Header Banner with Warm Analog Photography */}
       <SectionHero
-        title="Atelier de Perfumería & Archivo Olfativo"
+        title="Atelier de Aromas & Archivo Olfativo"
         subtitle="Formulación botánica de autor, pesaje y balance de batches, consolidación inteligente de compras por proveedor y observatorio de precios en CABA y Argentina."
-        badgeText="MEJUNJE · PALERMO SOHO · BUENOS AIRES"
+        badgeText="MEJUNJE · BUENOS AIRES"
         badgeIcon={<LotusIcon className="w-3.5 h-3.5 text-mejunje-verdeseco" />}
         bgImage="https://images.unsplash.com/photo-1603006905003-be475563bc59?auto=format&fit=crop&w=1600&q=80"
         noticeText="mezcla · intención · aroma"
@@ -189,7 +190,7 @@ export default function DashboardPage() {
                   <DropperIcon className="w-4 h-4 text-mejunje-verdeseco" /> Consolidación de Compras por Proveedor
                 </h3>
                 <p className="text-xs text-mejunje-secundario mt-0.5 font-typewriter">
-                  Control de mínimos de compra para desbloquear precios mayoristas en ARS
+                  Control de mínimos de compra para desbloquear precios mayoristas en taller
                 </p>
               </div>
               <Link href="/compras" className="text-xs text-mejunje-verdeprofundo font-bold hover:underline flex items-center gap-1 font-typewriter">
@@ -211,12 +212,12 @@ export default function DashboardPage() {
                           </span>
                         ) : (
                           <span className="px-2.5 py-0.5 rounded-full bg-amber-50 text-mejunje-ambar text-[10px] font-bold flex items-center gap-1 border border-amber-200">
-                            <AlertTriangle className="w-3 h-3 text-mejunje-ambar" /> Faltan ${(group.minPurchaseARS - group.totalARS).toLocaleString('es-AR')} ARS
+                            <AlertTriangle className="w-3 h-3 text-mejunje-ambar" /> Faltan {formatCurrency(group.minPurchaseARS - group.totalARS)}
                           </span>
                         )}
                       </div>
                       <div className="text-xs text-mejunje-secundario">
-                        Acumulado: <strong className="text-mejunje-carbon">${group.totalARS.toLocaleString('es-AR')} ARS</strong> / Mín: ${group.minPurchaseARS.toLocaleString('es-AR')} ARS
+                        Acumulado: <strong className="text-mejunje-carbon">{formatCurrency(group.totalARS)}</strong> / Mín: {formatCurrency(group.minPurchaseARS)}
                       </div>
                     </div>
 
@@ -303,7 +304,7 @@ export default function DashboardPage() {
 
           <div className="mt-5 pt-3 border-t border-mejunje-border flex items-center justify-between">
             <span className="text-[9px] text-mejunje-secundario uppercase tracking-wider">
-              MEJUNJE · Palermo, Bs As
+              MEJUNJE · Buenos Aires
             </span>
             <BotanicalBranchMini className="w-10 h-5 text-mejunje-salvia" />
           </div>

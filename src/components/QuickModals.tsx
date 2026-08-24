@@ -101,7 +101,7 @@ export default function QuickModals() {
     name: '',
     category: 'Vela',
     keywords: '',
-    zone: 'Palermo / CABA' as 'Palermo / CABA' | 'CABA' | 'Zona Norte' | 'Buenos Aires' | 'Argentina',
+    zone: 'Buenos Aires / CABA' as 'Buenos Aires / CABA' | 'CABA' | 'Zona Norte' | 'Buenos Aires' | 'Argentina',
     source: 'Mercado Libre' as 'Mercado Libre' | 'Ecommerce' | 'Marca concreta' | 'Otra',
   });
 
@@ -718,7 +718,7 @@ export default function QuickModals() {
 
                     <input
                       type="number"
-                      placeholder="Precio ARS"
+                      placeholder="Precio ($)"
                       value={item.unitPriceARS}
                       onChange={(e) => {
                         const next = [...poForm.items];
@@ -748,7 +748,7 @@ export default function QuickModals() {
                   rows={2}
                   value={poForm.observations}
                   onChange={(e) => setPoForm({ ...poForm, observations: e.target.value })}
-                  placeholder="Ej. Entregar en taller Palermo Soho. Pago con transferencia."
+                  placeholder="Ej. Entregar en taller de Buenos Aires. Pago con transferencia."
                   className="w-full bg-white border border-mejunje-border rounded-xl px-3.5 py-2 text-xs text-mejunje-carbon focus:outline-none focus:border-mejunje-verdeseco"
                 />
               </div>
@@ -897,7 +897,7 @@ export default function QuickModals() {
               </div>
               <div>
                 <h2 className="font-bold text-xl sm:text-2xl text-mejunje-carbon">Configurar Consulta de Mercado</h2>
-                <p className="text-xs text-mejunje-secundario">Rastreo de Precios & Competidores ARS</p>
+                <p className="text-xs text-mejunje-secundario">Rastreo de Precios & Competidores</p>
               </div>
             </div>
 
@@ -907,7 +907,7 @@ export default function QuickModals() {
                 <input
                   type="text"
                   required
-                  placeholder="Ej. Vela Soja 200g - Benchmark Palermo"
+                  placeholder="Ej. Vela Soja 200g - Benchmark Buenos Aires"
                   value={marketQueryForm.name}
                   onChange={(e) => setMarketQueryForm({ ...marketQueryForm, name: e.target.value })}
                   className="w-full bg-white border border-mejunje-border rounded-xl px-3.5 py-2 text-xs text-mejunje-carbon focus:outline-none focus:border-mejunje-verdeseco"
@@ -936,7 +936,7 @@ export default function QuickModals() {
                     onChange={(e) => setMarketQueryForm({ ...marketQueryForm, zone: e.target.value as any })}
                     className="w-full bg-white border border-mejunje-border rounded-xl px-3.5 py-2 text-xs text-mejunje-carbon focus:outline-none"
                   >
-                    <option value="Palermo / CABA">Palermo / CABA</option>
+                    <option value="Buenos Aires / CABA">Buenos Aires / CABA</option>
                     <option value="CABA">CABA</option>
                     <option value="Zona Norte">Zona Norte</option>
                     <option value="Buenos Aires">Buenos Aires</option>

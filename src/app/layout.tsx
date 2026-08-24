@@ -7,8 +7,8 @@ import { KameloProvider } from '@/context/KameloContext';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'MEJUNJE | Atelier de Perfumería Artesanal',
-  description: 'Plataforma interna de gestión de laboratorio, materias primas botánicas, fórmulas de autor, compras agrupadas y catálogo para MEJUNJE · Palermo, Buenos Aires.',
+  title: 'MEJUNJE | Atelier de Aromas',
+  description: 'Plataforma interna de gestión de laboratorio, materias primas botánicas, fórmulas de autor, compras agrupadas, clientes, proveedores y catálogo para MEJUNJE · Buenos Aires.',
 };
 
 export default function RootLayout({
@@ -31,10 +31,10 @@ export default function RootLayout({
               <div className="flex items-center gap-2">
                 <span className="font-typewriter text-mejunje-carbon font-bold tracking-widest text-sm">MEJUNJE</span>
                 <span className="text-mejunje-arena">·</span>
-                <span className="font-typewriter text-[11px] uppercase tracking-wider text-mejunje-verdeprofundo font-bold">Atelier de Perfumería Artesanal</span>
+                <span className="font-typewriter text-[11px] uppercase tracking-wider text-mejunje-verdeprofundo font-bold">Atelier de Aromas</span>
               </div>
               <p className="font-typewriter text-[11px] text-mejunje-secundario tracking-wider">
-                mezcla. intención. aroma. · Palermo, Buenos Aires
+                mezcla. intención. aroma. · Buenos Aires
               </p>
             </div>
           </footer>

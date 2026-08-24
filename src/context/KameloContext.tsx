@@ -59,6 +59,12 @@ interface KameloContextType {
   deleteFormula: (id: string) => void;
   duplicateFormula: (id: string) => void;
 
+  // Clients CRUD
+  addClient: (client: Omit<ClientContact, 'id'>) => ClientContact;
+  updateClient: (id: string, client: Partial<ClientContact>) => void;
+  deleteClient: (id: string) => void;
+  duplicateClient: (id: string) => void;
+
   // Insumos CRUD
   addIngredient: (ingredient: Omit<Ingredient, 'id' | 'lastUpdated'>) => Ingredient;
   updateIngredient: (id: string, ingredient: Partial<Ingredient>) => void;
@@ -122,7 +128,7 @@ export const KameloProvider: React.FC<{ children: React.ReactNode }> = ({ childr
   const [marketBenchmarks, setMarketBenchmarks] = useState<MarketBenchmark[]>(mockMarketBenchmarks);
   const [activityLogs, setActivityLogs] = useState<ActivityLog[]>(mockActivityLogs);
   const [toasts, setToasts] = useState<ToastNotification[]>([]);
-  const [clients] = useState<ClientContact[]>(mockClients);
+  const [clients, setClients] = useState<ClientContact[]>(mockClients);
   const [activeModal, setActiveModal] = useState<string | null>(null);
 
   // Hydrate from localStorage on initial load
@@ -141,6 +147,7 @@ export const KameloProvider: React.FC<{ children: React.ReactNode }> = ({ childr
         if (parsed.marketQueries) setMarketQueries(parsed.marketQueries);
         if (parsed.marketBenchmarks) setMarketBenchmarks(parsed.marketBenchmarks);
         if (parsed.activityLogs) setActivityLogs(parsed.activityLogs);
+        if (parsed.clients) setClients(parsed.clients);
       }
     } catch (e) {
       console.error('Failed to load local storage state', e);
@@ -161,6 +168,7 @@ export const KameloProvider: React.FC<{ children: React.ReactNode }> = ({ childr
         marketQueries,
         marketBenchmarks,
         activityLogs,
+        clients,
       };
       localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(stateToSave));
     } catch (e) {
@@ -177,6 +185,7 @@ export const KameloProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     marketQueries,
     marketBenchmarks,
     activityLogs,
+    clients,
   ]);
 
   // Toast Helper
@@ -249,6 +258,47 @@ export const KameloProvider: React.FC<{ children: React.ReactNode }> = ({ childr
   };
 
   // ---------------------------------------------------------------------------
+  // CLIENTS CRUD
+  // ---------------------------------------------------------------------------
+  const addClient = (clientData: Omit<ClientContact, 'id'>): ClientContact => {
+    const newId = `cli-${Date.now()}`;
+    const newClient: ClientContact = { ...clientData, id: newId, status: clientData.status || 'Activo' };
+    setClients((prev) => [newClient, ...prev]);
+    addActivityLog('Cliente Registrado', `Nuevo cliente "${newClient.name}" (${newClient.type}) añadido al registro.`, 'client');
+    showToast(`Cliente "${newClient.name}" registrado.`);
+    return newClient;
+  };
+
+  const updateClient = (id: string, partial: Partial<ClientContact>) => {
+    setClients((prev) =>
+      prev.map((c) => (c.id === id ? { ...c, ...partial } : c))
+    );
+    addActivityLog('Cliente Actualizado', `Datos de contacto actualizados.`, 'client');
+    showToast('Cliente actualizado correctamente.');
+  };
+
+  const deleteClient = (id: string) => {
+    const target = clients.find((c) => c.id === id);
+    setClients((prev) => prev.filter((c) => c.id !== id));
+    if (target) {
+      addActivityLog('Cliente Eliminado', `Cliente "${target.name}" removido.`, 'client');
+      showToast(`Cliente "${target.name}" eliminado.`, 'info');
+    }
+  };
+
+  const duplicateClient = (id: string) => {
+    const target = clients.find((c) => c.id === id);
+    if (!target) return;
+    const duplicated: ClientContact = {
+      ...target,
+      id: `cli-${Date.now()}`,
+      name: `${target.name} (Copia)`,
+    };
+    setClients((prev) => [duplicated, ...prev]);
+    showToast(`Cliente duplicado como "${duplicated.name}".`);
+  };
+
+  // ---------------------------------------------------------------------------
   // INSUMOS / INGREDIENTES CRUD
   // ---------------------------------------------------------------------------
   const addIngredient = (ingData: Omit<Ingredient, 'id' | 'lastUpdated'>): Ingredient => {
@@ -256,7 +306,7 @@ export const KameloProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     const today = new Date().toLocaleDateString('es-AR');
     const newIng: Ingredient = { ...ingData, id: newId, lastUpdated: today };
     setIngredients((prev) => [newIng, ...prev]);
-    addActivityLog('Insumo Registrado', `Nuevo insumo "${newIng.name}" cargado a $${newIng.purchasePriceARS} ARS.`, 'supplier');
+    addActivityLog('Insumo Registrado', `Nuevo insumo "${newIng.name}" cargado a ${newIng.purchasePriceARS.toLocaleString('es-AR')}.`, 'supplier');
     showToast(`Insumo "${newIng.name}" agregado a laboratorio.`);
     return newIng;
   };
@@ -427,7 +477,7 @@ export const KameloProvider: React.FC<{ children: React.ReactNode }> = ({ childr
       )
     );
 
-    addActivityLog('Orden de Compra Creada', `OC ${poCode} generada para ${supplierName} por $${group.totalARS.toLocaleString('es-AR')} ARS.`, 'purchase');
+    addActivityLog('Orden de Compra Creada', `OC ${poCode} generada para ${supplierName} por ${group.totalARS.toLocaleString('es-AR')}.`, 'purchase');
     showToast(`Orden ${poCode} generada para ${supplierName}.`);
   };
 
@@ -712,8 +762,8 @@ export const KameloProvider: React.FC<{ children: React.ReactNode }> = ({ childr
         return b;
       })
     );
-    addActivityLog('Precio Reajustado', `Precio reajustado a $${newPriceARS.toLocaleString('es-AR')} ARS según mercado.`, 'market');
-    showToast(`Precio Kamelo ajustado a $${newPriceARS.toLocaleString('es-AR')} ARS.`);
+    addActivityLog('Precio Reajustado', `Precio reajustado a ${newPriceARS.toLocaleString('es-AR')} según mercado.`, 'market');
+    showToast(`Precio Kamelo ajustado a ${newPriceARS.toLocaleString('es-AR')}.`);
   };
 
   return (
@@ -742,6 +792,11 @@ export const KameloProvider: React.FC<{ children: React.ReactNode }> = ({ childr
         updateFormula,
         deleteFormula,
         duplicateFormula,
+
+        addClient,
+        updateClient,
+        deleteClient,
+        duplicateClient,
 
         addIngredient,
         updateIngredient,

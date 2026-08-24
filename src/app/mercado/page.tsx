@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { useKamelo } from '@/context/KameloContext';
 import { MarketBenchmark, MarketQuery } from '@/types';
+import { formatCurrency } from '@/utils/formatters';
 import SectionHero from '@/components/SectionHero';
 import {
   TrendingUp,
@@ -25,8 +26,8 @@ import {
   Trash2,
   Edit3,
   RotateCcw,
-  CompassIcon,
-  ScalesIcon,
+  ChevronDown,
+  X,
 } from '@/components/Icons';
 
 export default function MercadoPage() {
@@ -50,9 +51,12 @@ export default function MercadoPage() {
   // ---------------------------------------------------------------------------
   const [selectedProductIds, setSelectedProductIds] = useState<string[]>([]);
   const [selectedSupplyIds, setSelectedSupplyIds] = useState<string[]>([]);
+  const [productSearchTerm, setProductSearchTerm] = useState('');
   const [supplySearchTerm, setSupplySearchTerm] = useState('');
+  const [isProductsDropdownOpen, setIsProductsDropdownOpen] = useState(false);
+  const [isSuppliesDropdownOpen, setIsSuppliesDropdownOpen] = useState(false);
   const [freeText, setFreeText] = useState('');
-  const [selectedZone, setSelectedZone] = useState<string>('Palermo / CABA');
+  const [selectedZone, setSelectedZone] = useState<string>('Buenos Aires / CABA');
   const [selectedSources, setSelectedSources] = useState<string[]>([
     'Mercado Libre',
     'Tiendas Online',
@@ -90,6 +94,14 @@ export default function MercadoPage() {
     );
   };
 
+  const handleSelectAllSupplies = () => {
+    setSelectedSupplyIds(ingredients.map((ing) => ing.id));
+  };
+
+  const handleClearSupplies = () => {
+    setSelectedSupplyIds([]);
+  };
+
   const handleToggleSource = (source: string) => {
     setSelectedSources((prev) =>
       prev.includes(source)
@@ -98,13 +110,19 @@ export default function MercadoPage() {
     );
   };
 
-  // Filtered supplies for search
+  // Filtered products for dropdown search
+  const filteredProducts = catalogProducts.filter((p) =>
+    p.name.toLowerCase().includes(productSearchTerm.toLowerCase()) ||
+    p.category.toLowerCase().includes(productSearchTerm.toLowerCase())
+  );
+
+  // Filtered supplies for dropdown search
   const filteredSupplies = ingredients.filter((ing) =>
     ing.name.toLowerCase().includes(supplySearchTerm.toLowerCase()) ||
     ing.category.toLowerCase().includes(supplySearchTerm.toLowerCase())
   );
 
-  // Selected names helper
+  // Selected items objects
   const selectedProducts = catalogProducts.filter((p) => selectedProductIds.includes(p.id));
   const selectedSupplies = ingredients.filter((ing) => selectedSupplyIds.includes(ing.id));
 
@@ -220,8 +238,8 @@ export default function MercadoPage() {
     <div className="space-y-10 animate-in fade-in pb-12 font-typewriter">
       {/* Header Banner */}
       <SectionHero
-        title="Observatorio de Mercado & Benchmarking ARS"
-        subtitle="Monitoreo de precios de referencia, materias primas botánicas y posicionamiento competitivo en perfumería de autor en Argentina."
+        title="Observatorio de Mercado & Benchmarking"
+        subtitle="Monitoreo de precios de referencia, materias primas botánicas y posicionamiento competitivo en perfumería de autor en Buenos Aires y Argentina."
         badgeText="MEJUNJE · OBSERVATORIO & PRECIOS"
         badgeIcon={<TrendingUp className="w-3.5 h-3.5 text-mejunje-verdeseco" />}
         bgImage="https://images.unsplash.com/photo-1616949755610-8c9bbc08f138?auto=format&fit=crop&w=1600&q=80"
@@ -230,7 +248,7 @@ export default function MercadoPage() {
         <div className="flex items-center gap-2 bg-white/95 backdrop-blur-md px-3.5 py-2 rounded-2xl border border-mejunje-border text-xs shrink-0 shadow-xs">
           <Info className="w-4 h-4 text-mejunje-verdeseco shrink-0" />
           <span className="text-mejunje-carbon text-[10px] tracking-wider uppercase font-bold">
-            Relevamiento activo · ARS
+            Relevamiento activo en taller
           </span>
         </div>
       </SectionHero>
@@ -246,7 +264,7 @@ export default function MercadoPage() {
               {editingQueryId ? 'Editar Consulta de Observatorio' : 'Nueva Consulta de Observatorio'}
             </h2>
             <p className="text-xs text-mejunje-secundario mt-0.5">
-              Seleccioná las piezas del atelier o materias primas que deseás relevar, o ingresá una búsqueda libre.
+              Seleccioná las piezas del atelier o materias primas mediante selectores desplegables, o ingresá una búsqueda libre.
             </p>
           </div>
 
@@ -263,12 +281,12 @@ export default function MercadoPage() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* LEFT & CENTER COLS: Selection Sections */}
           <div className="lg:col-span-2 space-y-6">
-            {/* 3.1 SELECCIÓN DESDE PRODUCTOS */}
+            {/* 3.1 SELECTOR DESPLEGABLE DE PIEZAS */}
             <div className="space-y-3 bg-mejunje-papel p-5 rounded-2xl border border-mejunje-border">
               <div className="flex items-center justify-between">
-                <h3 className="text-xs font-bold uppercase tracking-wider text-mejunje-carbon flex items-center gap-2">
-                  <Package className="w-4 h-4 text-mejunje-verdeseco" /> Piezas Mejunje
-                </h3>
+                <label className="text-xs font-bold uppercase tracking-wider text-mejunje-carbon flex items-center gap-2">
+                  <Package className="w-4 h-4 text-mejunje-verdeseco" /> Piezas del Catálogo ({selectedProducts.length} seleccionadas)
+                </label>
 
                 <div className="flex items-center gap-2 text-[11px]">
                   <button
@@ -284,113 +302,219 @@ export default function MercadoPage() {
                     onClick={handleClearProducts}
                     className="text-mejunje-secundario hover:underline"
                   >
-                    Limpiar selección
+                    Limpiar
                   </button>
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 max-h-56 overflow-y-auto pr-1">
-                {catalogProducts.map((product) => {
-                  const isSelected = selectedProductIds.includes(product.id);
-                  const firstVariant = product.variants?.[0];
+              {/* Dropdown Box */}
+              <div className="relative">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setIsProductsDropdownOpen(!isProductsDropdownOpen);
+                    setIsSuppliesDropdownOpen(false);
+                  }}
+                  className="w-full bg-white border border-mejunje-border rounded-xl px-4 py-3 text-left flex items-center justify-between text-xs hover:border-mejunje-verdeseco transition-colors shadow-xs"
+                >
+                  <span className="text-mejunje-carbon font-medium truncate">
+                    {selectedProducts.length === 0
+                      ? 'Desplegar para seleccionar piezas a monitorear...'
+                      : `${selectedProducts.length} pieza(s) seleccionada(s)`}
+                  </span>
+                  <ChevronDown className={`w-4 h-4 text-mejunje-secundario transition-transform ${isProductsDropdownOpen ? 'rotate-180' : ''}`} />
+                </button>
 
-                  return (
-                    <div
-                      key={product.id}
-                      onClick={() => handleToggleProduct(product.id)}
-                      className={`p-3 rounded-xl border text-xs cursor-pointer transition-all flex items-start gap-2.5 ${
-                        isSelected
-                          ? 'bg-white border-mejunje-verdeseco shadow-xs'
-                          : 'bg-white/80 border-mejunje-border hover:border-mejunje-borderarena'
-                      }`}
-                    >
-                      <div className="mt-0.5 text-mejunje-verdeseco">
-                        {isSelected ? (
-                          <CheckSquare className="w-4 h-4 fill-mejunje-verdeseco/20" />
-                        ) : (
-                          <Square className="w-4 h-4 text-mejunje-secundario" />
-                        )}
-                      </div>
-
-                      <div className="flex-1 min-w-0">
-                        <div className="font-bold text-mejunje-carbon truncate">
-                          {product.name}
-                        </div>
-
-                        <div className="flex flex-wrap gap-1 mt-1.5">
-                          <span className="px-2 py-0.5 rounded-md bg-mejunje-papel text-mejunje-carbon text-[9px] uppercase font-bold border border-mejunje-border">
-                            {product.category}
-                          </span>
-                          {firstVariant?.size && (
-                            <span className="px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-800 text-[10px] font-bold">
-                              {firstVariant.size}
-                            </span>
-                          )}
-                          {firstVariant?.aroma && (
-                            <span className="px-2 py-0.5 rounded-md bg-mejunje-arena/40 text-mejunje-carbon text-[10px]">
-                              {firstVariant.aroma}
-                            </span>
-                          )}
-                        </div>
-                      </div>
+                {isProductsDropdownOpen && (
+                  <div className="absolute z-30 left-0 right-0 mt-2 bg-white border border-mejunje-border rounded-2xl shadow-xl p-3 space-y-2 animate-in fade-in zoom-in-95">
+                    {/* Search inside dropdown */}
+                    <div className="relative">
+                      <Search className="w-3.5 h-3.5 text-mejunje-secundario absolute left-3 top-2.5" />
+                      <input
+                        type="text"
+                        placeholder="Buscar por nombre o categoría..."
+                        value={productSearchTerm}
+                        onChange={(e) => setProductSearchTerm(e.target.value)}
+                        className="w-full bg-mejunje-papel border border-mejunje-border rounded-xl pl-8 pr-3 py-1.5 text-xs text-mejunje-carbon focus:outline-none focus:border-mejunje-verdeseco"
+                      />
                     </div>
-                  );
-                })}
+
+                    <div className="max-h-48 overflow-y-auto space-y-1 pr-1">
+                      {filteredProducts.length === 0 ? (
+                        <p className="text-xs text-mejunje-secundario p-2 text-center">No se encontraron piezas</p>
+                      ) : (
+                        filteredProducts.map((p) => {
+                          const isSelected = selectedProductIds.includes(p.id);
+                          return (
+                            <div
+                              key={p.id}
+                              onClick={() => handleToggleProduct(p.id)}
+                              className={`p-2 rounded-xl border text-xs cursor-pointer transition-all flex items-center justify-between gap-2 ${
+                                isSelected
+                                  ? 'bg-mejunje-papel border-mejunje-verdeseco text-mejunje-carbon font-bold'
+                                  : 'bg-white border-transparent hover:bg-mejunje-papel/50 text-mejunje-carbon'
+                              }`}
+                            >
+                              <div className="flex items-center gap-2 min-w-0">
+                                <div className="text-mejunje-verdeseco">
+                                  {isSelected ? (
+                                    <CheckSquare className="w-4 h-4" />
+                                  ) : (
+                                    <Square className="w-4 h-4 text-mejunje-secundario" />
+                                  )}
+                                </div>
+                                <span className="truncate">{p.name}</span>
+                              </div>
+                              <span className="text-[9px] uppercase px-2 py-0.5 rounded bg-mejunje-papel text-mejunje-secundario border border-mejunje-border shrink-0">
+                                {p.category}
+                              </span>
+                            </div>
+                          );
+                        })
+                      )}
+                    </div>
+                  </div>
+                )}
               </div>
+
+              {/* Selected Pills */}
+              {selectedProducts.length > 0 && (
+                <div className="flex flex-wrap gap-1.5 pt-1">
+                  {selectedProducts.map((p) => (
+                    <span
+                      key={p.id}
+                      className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white border border-mejunje-border text-mejunje-verdeprofundo font-bold text-xs shadow-2xs"
+                    >
+                      <span>{p.name}</span>
+                      <button
+                        type="button"
+                        onClick={() => handleToggleProduct(p.id)}
+                        className="text-mejunje-secundario hover:text-mejunje-rojo"
+                      >
+                        <X className="w-3 h-3" />
+                      </button>
+                    </span>
+                  ))}
+                </div>
+              )}
             </div>
 
-            {/* 3.2 SELECCIÓN DESDE INSUMOS */}
+            {/* 3.2 SELECTOR DESPLEGABLE DE MATERIAS PRIMAS */}
             <div className="space-y-3 bg-mejunje-papel p-5 rounded-2xl border border-mejunje-border">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                <h3 className="text-xs font-bold uppercase tracking-wider text-mejunje-carbon flex items-center gap-2">
-                  <FlaskConical className="w-4 h-4 text-mejunje-verdeseco" /> Materias Primas & Insumos
-                </h3>
+              <div className="flex items-center justify-between">
+                <label className="text-xs font-bold uppercase tracking-wider text-mejunje-carbon flex items-center gap-2">
+                  <FlaskConical className="w-4 h-4 text-mejunje-verdeseco" /> Materias Primas & Insumos ({selectedSupplies.length} seleccionadas)
+                </label>
 
-                {/* Quick Search */}
-                <div className="relative">
-                  <Search className="w-3.5 h-3.5 text-mejunje-secundario absolute left-2.5 top-2" />
-                  <input
-                    type="text"
-                    value={supplySearchTerm}
-                    onChange={(e) => setSupplySearchTerm(e.target.value)}
-                    placeholder="Buscar insumo..."
-                    className="pl-8 pr-3 py-1 bg-white border border-mejunje-border rounded-lg text-xs text-mejunje-carbon focus:outline-none focus:border-mejunje-verdeseco w-full sm:w-44"
-                  />
+                <div className="flex items-center gap-2 text-[11px]">
+                  <button
+                    type="button"
+                    onClick={handleSelectAllSupplies}
+                    className="text-mejunje-verdeprofundo font-bold hover:underline"
+                  >
+                    Seleccionar todas
+                  </button>
+                  <span className="text-mejunje-arena">·</span>
+                  <button
+                    type="button"
+                    onClick={handleClearSupplies}
+                    className="text-mejunje-secundario hover:underline"
+                  >
+                    Limpiar
+                  </button>
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 max-h-56 overflow-y-auto pr-1">
-                {filteredSupplies.map((ing) => {
-                  const isSelected = selectedSupplyIds.includes(ing.id);
+              {/* Dropdown Box */}
+              <div className="relative">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setIsSuppliesDropdownOpen(!isSuppliesDropdownOpen);
+                    setIsProductsDropdownOpen(false);
+                  }}
+                  className="w-full bg-white border border-mejunje-border rounded-xl px-4 py-3 text-left flex items-center justify-between text-xs hover:border-mejunje-verdeseco transition-colors shadow-xs"
+                >
+                  <span className="text-mejunje-carbon font-medium truncate">
+                    {selectedSupplies.length === 0
+                      ? 'Desplegar para seleccionar materias primas...'
+                      : `${selectedSupplies.length} materia(s) prima(s) seleccionada(s)`}
+                  </span>
+                  <ChevronDown className={`w-4 h-4 text-mejunje-secundario transition-transform ${isSuppliesDropdownOpen ? 'rotate-180' : ''}`} />
+                </button>
 
-                  return (
-                    <div
-                      key={ing.id}
-                      onClick={() => handleToggleSupply(ing.id)}
-                      className={`p-2.5 rounded-xl border text-xs cursor-pointer transition-all flex items-center gap-2.5 ${
-                        isSelected
-                          ? 'bg-white border-mejunje-verdeseco shadow-xs'
-                          : 'bg-white/80 border-mejunje-border hover:border-mejunje-borderarena'
-                      }`}
-                    >
-                      <div className="text-mejunje-verdeseco">
-                        {isSelected ? (
-                          <CheckSquare className="w-4 h-4 fill-mejunje-verdeseco/20" />
-                        ) : (
-                          <Square className="w-4 h-4 text-mejunje-secundario" />
-                        )}
-                      </div>
-
-                      <div className="flex-1 min-w-0">
-                        <div className="font-bold text-mejunje-carbon truncate">{ing.name}</div>
-                        <div className="text-[10px] text-mejunje-secundario">
-                          Cat: {ing.category} · Costo: ${ing.purchasePriceARS.toLocaleString('es-AR')} ARS
-                        </div>
-                      </div>
+                {isSuppliesDropdownOpen && (
+                  <div className="absolute z-30 left-0 right-0 mt-2 bg-white border border-mejunje-border rounded-2xl shadow-xl p-3 space-y-2 animate-in fade-in zoom-in-95">
+                    {/* Search inside dropdown */}
+                    <div className="relative">
+                      <Search className="w-3.5 h-3.5 text-mejunje-secundario absolute left-3 top-2.5" />
+                      <input
+                        type="text"
+                        placeholder="Buscar por insumo o categoría..."
+                        value={supplySearchTerm}
+                        onChange={(e) => setSupplySearchTerm(e.target.value)}
+                        className="w-full bg-mejunje-papel border border-mejunje-border rounded-xl pl-8 pr-3 py-1.5 text-xs text-mejunje-carbon focus:outline-none focus:border-mejunje-verdeseco"
+                      />
                     </div>
-                  );
-                })}
+
+                    <div className="max-h-48 overflow-y-auto space-y-1 pr-1">
+                      {filteredSupplies.length === 0 ? (
+                        <p className="text-xs text-mejunje-secundario p-2 text-center">No se encontraron insumos</p>
+                      ) : (
+                        filteredSupplies.map((ing) => {
+                          const isSelected = selectedSupplyIds.includes(ing.id);
+                          return (
+                            <div
+                              key={ing.id}
+                              onClick={() => handleToggleSupply(ing.id)}
+                              className={`p-2 rounded-xl border text-xs cursor-pointer transition-all flex items-center justify-between gap-2 ${
+                                isSelected
+                                  ? 'bg-mejunje-papel border-mejunje-verdeseco text-mejunje-carbon font-bold'
+                                  : 'bg-white border-transparent hover:bg-mejunje-papel/50 text-mejunje-carbon'
+                              }`}
+                            >
+                              <div className="flex items-center gap-2 min-w-0">
+                                <div className="text-mejunje-verdeseco">
+                                  {isSelected ? (
+                                    <CheckSquare className="w-4 h-4" />
+                                  ) : (
+                                    <Square className="w-4 h-4 text-mejunje-secundario" />
+                                  )}
+                                </div>
+                                <span className="truncate">{ing.name}</span>
+                              </div>
+                              <span className="text-[9px] text-mejunje-secundario shrink-0">
+                                {formatCurrency(ing.purchasePriceARS)}
+                              </span>
+                            </div>
+                          );
+                        })
+                      )}
+                    </div>
+                  </div>
+                )}
               </div>
+
+              {/* Selected Pills */}
+              {selectedSupplies.length > 0 && (
+                <div className="flex flex-wrap gap-1.5 pt-1">
+                  {selectedSupplies.map((ing) => (
+                    <span
+                      key={ing.id}
+                      className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white border border-mejunje-border text-mejunje-carbon font-bold text-xs shadow-2xs"
+                    >
+                      <span>{ing.name}</span>
+                      <button
+                        type="button"
+                        onClick={() => handleToggleSupply(ing.id)}
+                        className="text-mejunje-secundario hover:text-mejunje-rojo"
+                      >
+                        <X className="w-3 h-3" />
+                      </button>
+                    </span>
+                  ))}
+                </div>
+              )}
             </div>
 
             {/* 3.3 TEXTO LIBRE */}
@@ -404,7 +528,7 @@ export default function MercadoPage() {
                 rows={3}
                 placeholder={`Ejemplos:
 - velas de cera de soja aromáticas frasco ámbar
-- difusores de varillas ratán palermo
+- difusores de varillas ratán buenos aires
 - esencias aromáticas para perfumería por mayor
 - packaging botánico y cajas kraft`}
                 className="w-full bg-white border border-mejunje-border rounded-xl p-3 text-xs text-mejunje-carbon focus:outline-none focus:border-mejunje-verdeseco leading-relaxed"
@@ -426,10 +550,10 @@ export default function MercadoPage() {
                   onChange={(e) => setSelectedZone(e.target.value)}
                   className="w-full bg-white border border-mejunje-border rounded-xl px-3 py-2 text-xs text-mejunje-carbon focus:outline-none"
                 >
-                  <option value="Palermo / CABA">Palermo / CABA</option>
+                  <option value="Buenos Aires / CABA">Buenos Aires / CABA</option>
                   <option value="Zona Norte GBA">Zona Norte GBA</option>
-                  <option value="Buenos Aires">Buenos Aires</option>
-                  <option value="Argentina">Argentina Nacional</option>
+                  <option value="Buenos Aires Interior">Buenos Aires Interior</option>
+                  <option value="Argentina Nacional">Argentina Nacional</option>
                 </select>
               </div>
 
@@ -568,7 +692,7 @@ export default function MercadoPage() {
                     type="text"
                     value={queryName}
                     onChange={(e) => setQueryName(e.target.value)}
-                    placeholder="Ej: Benchmark velas Palermo Soho"
+                    placeholder="Ej: Benchmark velas Buenos Aires"
                     className="flex-1 bg-white border border-mejunje-border rounded-xl px-2.5 py-1.5 text-xs text-mejunje-carbon focus:outline-none"
                   />
                   <button
@@ -718,7 +842,7 @@ export default function MercadoPage() {
         </div>
 
         <div className="atelier-sheet p-5 flex flex-col justify-between">
-          <span className="text-[10px] uppercase text-mejunje-secundario font-bold">Oportunidad de Captura ARS</span>
+          <span className="text-[10px] uppercase text-mejunje-secundario font-bold">Oportunidad de Captura</span>
           <div className="text-xl sm:text-2xl font-bold text-mejunje-verdeprofundo mt-2 flex items-center gap-2">
             {opportunitiesCount} Oportunidad(es) <ArrowUpRight className="w-5 h-5 text-mejunje-ambar" />
           </div>
@@ -728,7 +852,7 @@ export default function MercadoPage() {
         <div className="atelier-sheet p-5 flex flex-col justify-between">
           <span className="text-[10px] uppercase text-mejunje-secundario font-bold">Margen Comercial Promedio</span>
           <div className="text-xl sm:text-2xl font-bold text-mejunje-verdeprofundo mt-2">
-            ~64.5% ARS
+            ~64.5%
           </div>
           <p className="text-xs text-mejunje-secundario mt-1">Calculado sobre materias primas e insumos directos</p>
         </div>
@@ -738,7 +862,7 @@ export default function MercadoPage() {
       <div className="atelier-sheet p-6 space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-mejunje-border">
           <h2 className="font-bold text-lg text-mejunje-carbon flex items-center gap-2">
-            <BarChart3 className="w-5 h-5 text-mejunje-verdeseco" /> Comparativa Directa de Precios ARS
+            <BarChart3 className="w-5 h-5 text-mejunje-verdeseco" /> Comparativa Directa de Precios
           </h2>
 
           <div className="flex items-center gap-3">
@@ -791,28 +915,28 @@ export default function MercadoPage() {
                 <div className="bg-white p-3 rounded-xl border border-mejunje-border">
                   <span className="text-mejunje-secundario text-[9px] uppercase font-bold block">Precio Mejunje</span>
                   <span className="text-sm font-bold text-mejunje-verdeprofundo">
-                    ${item.kameloPriceARS.toLocaleString('es-AR')} ARS
+                    {formatCurrency(item.kameloPriceARS)}
                   </span>
                 </div>
 
                 <div className="bg-white p-3 rounded-xl border border-mejunje-border">
                   <span className="text-mejunje-secundario text-[9px] uppercase font-bold block">Prom. Mercado</span>
                   <span className="text-sm font-bold text-mejunje-carbon">
-                    ${item.competitorAverageARS.toLocaleString('es-AR')} ARS
+                    {formatCurrency(item.competitorAverageARS)}
                   </span>
                 </div>
 
                 <div className="bg-white p-3 rounded-xl border border-mejunje-border">
                   <span className="text-mejunje-secundario text-[9px] uppercase font-bold block">Mín. Mercado</span>
                   <span className="text-sm font-bold text-mejunje-secundario">
-                    ${item.competitorMinARS.toLocaleString('es-AR')} ARS
+                    {formatCurrency(item.competitorMinARS)}
                   </span>
                 </div>
 
                 <div className="bg-white p-3 rounded-xl border border-mejunje-border">
                   <span className="text-mejunje-secundario text-[9px] uppercase font-bold block">Máx. Mercado</span>
                   <span className="text-sm font-bold text-mejunje-secundario">
-                    ${item.competitorMaxARS.toLocaleString('es-AR')} ARS
+                    {formatCurrency(item.competitorMaxARS)}
                   </span>
                 </div>
               </div>

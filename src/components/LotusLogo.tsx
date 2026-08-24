@@ -48,7 +48,7 @@ export function LotusLogoHeader({ className = "" }: { className?: string }) {
           </span>
         </div>
         <p className="font-typewriter text-[9px] text-mejunje-secundario tracking-widest uppercase">
-          Palermo · Buenos Aires
+          Atelier de Aromas · Buenos Aires
         </p>
       </div>
     </div>

@@ -203,7 +203,7 @@ export interface ActivityLog {
   timestamp: string;
   title: string;
   description: string;
-  type: 'formula' | 'batch' | 'purchase' | 'market' | 'catalog' | 'supplier';
+  type: 'formula' | 'batch' | 'purchase' | 'market' | 'catalog' | 'supplier' | 'client';
 }
 
 export interface ToastNotification {
@@ -216,5 +216,10 @@ export interface ClientContact {
   id: string;
   name: string;
   phone: string;
-  type: 'Minorista' | 'Mayorista' | 'Boutique';
+  type: 'Minorista' | 'Mayorista' | 'Boutique' | string;
+  email?: string;
+  address?: string;
+  notes?: string;
+  status?: 'Activo' | 'Inactivo' | 'Potencial';
+  lastOrderDate?: string;
 }

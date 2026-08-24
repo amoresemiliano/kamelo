@@ -49,6 +49,12 @@ import {
   Search as LucideSearch,
   MessageCircle as LucideMessageCircle,
   Flower2 as LucideFlower2,
+  Users as LucideUsers,
+  UserCheck as LucideUserCheck,
+  UserPlus as LucideUserPlus,
+  Truck as LucideTruck,
+  Phone as LucidePhone,
+  Mail as LucideMail,
 } from 'lucide-react';
 
 export {
@@ -79,6 +85,13 @@ export {
   Compass,
   Scale,
 };
+
+export const Users = LucideUsers;
+export const UserCheck = LucideUserCheck;
+export const UserPlus = LucideUserPlus;
+export const Truck = LucideTruck;
+export const Phone = LucidePhone;
+export const Mail = LucideMail;
 
 // Domain-Specific Handcrafted SVG Icons for MEJUNJE Atelier
 

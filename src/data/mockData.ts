@@ -71,11 +71,11 @@ export const mockSuppliers: Supplier[] = [
   },
   {
     id: 'sup-5',
-    name: 'Taller Gráfico Palermo & Packaging',
+    name: 'Taller Gráfico & Packaging Botánico',
     contactPerson: 'Sofía Peralta',
     phoneWhatsApp: '+5491124449900',
-    email: 'grafica@packagingperalta.com',
-    location: 'Palermo Soho, CABA',
+    email: 'grafica@packagingbotanico.com.ar',
+    location: 'Buenos Aires',
     categoriesSupplied: ['Packaging', 'Etiquetas'],
     minPurchaseARS: 80000,
     deliveryTimeDays: 4,
@@ -326,7 +326,7 @@ export const mockIngredients: Ingredient[] = [
     stock: 650,
     minStock: 400,
     supplierId: 'sup-5',
-    supplierName: 'Taller Gráfico Palermo & Packaging',
+    supplierName: 'Taller Gráfico & Packaging Botánico',
     lastUpdated: '07/08/2026',
     imageUrl: 'https://images.unsplash.com/photo-1586075010923-2dd4570fb338?auto=format&fit=crop&w=600&q=80',
   },
@@ -341,7 +341,7 @@ export const mockIngredients: Ingredient[] = [
     stock: 220,
     minStock: 200,
     supplierId: 'sup-5',
-    supplierName: 'Taller Gráfico Palermo & Packaging',
+    supplierName: 'Taller Gráfico & Packaging Botánico',
     lastUpdated: '05/08/2026',
     imageUrl: 'https://images.unsplash.com/photo-1530587191325-3db32d826c18?auto=format&fit=crop&w=600&q=80',
   },
@@ -389,7 +389,7 @@ export const mockFormulas: Formula[] = [
       { ingredientId: 'ing-7', ingredientName: 'Esencia Ámbar Botánico & Madera', category: 'Fragancias', quantity: 140, unit: 'ml', percentage: 7, unitCostARS: 145, supplierId: 'sup-1', supplierName: 'Fragancias Eissen AR', calculatedCostARS: 20300 },
       { ingredientId: 'ing-13', ingredientName: 'Vaso de Vidrio Esmerilado 250g', category: 'Envases', quantity: 10, unit: 'unid', percentage: 0, unitCostARS: 1400, supplierId: 'sup-3', supplierName: 'EcoGlass Envases de Vidrio', calculatedCostARS: 14000 },
       { ingredientId: 'ing-10', ingredientName: 'Pabilo de Algodón N°18', category: 'Pabilos', quantity: 10, unit: 'unid', percentage: 0, unitCostARS: 120, supplierId: 'sup-4', supplierName: 'Ceras & Botánica AR', calculatedCostARS: 1200 },
-      { ingredientId: 'ing-16', ingredientName: 'Etiqueta Kraft Tipográfica Mejunje', category: 'Etiquetas', quantity: 10, unit: 'unid', percentage: 0, unitCostARS: 140, supplierId: 'sup-5', supplierName: 'Taller Gráfico Palermo & Packaging', calculatedCostARS: 1400 },
+      { ingredientId: 'ing-16', ingredientName: 'Etiqueta Kraft Tipográfica Mejunje', category: 'Etiquetas', quantity: 10, unit: 'unid', percentage: 0, unitCostARS: 140, supplierId: 'sup-5', supplierName: 'Taller Gráfico & Packaging Botánico', calculatedCostARS: 1400 },
     ],
   },
   {
@@ -511,7 +511,7 @@ export const mockBatchTests: BatchTest[] = [
     ratingHotAroma: 4,
     ratingBurn: 5,
     observations: 'Superficie lisa perfecta sin grietas ni rechupe. Excelente adherencia al vaso de vidrio.',
-    result: 'Fórmula lista para producción en el taller de Palermo.',
+    result: 'Fórmula lista para producción en el taller de Buenos Aires.',
   },
   {
     id: 'bt-2',
@@ -641,7 +641,7 @@ export const mockPurchaseOrders: PurchaseOrder[] = [
     subtotalARS: 200000,
     totalARS: 200000,
     status: 'Solicitada',
-    observations: 'Entrega acordada en el atelier de Palermo Soho.',
+    observations: 'Entrega acordada en el atelier de Buenos Aires.',
   },
   {
     id: 'po-2',
@@ -663,10 +663,10 @@ export const mockPurchaseOrders: PurchaseOrder[] = [
 export const mockMarketQueries: MarketQuery[] = [
   {
     id: 'mq-1',
-    name: 'Vela de Soja 200g - Benchmark Palermo',
+    name: 'Vela de Soja 200g - Benchmark Buenos Aires',
     category: 'Vela',
-    keywords: 'vela soja 200g aromatica artesanal palermo',
-    zone: 'CABA',
+    keywords: 'vela soja 200g aromatica artesanal buenos aires',
+    zone: 'Buenos Aires',
     source: 'Mercado Libre',
     status: 'Activo',
     lastRun: '10/08/2026 10:15',
@@ -778,7 +778,7 @@ export const mockCatalogProducts: CatalogProduct[] = [
     name: 'Vela Botánica Ámbar & Madera',
     category: 'Velas Botánicas',
     shortDescription: 'Cera de soja 100% pura con notas de ámbar cálido, cedro y vainilla.',
-    description: 'Vela botánica elaborada artesanalmente en nuestro atelier de Palermo con cera de soja de bajo punto de fusión, pabilo de algodón puro y aceites botánicos.',
+    description: 'Vela botánica elaborada artesanalmente en nuestro atelier de Buenos Aires con cera de soja de bajo punto de fusión, pabilo de algodón puro y aceites botánicos.',
     collection: 'Colección Botánica Tierra',
     fragranceFamily: 'Amaderada Cálida',
     status: 'Activo',
@@ -928,14 +928,14 @@ export const mockActivityLogs: ActivityLog[] = [
     id: 'act-3',
     timestamp: 'Hace 1 hora',
     title: 'Orden de Compra Creada',
-    description: 'MJ-OC-2026-001 generada para Fragancias Eissen AR por $200.000 ARS.',
+    description: 'MJ-OC-2026-001 generada para Fragancias Eissen AR por $200.000.',
     type: 'purchase',
   },
   {
     id: 'act-4',
     timestamp: 'Hace 2 horas',
     title: 'Ficha Comercial Actualizada',
-    description: 'Vela Botánica 350g reajustada a $29.900 ARS en catálogo.',
+    description: 'Vela Botánica 350g reajustada a $29.900 en catálogo.',
     type: 'catalog',
   },
   {
@@ -948,8 +948,8 @@ export const mockActivityLogs: ActivityLog[] = [
 ];
 
 export const mockClients: ClientContact[] = [
-  { id: 'cli-1', name: 'Sofía Martínez (Boutique Palermo)', phone: '+5491140001122', type: 'Boutique' },
-  { id: 'cli-2', name: 'Martín Benítez (Decoración San Isidro)', phone: '+5491152223344', type: 'Mayorista' },
-  { id: 'cli-3', name: 'Camila Rodriguez', phone: '+5491163334455', type: 'Minorista' },
-  { id: 'cli-4', name: 'Hotel & Spa Recoleta', phone: '+5491138889900', type: 'Mayorista' },
+  { id: 'cli-1', name: 'Sofía Martínez (Boutique de Diseño)', phone: '+5491140001122', type: 'Boutique', email: 'sofia@boutiquediseno.com.ar', address: 'Buenos Aires', notes: 'Prefiere presentaciones de velas de 350g en vidrio esmerilado.' },
+  { id: 'cli-2', name: 'Martín Benítez (Estudio Decoración)', phone: '+5491152223344', type: 'Mayorista', email: 'martin@benitezdeco.com.ar', address: 'Buenos Aires', notes: 'Pedidos periódicos de difusores de ambiente x 250ml.' },
+  { id: 'cli-3', name: 'Camila Rodríguez', phone: '+5491163334455', type: 'Minorista', email: 'camila.rodriguez@gmail.com', address: 'Buenos Aires', notes: 'Cliente frecuente de Velvet Rose Eau de Parfum.' },
+  { id: 'cli-4', name: 'Hotel & Spa Boutique', phone: '+5491138889900', type: 'Mayorista', email: 'compras@hotelspaboutique.com.ar', address: 'Buenos Aires', notes: 'Aromatización personalizada con perfume textil y velas botánicas.' },
 ];

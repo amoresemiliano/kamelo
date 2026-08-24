@@ -1,27 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Special+Elite&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   body {
-    background-color: #F7F3EE;
-    color: #4B4038;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background-color: #F5EFE6;
+    color: #292622;
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    letter-spacing: -0.01em;
+  }
+
+  h1, h2, h3, h4, .font-heading {
+    font-family: 'Special Elite', 'Courier Prime', Courier, monospace;
+    letter-spacing: 0.02em;
   }
 }
 
-/* Custom Scrollbar */
+/* Authentic Antique Typewriter Ink Texture & analog effects */
+.typewriter-title {
+  font-family: 'Special Elite', 'Courier Prime', Courier, monospace;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #292622;
+  text-shadow: 0.2px 0.2px 0 rgba(41, 38, 34, 0.2);
+}
+
+.typewriter-sub {
+  font-family: 'Courier Prime', 'Special Elite', Courier, monospace;
+  letter-spacing: 0.05em;
+}
+
+.font-editorial {
+  font-family: 'Newsreader', 'EB Garamond', Georgia, serif;
+}
+
+/* Subtle Atelier Card Style */
+.atelier-sheet {
+  background-color: #FAF6F0;
+  border: 1px solid #E5D9C8;
+  border-radius: 1.25rem;
+  transition: all 0.2s ease-in-out;
+}
+.atelier-sheet:hover {
+  border-color: #D7C3A8;
+}
+
+/* Discrete Stamp / Tag */
+.atelier-tag {
+  font-family: 'Courier Prime', Courier, monospace;
+  font-size: 0.6875rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.6rem;
+  border-radius: 9999px;
+  background-color: rgba(215, 195, 168, 0.35);
+  color: #5A4030;
+  border: 1px solid rgba(184, 160, 134, 0.4);
+}
+
+/* Minimalist Scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
 }
 ::-webkit-scrollbar-track {
-  background: #F7F3EE;
+  background: #F5EFE6;
 }
 ::-webkit-scrollbar-thumb {
-  background: #D8C7B8;
+  background: #D7C3A8;
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #C98F7A;
+  background: #B8A086;
+}
+
+/* Delicate selection styling */
+::selection {
+  background-color: #D7C3A8;
+  color: #292622;
 }

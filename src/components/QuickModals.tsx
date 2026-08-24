@@ -45,11 +45,11 @@ export default function QuickModals() {
   // ---------------------------------------------------------------------------
   const [productForm, setProductForm] = useState({
     name: '',
-    sku: `KAM-PROD-${Math.floor(100 + Math.random() * 900)}`,
+    sku: `MEJ-PROD-${Math.floor(100 + Math.random() * 900)}`,
     category: 'Velas Botánicas' as 'Velas Botánicas' | 'Difusores de Ambiente' | 'Perfumes Finos' | 'Cosmética Natural',
     shortDescription: '',
     description: '',
-    collection: 'Colección Botánica Tierra',
+    collection: 'Colección Botánica Atelier',
     fragranceFamily: 'Amaderada Cálida',
     status: 'Activo' as 'Borrador' | 'Activo' | 'Inactivo',
     variantSize: '200 g',
@@ -91,7 +91,7 @@ export default function QuickModals() {
     name: '',
     category: 'Vela',
     keywords: '',
-    zone: 'CABA' as 'CABA' | 'Zona Norte' | 'Buenos Aires' | 'Argentina',
+    zone: 'Palermo / CABA' as 'Palermo / CABA' | 'CABA' | 'Zona Norte' | 'Buenos Aires' | 'Argentina',
     source: 'Mercado Libre' as 'Mercado Libre' | 'Ecommerce' | 'Marca concreta' | 'Otra',
   });
 
@@ -169,8 +169,8 @@ export default function QuickModals() {
       sku: productForm.sku,
       name: productForm.name,
       category: productForm.category,
-      shortDescription: productForm.shortDescription || 'Producto artesanal Kamelo Aromáticos.',
-      description: productForm.description || 'Elaborado con insumos puros de alta persistencia olfativa.',
+      shortDescription: productForm.shortDescription || 'Pieza artesanal MEJUNJE.',
+      description: productForm.description || 'Elaborado con materias primas botánicas puras y alta persistencia olfativa.',
       collection: productForm.collection,
       fragranceFamily: productForm.fragranceFamily,
       status: productForm.status,
@@ -272,11 +272,11 @@ export default function QuickModals() {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-xs p-4 overflow-y-auto animate-in fade-in">
-      <div className="bg-[#3E342F] text-[#FBF8F4] border border-[#C98F7A]/40 rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-xl relative my-8">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4 overflow-y-auto animate-in fade-in">
+      <div className="bg-mejunje-card text-mejunje-tinta border border-mejunje-border rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-atelier-lg relative my-8">
         <button
           onClick={() => setActiveModal(null)}
-          className="absolute top-5 right-5 text-[#D8C7B8]/70 hover:text-white p-1.5 rounded-full bg-[#4B4038] transition-colors"
+          className="absolute top-5 right-5 text-mejunje-griscalido hover:text-mejunje-tinta p-1.5 rounded-full bg-white border border-mejunje-border transition-colors"
         >
           <X className="w-5 h-5" />
         </button>
@@ -286,36 +286,36 @@ export default function QuickModals() {
         {/* ------------------------------------------------------------------- */}
         {activeModal === 'formula' && (
           <div>
-            <div className="flex items-center gap-3 mb-6 pb-4 border-b border-[#3D2C22]">
-              <div className="w-10 h-10 rounded-2xl bg-[#C86D51]/20 border border-[#C86D51]/40 flex items-center justify-center text-[#C86D51]">
+            <div className="flex items-center gap-3 mb-6 pb-4 border-b border-mejunje-border">
+              <div className="w-10 h-10 rounded-2xl bg-mejunje-salmon/15 border border-mejunje-salmon/30 flex items-center justify-center text-mejunje-salmon">
                 <FlaskConical className="w-5 h-5" />
               </div>
               <div>
-                <h2 className="font-serif font-bold text-xl text-[#F7F4EE]">Crear Nueva Fórmula</h2>
-                <p className="text-xs text-[#E6DFC8]/70">Laboratorio & Especificación Perfumística</p>
+                <h2 className="font-serif italic text-2xl text-mejunje-tinta">Crear Nueva Fórmula</h2>
+                <p className="text-xs text-mejunje-griscalido font-typewriter">Laboratorio & Especificación Perfumística</p>
               </div>
             </div>
 
             <form onSubmit={handleSaveFormula} className="space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-semibold text-[#E6DFC8] mb-1">Nombre de la Fórmula *</label>
+                  <label className="block text-xs font-typewriter uppercase text-mejunje-tinta mb-1">Nombre de la Fórmula *</label>
                   <input
                     type="text"
                     required
                     placeholder="Ej. Vela Botánica Ámbar & Canela 200g"
                     value={formulaForm.name}
                     onChange={(e) => setFormulaForm({ ...formulaForm, name: e.target.value })}
-                    className="w-full bg-[#3D2C22] border border-[#523B2E] rounded-xl px-3.5 py-2 text-xs text-white focus:outline-none focus:border-[#C86D51]"
+                    className="w-full bg-white border border-mejunje-border rounded-xl px-3.5 py-2 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salmon"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-[#E6DFC8] mb-1">Categoría</label>
+                  <label className="block text-xs font-typewriter uppercase text-mejunje-tinta mb-1">Categoría</label>
                   <select
                     value={formulaForm.category}
                     onChange={(e) => setFormulaForm({ ...formulaForm, category: e.target.value as any })}
-                    className="w-full bg-[#3D2C22] border border-[#523B2E] rounded-xl px-3.5 py-2 text-xs text-white focus:outline-none focus:border-[#C86D51]"
+                    className="w-full bg-white border border-mejunje-border rounded-xl px-3.5 py-2 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salmon"
                   >
                     <option value="Vela">Vela de Soja</option>
                     <option value="Difusor">Difusor de Ambiente</option>
@@ -325,33 +325,33 @@ export default function QuickModals() {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-[#E6DFC8] mb-1">Rendimiento / Tamaño Unitario</label>
+                  <label className="block text-xs font-typewriter uppercase text-mejunje-tinta mb-1">Rendimiento / Tamaño</label>
                   <input
                     type="text"
                     placeholder="Ej. 200 g o 250 ml"
                     value={formulaForm.yieldSize}
                     onChange={(e) => setFormulaForm({ ...formulaForm, yieldSize: e.target.value })}
-                    className="w-full bg-[#3D2C22] border border-[#523B2E] rounded-xl px-3.5 py-2 text-xs text-white focus:outline-none focus:border-[#C86D51]"
+                    className="w-full bg-white border border-mejunje-border rounded-xl px-3.5 py-2 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salmon"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-[#E6DFC8] mb-1">Tamaño de Batch Base (gramos/ml)</label>
+                  <label className="block text-xs font-typewriter uppercase text-mejunje-tinta mb-1">Batch Base (g/ml)</label>
                   <input
                     type="number"
                     value={formulaForm.batchSizeGrams}
                     onChange={(e) => setFormulaForm({ ...formulaForm, batchSizeGrams: Number(e.target.value) })}
-                    className="w-full bg-[#3D2C22] border border-[#523B2E] rounded-xl px-3.5 py-2 text-xs text-white focus:outline-none focus:border-[#C86D51]"
+                    className="w-full bg-white border border-mejunje-border rounded-xl px-3.5 py-2 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salmon"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-[#E6DFC8] mb-1">Vincular a Producto de Catálogo (Opcional)</label>
+                <label className="block text-xs font-typewriter uppercase text-mejunje-tinta mb-1">Vincular a Pieza de Catálogo (Opcional)</label>
                 <select
                   value={formulaForm.associatedProductId}
                   onChange={(e) => setFormulaForm({ ...formulaForm, associatedProductId: e.target.value })}
-                  className="w-full bg-[#3D2C22] border border-[#523B2E] rounded-xl px-3.5 py-2 text-xs text-white focus:outline-none focus:border-[#C86D51]"
+                  className="w-full bg-white border border-mejunje-border rounded-xl px-3.5 py-2 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salmon"
                 >
                   <option value="">-- Sin producto vinculado por el momento --</option>
                   {catalogProducts.map((p) => (
@@ -361,9 +361,9 @@ export default function QuickModals() {
               </div>
 
               {/* Dynamic Ingredients */}
-              <div className="bg-[#3D2C22]/50 p-4 rounded-2xl border border-[#523B2E] space-y-3">
+              <div className="bg-mejunje-papel/40 p-4 rounded-2xl border border-mejunje-border space-y-3">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold text-[#F7F4EE]">Composición & Insumos</span>
+                  <span className="text-xs font-typewriter font-bold uppercase text-mejunje-tinta">Composición & Materias Primas</span>
                   <button
                     type="button"
                     onClick={() =>
@@ -372,9 +372,9 @@ export default function QuickModals() {
                         ingredients: [...formulaForm.ingredients, { ingredientId: '', quantity: 100, percentage: 5, unit: 'g' }],
                       })
                     }
-                    className="text-[11px] text-[#D9822B] hover:underline flex items-center gap-1 font-semibold"
+                    className="text-[11px] text-mejunje-salmon hover:underline flex items-center gap-1 font-medium font-sans"
                   >
-                    <Plus className="w-3.5 h-3.5" /> Agregar Insumo
+                    <Plus className="w-3.5 h-3.5" /> Agregar Materia Prima
                   </button>
                 </div>
 
@@ -387,9 +387,9 @@ export default function QuickModals() {
                         next[idx].ingredientId = e.target.value;
                         setFormulaForm({ ...formulaForm, ingredients: next });
                       }}
-                      className="flex-1 bg-[#2A1E17] border border-[#523B2E] rounded-lg px-2.5 py-1.5 text-xs text-white"
+                      className="flex-1 bg-white border border-mejunje-border rounded-lg px-2.5 py-1.5 text-xs text-mejunje-tinta"
                     >
-                      <option value="">-- Seleccionar Insumo --</option>
+                      <option value="">-- Seleccionar Materia Prima --</option>
                       {ingredients.map((i) => (
                         <option key={i.id} value={i.id}>
                           {i.name} ({i.category}) - ${i.unitCostARS}/u
@@ -406,7 +406,7 @@ export default function QuickModals() {
                         next[idx].quantity = Number(e.target.value);
                         setFormulaForm({ ...formulaForm, ingredients: next });
                       }}
-                      className="w-20 bg-[#2A1E17] border border-[#523B2E] rounded-lg px-2.5 py-1.5 text-xs text-white"
+                      className="w-20 bg-white border border-mejunje-border rounded-lg px-2.5 py-1.5 text-xs text-mejunje-tinta"
                     />
 
                     <input
@@ -418,7 +418,7 @@ export default function QuickModals() {
                         next[idx].unit = e.target.value;
                         setFormulaForm({ ...formulaForm, ingredients: next });
                       }}
-                      className="w-16 bg-[#2A1E17] border border-[#523B2E] rounded-lg px-2.5 py-1.5 text-xs text-white"
+                      className="w-16 bg-white border border-mejunje-border rounded-lg px-2.5 py-1.5 text-xs text-mejunje-tinta"
                     />
 
                     <button
@@ -427,7 +427,7 @@ export default function QuickModals() {
                         const next = formulaForm.ingredients.filter((_, i) => i !== idx);
                         setFormulaForm({ ...formulaForm, ingredients: next });
                       }}
-                      className="text-[#C86D51] hover:text-white p-1"
+                      className="text-rose-700 hover:text-rose-900 p-1"
                     >
                       <Trash2 className="w-4 h-4" />
                     </button>
@@ -436,43 +436,43 @@ export default function QuickModals() {
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-[#E6DFC8] mb-1">Notas Aromáticas (Salida, Corazón, Fondo)</label>
+                <label className="block text-xs font-typewriter uppercase text-mejunje-tinta mb-1">Notas Olfativas (Salida, Corazón, Fondo)</label>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                   <input
                     type="text"
                     placeholder="Salida (ej. Bergamota)"
                     value={formulaForm.topNotes}
                     onChange={(e) => setFormulaForm({ ...formulaForm, topNotes: e.target.value })}
-                    className="bg-[#3D2C22] border border-[#523B2E] rounded-xl px-3 py-1.5 text-xs text-white"
+                    className="bg-white border border-mejunje-border rounded-xl px-3 py-1.5 text-xs text-mejunje-tinta"
                   />
                   <input
                     type="text"
-                    placeholder="Corazón (ej. Rosa)"
+                    placeholder="Corazón (ej. Rosa Damascena)"
                     value={formulaForm.heartNotes}
                     onChange={(e) => setFormulaForm({ ...formulaForm, heartNotes: e.target.value })}
-                    className="bg-[#3D2C22] border border-[#523B2E] rounded-xl px-3 py-1.5 text-xs text-white"
+                    className="bg-white border border-mejunje-border rounded-xl px-3 py-1.5 text-xs text-mejunje-tinta"
                   />
                   <input
                     type="text"
-                    placeholder="Fondo (ej. Ámbar)"
+                    placeholder="Fondo (ej. Ámbar & Sándalo)"
                     value={formulaForm.baseNotes}
                     onChange={(e) => setFormulaForm({ ...formulaForm, baseNotes: e.target.value })}
-                    className="bg-[#3D2C22] border border-[#523B2E] rounded-xl px-3 py-1.5 text-xs text-white"
+                    className="bg-white border border-mejunje-border rounded-xl px-3 py-1.5 text-xs text-mejunje-tinta"
                   />
                 </div>
               </div>
 
-              <div className="pt-4 flex items-center justify-end gap-3 border-t border-[#3D2C22]">
+              <div className="pt-4 flex items-center justify-end gap-3 border-t border-mejunje-border">
                 <button
                   type="button"
                   onClick={() => setActiveModal(null)}
-                  className="px-4 py-2 rounded-xl text-xs font-medium text-[#E6DFC8] bg-[#3D2C22] hover:bg-[#523B2E]"
+                  className="px-4 py-2 rounded-xl text-xs font-medium text-mejunje-tinta bg-white border border-mejunje-border hover:bg-mejunje-papel"
                 >
                   Cancelar
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 rounded-xl text-xs font-semibold text-white bg-[#C86D51] hover:bg-[#a85239] shadow-md flex items-center gap-1.5"
+                  className="px-5 py-2 rounded-xl text-xs font-medium text-white bg-mejunje-salmon hover:bg-mejunje-terracota shadow-xs flex items-center gap-1.5"
                 >
                   <Sparkles className="w-4 h-4" /> Guardar Fórmula
                 </button>
@@ -486,46 +486,46 @@ export default function QuickModals() {
         {/* ------------------------------------------------------------------- */}
         {activeModal === 'product' && (
           <div>
-            <div className="flex items-center gap-3 mb-6 pb-4 border-b border-[#3D2C22]">
-              <div className="w-10 h-10 rounded-2xl bg-[#D9822B]/20 border border-[#D9822B]/40 flex items-center justify-center text-[#D9822B]">
+            <div className="flex items-center gap-3 mb-6 pb-4 border-b border-mejunje-border">
+              <div className="w-10 h-10 rounded-2xl bg-mejunje-ambar/20 border border-mejunje-ambar/40 flex items-center justify-center text-mejunje-tabaco">
                 <Package className="w-5 h-5" />
               </div>
               <div>
-                <h2 className="font-serif font-bold text-xl text-[#F7F4EE]">Crear Nuevo Producto</h2>
-                <p className="text-xs text-[#E6DFC8]/70">Alta de Catálogo & Variantes Comerciales</p>
+                <h2 className="font-serif italic text-2xl text-mejunje-tinta">Crear Nueva Pieza</h2>
+                <p className="text-xs text-mejunje-griscalido font-typewriter">Alta de Catálogo & Variantes de Presentación</p>
               </div>
             </div>
 
             <form onSubmit={handleSaveProduct} className="space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-semibold text-[#E6DFC8] mb-1">Nombre Comercial *</label>
+                  <label className="block text-xs font-typewriter uppercase text-mejunje-tinta mb-1">Nombre Comercial *</label>
                   <input
                     type="text"
                     required
                     placeholder="Ej. Vela Soja Canela & Naranja"
                     value={productForm.name}
                     onChange={(e) => setProductForm({ ...productForm, name: e.target.value })}
-                    className="w-full bg-[#3D2C22] border border-[#523B2E] rounded-xl px-3.5 py-2 text-xs text-white focus:outline-none focus:border-[#D9822B]"
+                    className="w-full bg-white border border-mejunje-border rounded-xl px-3.5 py-2 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salmon"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-[#E6DFC8] mb-1">SKU Base</label>
+                  <label className="block text-xs font-typewriter uppercase text-mejunje-tinta mb-1">SKU Base</label>
                   <input
                     type="text"
                     value={productForm.sku}
                     onChange={(e) => setProductForm({ ...productForm, sku: e.target.value })}
-                    className="w-full bg-[#3D2C22] border border-[#523B2E] rounded-xl px-3.5 py-2 text-xs text-white focus:outline-none focus:border-[#D9822B]"
+                    className="w-full bg-white border border-mejunje-border rounded-xl px-3.5 py-2 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salmon"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-[#E6DFC8] mb-1">Categoría</label>
+                  <label className="block text-xs font-typewriter uppercase text-mejunje-tinta mb-1">Categoría</label>
                   <select
                     value={productForm.category}
                     onChange={(e) => setProductForm({ ...productForm, category: e.target.value as any })}
-                    className="w-full bg-[#3D2C22] border border-[#523B2E] rounded-xl px-3.5 py-2 text-xs text-white focus:outline-none focus:border-[#D9822B]"
+                    className="w-full bg-white border border-mejunje-border rounded-xl px-3.5 py-2 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salmon"
                   >
                     <option value="Velas Botánicas">Velas Botánicas</option>
                     <option value="Difusores de Ambiente">Difusores de Ambiente</option>
@@ -535,84 +535,84 @@ export default function QuickModals() {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-[#E6DFC8] mb-1">Colección</label>
+                  <label className="block text-xs font-typewriter uppercase text-mejunje-tinta mb-1">Colección</label>
                   <input
                     type="text"
                     value={productForm.collection}
                     onChange={(e) => setProductForm({ ...productForm, collection: e.target.value })}
-                    className="w-full bg-[#3D2C22] border border-[#523B2E] rounded-xl px-3.5 py-2 text-xs text-white focus:outline-none focus:border-[#D9822B]"
+                    className="w-full bg-white border border-mejunje-border rounded-xl px-3.5 py-2 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salmon"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-[#E6DFC8] mb-1">Descripción Breve</label>
+                <label className="block text-xs font-typewriter uppercase text-mejunje-tinta mb-1">Descripción Breve</label>
                 <input
                   type="text"
-                  placeholder="Ej. Cera de soja 100% pura en vaso de cristal."
+                  placeholder="Ej. Cera de soja 100% botánica en vaso de cristal ambarino."
                   value={productForm.shortDescription}
                   onChange={(e) => setProductForm({ ...productForm, shortDescription: e.target.value })}
-                  className="w-full bg-[#3D2C22] border border-[#523B2E] rounded-xl px-3.5 py-2 text-xs text-white focus:outline-none focus:border-[#D9822B]"
+                  className="w-full bg-white border border-mejunje-border rounded-xl px-3.5 py-2 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salmon"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-[#E6DFC8] mb-1">URL de Imagen del Producto (Opcional)</label>
+                <label className="block text-xs font-typewriter uppercase text-mejunje-tinta mb-1">URL de Fotografía del Producto (Opcional)</label>
                 <input
                   type="url"
                   placeholder="https://images.unsplash.com/... (Dejar vacío para usar imagen automática)"
                   value={productForm.imageUrl}
                   onChange={(e) => setProductForm({ ...productForm, imageUrl: e.target.value })}
-                  className="w-full bg-[#3D2C22] border border-[#523B2E] rounded-xl px-3.5 py-2 text-xs text-white focus:outline-none focus:border-[#D9822B]"
+                  className="w-full bg-white border border-mejunje-border rounded-xl px-3.5 py-2 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salmon"
                 />
               </div>
 
-              <div className="bg-[#3D2C22]/50 p-4 rounded-2xl border border-[#523B2E] space-y-3">
-                <span className="text-xs font-bold text-[#F7F4EE]">Variante Inicial</span>
+              <div className="bg-mejunje-papel/40 p-4 rounded-2xl border border-mejunje-border space-y-3">
+                <span className="text-xs font-typewriter font-bold uppercase text-mejunje-tinta">Presentación Inicial</span>
                 <div className="grid grid-cols-3 gap-3">
                   <div>
-                    <label className="block text-[11px] text-[#E6DFC8] mb-1">Tamaño / Presentación</label>
+                    <label className="block text-[10px] font-typewriter uppercase text-mejunje-griscalido mb-1">Presentación</label>
                     <input
                       type="text"
                       value={productForm.variantSize}
                       onChange={(e) => setProductForm({ ...productForm, variantSize: e.target.value })}
-                      className="w-full bg-[#2A1E17] border border-[#523B2E] rounded-lg px-2.5 py-1.5 text-xs text-white"
+                      className="w-full bg-white border border-mejunje-border rounded-lg px-2.5 py-1.5 text-xs text-mejunje-tinta"
                     />
                   </div>
                   <div>
-                    <label className="block text-[11px] text-[#E6DFC8] mb-1">Precio Venta (ARS)</label>
+                    <label className="block text-[10px] font-typewriter uppercase text-mejunje-griscalido mb-1">Precio Venta (ARS)</label>
                     <input
                       type="number"
                       value={productForm.variantPrice}
                       onChange={(e) => setProductForm({ ...productForm, variantPrice: Number(e.target.value) })}
-                      className="w-full bg-[#2A1E17] border border-[#523B2E] rounded-lg px-2.5 py-1.5 text-xs text-white"
+                      className="w-full bg-white border border-mejunje-border rounded-lg px-2.5 py-1.5 text-xs text-mejunje-tinta"
                     />
                   </div>
                   <div>
-                    <label className="block text-[11px] text-[#E6DFC8] mb-1">Costo Estimado (ARS)</label>
+                    <label className="block text-[10px] font-typewriter uppercase text-mejunje-griscalido mb-1">Costo Estimado (ARS)</label>
                     <input
                       type="number"
                       value={productForm.variantCost}
                       onChange={(e) => setProductForm({ ...productForm, variantCost: Number(e.target.value) })}
-                      className="w-full bg-[#2A1E17] border border-[#523B2E] rounded-lg px-2.5 py-1.5 text-xs text-white"
+                      className="w-full bg-white border border-mejunje-border rounded-lg px-2.5 py-1.5 text-xs text-mejunje-tinta"
                     />
                   </div>
                 </div>
               </div>
 
-              <div className="pt-4 flex items-center justify-end gap-3 border-t border-[#3D2C22]">
+              <div className="pt-4 flex items-center justify-end gap-3 border-t border-mejunje-border">
                 <button
                   type="button"
                   onClick={() => setActiveModal(null)}
-                  className="px-4 py-2 rounded-xl text-xs font-medium text-[#E6DFC8] bg-[#3D2C22] hover:bg-[#523B2E]"
+                  className="px-4 py-2 rounded-xl text-xs font-medium text-mejunje-tinta bg-white border border-mejunje-border hover:bg-mejunje-papel"
                 >
                   Cancelar
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 rounded-xl text-xs font-semibold text-white bg-[#D9822B] hover:bg-[#b86a1d] shadow-md flex items-center gap-1.5"
+                  className="px-5 py-2 rounded-xl text-xs font-medium text-white bg-mejunje-salmon hover:bg-mejunje-terracota shadow-xs flex items-center gap-1.5"
                 >
-                  <Plus className="w-4 h-4" /> Crear Producto
+                  <Plus className="w-4 h-4" /> Crear Pieza
                 </button>
               </div>
             </form>
@@ -624,24 +624,24 @@ export default function QuickModals() {
         {/* ------------------------------------------------------------------- */}
         {activeModal === 'purchaseOrder' && (
           <div>
-            <div className="flex items-center gap-3 mb-6 pb-4 border-b border-[#3D2C22]">
-              <div className="w-10 h-10 rounded-2xl bg-[#6E8B74]/20 border border-[#6E8B74]/40 flex items-center justify-center text-[#6E8B74]">
+            <div className="flex items-center gap-3 mb-6 pb-4 border-b border-mejunje-border">
+              <div className="w-10 h-10 rounded-2xl bg-emerald-100 border border-emerald-300 flex items-center justify-center text-emerald-800">
                 <ShoppingBag className="w-5 h-5" />
               </div>
               <div>
-                <h2 className="font-serif font-bold text-xl text-[#F7F4EE]">Nueva Orden de Compra</h2>
-                <p className="text-xs text-[#E6DFC8]/70">Emisión de Pedido a Proveedor Registrado</p>
+                <h2 className="font-serif italic text-2xl text-mejunje-tinta">Nueva Orden de Aprovisionamiento</h2>
+                <p className="text-xs text-mejunje-griscalido font-typewriter">Emisión de Pedido a Proveedor Registrado</p>
               </div>
             </div>
 
             <form onSubmit={handleSavePO} className="space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-semibold text-[#E6DFC8] mb-1">Proveedor *</label>
+                  <label className="block text-xs font-typewriter uppercase text-mejunje-tinta mb-1">Proveedor *</label>
                   <select
                     value={poForm.supplierId}
                     onChange={(e) => setPoForm({ ...poForm, supplierId: e.target.value })}
-                    className="w-full bg-[#3D2C22] border border-[#523B2E] rounded-xl px-3.5 py-2 text-xs text-white focus:outline-none focus:border-[#6E8B74]"
+                    className="w-full bg-white border border-mejunje-border rounded-xl px-3.5 py-2 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salmon"
                   >
                     {suppliers.map((s) => (
                       <option key={s.id} value={s.id}>
@@ -652,20 +652,20 @@ export default function QuickModals() {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-[#E6DFC8] mb-1">Fecha Emisión</label>
+                  <label className="block text-xs font-typewriter uppercase text-mejunje-tinta mb-1">Fecha Emisión</label>
                   <input
                     type="text"
                     value={poForm.date}
                     onChange={(e) => setPoForm({ ...poForm, date: e.target.value })}
-                    className="w-full bg-[#3D2C22] border border-[#523B2E] rounded-xl px-3.5 py-2 text-xs text-white focus:outline-none focus:border-[#6E8B74]"
+                    className="w-full bg-white border border-mejunje-border rounded-xl px-3.5 py-2 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salmon"
                   />
                 </div>
               </div>
 
               {/* Items List */}
-              <div className="bg-[#3D2C22]/50 p-4 rounded-2xl border border-[#523B2E] space-y-3">
+              <div className="bg-mejunje-papel/40 p-4 rounded-2xl border border-mejunje-border space-y-3">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold text-[#F7F4EE]">Items de la Orden</span>
+                  <span className="text-xs font-typewriter font-bold uppercase text-mejunje-tinta">Items de la Orden</span>
                   <button
                     type="button"
                     onClick={() =>
@@ -674,7 +674,7 @@ export default function QuickModals() {
                         items: [...poForm.items, { ingredientName: '', requiredQty: 1, unit: 'kg', unitPriceARS: 5000, subtotalARS: 5000 }],
                       })
                     }
-                    className="text-[11px] text-[#6E8B74] hover:underline flex items-center gap-1 font-semibold"
+                    className="text-[11px] text-emerald-800 hover:underline flex items-center gap-1 font-medium font-sans"
                   >
                     <Plus className="w-3.5 h-3.5" /> Agregar Item
                   </button>
@@ -684,14 +684,14 @@ export default function QuickModals() {
                   <div key={idx} className="flex items-center gap-2">
                     <input
                       type="text"
-                      placeholder="Insumo o Item"
+                      placeholder="Materia Prima o Insumo"
                       value={item.ingredientName}
                       onChange={(e) => {
                         const next = [...poForm.items];
                         next[idx].ingredientName = e.target.value;
                         setPoForm({ ...poForm, items: next });
                       }}
-                      className="flex-1 bg-[#2A1E17] border border-[#523B2E] rounded-lg px-2.5 py-1.5 text-xs text-white"
+                      className="flex-1 bg-white border border-mejunje-border rounded-lg px-2.5 py-1.5 text-xs text-mejunje-tinta"
                     />
 
                     <input
@@ -703,7 +703,7 @@ export default function QuickModals() {
                         next[idx].requiredQty = Number(e.target.value);
                         setPoForm({ ...poForm, items: next });
                       }}
-                      className="w-20 bg-[#2A1E17] border border-[#523B2E] rounded-lg px-2.5 py-1.5 text-xs text-white"
+                      className="w-20 bg-white border border-mejunje-border rounded-lg px-2.5 py-1.5 text-xs text-mejunje-tinta"
                     />
 
                     <input
@@ -715,7 +715,7 @@ export default function QuickModals() {
                         next[idx].unitPriceARS = Number(e.target.value);
                         setPoForm({ ...poForm, items: next });
                       }}
-                      className="w-28 bg-[#2A1E17] border border-[#523B2E] rounded-lg px-2.5 py-1.5 text-xs text-white"
+                      className="w-28 bg-white border border-mejunje-border rounded-lg px-2.5 py-1.5 text-xs text-mejunje-tinta"
                     />
 
                     <button
@@ -724,7 +724,7 @@ export default function QuickModals() {
                         const next = poForm.items.filter((_, i) => i !== idx);
                         setPoForm({ ...poForm, items: next });
                       }}
-                      className="text-[#C86D51] hover:text-white p-1"
+                      className="text-rose-700 hover:text-rose-900 p-1"
                     >
                       <Trash2 className="w-4 h-4" />
                     </button>
@@ -733,27 +733,27 @@ export default function QuickModals() {
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-[#E6DFC8] mb-1">Observaciones o Dirección de Entrega</label>
+                <label className="block text-xs font-typewriter uppercase text-mejunje-tinta mb-1">Observaciones de Despacho</label>
                 <textarea
                   rows={2}
                   value={poForm.observations}
                   onChange={(e) => setPoForm({ ...poForm, observations: e.target.value })}
-                  placeholder="Ej. Entregar en taller Villa Crespo. Pago con transferencia."
-                  className="w-full bg-[#3D2C22] border border-[#523B2E] rounded-xl px-3.5 py-2 text-xs text-white focus:outline-none focus:border-[#6E8B74]"
+                  placeholder="Ej. Entregar en taller Palermo Soho. Pago con transferencia."
+                  className="w-full bg-white border border-mejunje-border rounded-xl px-3.5 py-2 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salmon"
                 />
               </div>
 
-              <div className="pt-4 flex items-center justify-end gap-3 border-t border-[#3D2C22]">
+              <div className="pt-4 flex items-center justify-end gap-3 border-t border-mejunje-border">
                 <button
                   type="button"
                   onClick={() => setActiveModal(null)}
-                  className="px-4 py-2 rounded-xl text-xs font-medium text-[#E6DFC8] bg-[#3D2C22] hover:bg-[#523B2E]"
+                  className="px-4 py-2 rounded-xl text-xs font-medium text-mejunje-tinta bg-white border border-mejunje-border hover:bg-mejunje-papel"
                 >
                   Cancelar
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 rounded-xl text-xs font-semibold text-white bg-[#6E8B74] hover:bg-[#58725d] shadow-md flex items-center gap-1.5"
+                  className="px-5 py-2 rounded-xl text-xs font-medium text-white bg-emerald-700 hover:bg-emerald-800 shadow-xs flex items-center gap-1.5"
                 >
                   <ShoppingBag className="w-4 h-4" /> Emitir Orden
                 </button>
@@ -767,107 +767,107 @@ export default function QuickModals() {
         {/* ------------------------------------------------------------------- */}
         {activeModal === 'supplier' && (
           <div>
-            <div className="flex items-center gap-3 mb-6 pb-4 border-b border-[#3D2C22]">
-              <div className="w-10 h-10 rounded-2xl bg-[#E6DFC8]/20 border border-[#E6DFC8]/40 flex items-center justify-center text-[#E6DFC8]">
+            <div className="flex items-center gap-3 mb-6 pb-4 border-b border-mejunje-border">
+              <div className="w-10 h-10 rounded-2xl bg-mejunje-arena/40 border border-mejunje-border flex items-center justify-center text-mejunje-tabaco">
                 <Building2 className="w-5 h-5" />
               </div>
               <div>
-                <h2 className="font-serif font-bold text-xl text-[#F7F4EE]">Nuevo Proveedor</h2>
-                <p className="text-xs text-[#E6DFC8]/70">Alta de Aliado Comercial & Insumos</p>
+                <h2 className="font-serif italic text-2xl text-mejunje-tinta">Registrar Proveedor</h2>
+                <p className="text-xs text-mejunje-griscalido font-typewriter">Alta de Aliado de Materias Primas</p>
               </div>
             </div>
 
             <form onSubmit={handleSaveSupplier} className="space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-semibold text-[#E6DFC8] mb-1">Nombre Comercial *</label>
+                  <label className="block text-xs font-typewriter uppercase text-mejunje-tinta mb-1">Razón Social o Nombre *</label>
                   <input
                     type="text"
                     required
-                    placeholder="Ej. Ceras & Botánica S.A."
+                    placeholder="Ej. Botánica Natural S.A."
                     value={supplierForm.name}
                     onChange={(e) => setSupplierForm({ ...supplierForm, name: e.target.value })}
-                    className="w-full bg-[#3D2C22] border border-[#523B2E] rounded-xl px-3.5 py-2 text-xs text-white focus:outline-none focus:border-[#C86D51]"
+                    className="w-full bg-white border border-mejunje-border rounded-xl px-3.5 py-2 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salmon"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-[#E6DFC8] mb-1">Contacto Principal</label>
+                  <label className="block text-xs font-typewriter uppercase text-mejunje-tinta mb-1">Contacto Principal</label>
                   <input
                     type="text"
-                    placeholder="Ej. Esteban Lucero"
+                    placeholder="Ej. Julián"
                     value={supplierForm.contactPerson}
                     onChange={(e) => setSupplierForm({ ...supplierForm, contactPerson: e.target.value })}
-                    className="w-full bg-[#3D2C22] border border-[#523B2E] rounded-xl px-3.5 py-2 text-xs text-white focus:outline-none focus:border-[#C86D51]"
+                    className="w-full bg-white border border-mejunje-border rounded-xl px-3.5 py-2 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salmon"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-[#E6DFC8] mb-1">WhatsApp de Contacto *</label>
+                  <label className="block text-xs font-typewriter uppercase text-mejunje-tinta mb-1">WhatsApp *</label>
                   <input
                     type="text"
                     required
                     placeholder="Ej. +5491167772233"
                     value={supplierForm.phoneWhatsApp}
                     onChange={(e) => setSupplierForm({ ...supplierForm, phoneWhatsApp: e.target.value })}
-                    className="w-full bg-[#3D2C22] border border-[#523B2E] rounded-xl px-3.5 py-2 text-xs text-white focus:outline-none focus:border-[#C86D51]"
+                    className="w-full bg-white border border-mejunje-border rounded-xl px-3.5 py-2 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salmon"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-[#E6DFC8] mb-1">Email</label>
+                  <label className="block text-xs font-typewriter uppercase text-mejunje-tinta mb-1">Email</label>
                   <input
                     type="email"
                     placeholder="ventas@proveedor.com"
                     value={supplierForm.email}
                     onChange={(e) => setSupplierForm({ ...supplierForm, email: e.target.value })}
-                    className="w-full bg-[#3D2C22] border border-[#523B2E] rounded-xl px-3.5 py-2 text-xs text-white focus:outline-none focus:border-[#C86D51]"
+                    className="w-full bg-white border border-mejunje-border rounded-xl px-3.5 py-2 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salmon"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-[#E6DFC8] mb-1">Compra Mínima (ARS)</label>
+                  <label className="block text-xs font-typewriter uppercase text-mejunje-tinta mb-1">Compra Mínima (ARS)</label>
                   <input
                     type="number"
                     value={supplierForm.minPurchaseARS}
                     onChange={(e) => setSupplierForm({ ...supplierForm, minPurchaseARS: Number(e.target.value) })}
-                    className="w-full bg-[#3D2C22] border border-[#523B2E] rounded-xl px-3.5 py-2 text-xs text-white focus:outline-none focus:border-[#C86D51]"
+                    className="w-full bg-white border border-mejunje-border rounded-xl px-3.5 py-2 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salmon"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-[#E6DFC8] mb-1">Tiempo Entrega (Días)</label>
+                  <label className="block text-xs font-typewriter uppercase text-mejunje-tinta mb-1">Tiempo Entrega (Días)</label>
                   <input
                     type="number"
                     value={supplierForm.deliveryTimeDays}
                     onChange={(e) => setSupplierForm({ ...supplierForm, deliveryTimeDays: Number(e.target.value) })}
-                    className="w-full bg-[#3D2C22] border border-[#523B2E] rounded-xl px-3.5 py-2 text-xs text-white focus:outline-none focus:border-[#C86D51]"
+                    className="w-full bg-white border border-mejunje-border rounded-xl px-3.5 py-2 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salmon"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-[#E6DFC8] mb-1">Ubicación / Taller</label>
+                <label className="block text-xs font-typewriter uppercase text-mejunje-tinta mb-1">Ubicación / Depósito</label>
                 <input
                   type="text"
                   placeholder="Ej. Villa Crespo, CABA"
                   value={supplierForm.location}
                   onChange={(e) => setSupplierForm({ ...supplierForm, location: e.target.value })}
-                  className="w-full bg-[#3D2C22] border border-[#523B2E] rounded-xl px-3.5 py-2 text-xs text-white focus:outline-none focus:border-[#C86D51]"
+                  className="w-full bg-white border border-mejunje-border rounded-xl px-3.5 py-2 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salmon"
                 />
               </div>
 
-              <div className="pt-4 flex items-center justify-end gap-3 border-t border-[#3D2C22]">
+              <div className="pt-4 flex items-center justify-end gap-3 border-t border-mejunje-border">
                 <button
                   type="button"
                   onClick={() => setActiveModal(null)}
-                  className="px-4 py-2 rounded-xl text-xs font-medium text-[#E6DFC8] bg-[#3D2C22] hover:bg-[#523B2E]"
+                  className="px-4 py-2 rounded-xl text-xs font-medium text-mejunje-tinta bg-white border border-mejunje-border hover:bg-mejunje-papel"
                 >
                   Cancelar
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 rounded-xl text-xs font-semibold text-white bg-[#C86D51] hover:bg-[#a85239] shadow-md flex items-center gap-1.5"
+                  className="px-5 py-2 rounded-xl text-xs font-medium text-white bg-mejunje-salmon hover:bg-mejunje-terracota shadow-xs flex items-center gap-1.5"
                 >
                   <Building2 className="w-4 h-4" /> Registrar Proveedor
                 </button>
@@ -881,36 +881,36 @@ export default function QuickModals() {
         {/* ------------------------------------------------------------------- */}
         {activeModal === 'marketQuery' && (
           <div>
-            <div className="flex items-center gap-3 mb-6 pb-4 border-b border-[#3D2C22]">
-              <div className="w-10 h-10 rounded-2xl bg-[#D9822B]/20 border border-[#D9822B]/40 flex items-center justify-center text-[#D9822B]">
+            <div className="flex items-center gap-3 mb-6 pb-4 border-b border-mejunje-border">
+              <div className="w-10 h-10 rounded-2xl bg-mejunje-salmon/15 border border-mejunje-salmon/30 flex items-center justify-center text-mejunje-salmon">
                 <TrendingUp className="w-5 h-5" />
               </div>
               <div>
-                <h2 className="font-serif font-bold text-xl text-[#F7F4EE]">Configurar Consulta de Mercado</h2>
-                <p className="text-xs text-[#E6DFC8]/70">Rastreo de Precios & Competidores ARS</p>
+                <h2 className="font-serif italic text-2xl text-mejunje-tinta">Configurar Consulta de Mercado</h2>
+                <p className="text-xs text-mejunje-griscalido font-typewriter">Rastreo de Precios & Competidores ARS</p>
               </div>
             </div>
 
             <form onSubmit={handleSaveMarketQuery} className="space-y-4">
               <div>
-                <label className="block text-xs font-semibold text-[#E6DFC8] mb-1">Título de la Consulta *</label>
+                <label className="block text-xs font-typewriter uppercase text-mejunje-tinta mb-1">Título de la Consulta *</label>
                 <input
                   type="text"
                   required
-                  placeholder="Ej. Vela Soja 200g - Benchmark CABA"
+                  placeholder="Ej. Vela Soja 200g - Benchmark Palermo"
                   value={marketQueryForm.name}
                   onChange={(e) => setMarketQueryForm({ ...marketQueryForm, name: e.target.value })}
-                  className="w-full bg-[#3D2C22] border border-[#523B2E] rounded-xl px-3.5 py-2 text-xs text-white focus:outline-none focus:border-[#D9822B]"
+                  className="w-full bg-white border border-mejunje-border rounded-xl px-3.5 py-2 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salmon"
                 />
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-semibold text-[#E6DFC8] mb-1">Categoría</label>
+                  <label className="block text-xs font-typewriter uppercase text-mejunje-tinta mb-1">Categoría</label>
                   <select
                     value={marketQueryForm.category}
                     onChange={(e) => setMarketQueryForm({ ...marketQueryForm, category: e.target.value })}
-                    className="w-full bg-[#3D2C22] border border-[#523B2E] rounded-xl px-3.5 py-2 text-xs text-white focus:outline-none focus:border-[#D9822B]"
+                    className="w-full bg-white border border-mejunje-border rounded-xl px-3.5 py-2 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salmon"
                   >
                     <option value="Vela">Vela de Soja</option>
                     <option value="Difusor">Difusor de Ambiente</option>
@@ -920,12 +920,13 @@ export default function QuickModals() {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-[#E6DFC8] mb-1">Zona Geográfica</label>
+                  <label className="block text-xs font-typewriter uppercase text-mejunje-tinta mb-1">Zona Geográfica</label>
                   <select
                     value={marketQueryForm.zone}
                     onChange={(e) => setMarketQueryForm({ ...marketQueryForm, zone: e.target.value as any })}
-                    className="w-full bg-[#3D2C22] border border-[#523B2E] rounded-xl px-3.5 py-2 text-xs text-white focus:outline-none focus:border-[#D9822B]"
+                    className="w-full bg-white border border-mejunje-border rounded-xl px-3.5 py-2 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salmon"
                   >
+                    <option value="Palermo / CABA">Palermo / CABA</option>
                     <option value="CABA">CABA</option>
                     <option value="Zona Norte">Zona Norte</option>
                     <option value="Buenos Aires">Buenos Aires</option>
@@ -935,41 +936,41 @@ export default function QuickModals() {
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-[#E6DFC8] mb-1">Palabras Clave de Búsqueda</label>
+                <label className="block text-xs font-typewriter uppercase text-mejunje-tinta mb-1">Palabras Clave de Búsqueda</label>
                 <input
                   type="text"
-                  placeholder="Ej. vela soja 200g artesanal premium"
+                  placeholder="Ej. vela soja 200g artesanal botánica"
                   value={marketQueryForm.keywords}
                   onChange={(e) => setMarketQueryForm({ ...marketQueryForm, keywords: e.target.value })}
-                  className="w-full bg-[#3D2C22] border border-[#523B2E] rounded-xl px-3.5 py-2 text-xs text-white focus:outline-none focus:border-[#D9822B]"
+                  className="w-full bg-white border border-mejunje-border rounded-xl px-3.5 py-2 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salmon"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-[#E6DFC8] mb-1">Fuente de Relevamiento</label>
+                <label className="block text-xs font-typewriter uppercase text-mejunje-tinta mb-1">Canal de Relevamiento</label>
                 <select
                   value={marketQueryForm.source}
                   onChange={(e) => setMarketQueryForm({ ...marketQueryForm, source: e.target.value as any })}
-                  className="w-full bg-[#3D2C22] border border-[#523B2E] rounded-xl px-3.5 py-2 text-xs text-white focus:outline-none focus:border-[#D9822B]"
+                  className="w-full bg-white border border-mejunje-border rounded-xl px-3.5 py-2 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salmon"
                 >
                   <option value="Mercado Libre">Mercado Libre</option>
-                  <option value="Ecommerce">Ecommerce Directos</option>
-                  <option value="Marca concreta">Marca Concreta</option>
+                  <option value="Ecommerce">Tiendas Online Directas</option>
+                  <option value="Marca concreta">Marcas de Autor</option>
                   <option value="Otra">Otra Fuente</option>
                 </select>
               </div>
 
-              <div className="pt-4 flex items-center justify-end gap-3 border-t border-[#3D2C22]">
+              <div className="pt-4 flex items-center justify-end gap-3 border-t border-mejunje-border">
                 <button
                   type="button"
                   onClick={() => setActiveModal(null)}
-                  className="px-4 py-2 rounded-xl text-xs font-medium text-[#E6DFC8] bg-[#3D2C22] hover:bg-[#523B2E]"
+                  className="px-4 py-2 rounded-xl text-xs font-medium text-mejunje-tinta bg-white border border-mejunje-border hover:bg-mejunje-papel"
                 >
                   Cancelar
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 rounded-xl text-xs font-semibold text-white bg-[#D9822B] hover:bg-[#b86a1d] shadow-md flex items-center gap-1.5"
+                  className="px-5 py-2 rounded-xl text-xs font-medium text-white bg-mejunje-salmon hover:bg-mejunje-terracota shadow-xs flex items-center gap-1.5"
                 >
                   <TrendingUp className="w-4 h-4" /> Guardar Consulta
                 </button>

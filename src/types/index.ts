@@ -26,6 +26,7 @@ export interface Ingredient {
   supplierId: string;
   supplierName: string;
   lastUpdated: string;
+  imageUrl?: string;
 }
 
 export interface FormulaIngredient {
@@ -66,7 +67,7 @@ export interface Formula {
 
 export interface BatchTest {
   id: string;
-  code: string; // e.g., LAB-2026-001
+  code: string; // e.g., LAB-2026-001 or MJ-2026-001
   formulaId: string;
   formulaName: string;
   version: string;
@@ -99,6 +100,7 @@ export interface Supplier {
   minPurchaseARS: number;
   deliveryTimeDays: number;
   notes?: string;
+  imageUrl?: string;
 }
 
 export interface PurchaseItem {
@@ -124,7 +126,7 @@ export interface SupplierRequirementGroup {
 
 export interface PurchaseOrder {
   id: string;
-  code: string; // OC-001
+  code: string; // OC-001 or MJ-OC-001
   supplierId: string;
   supplierName: string;
   date: string;
@@ -186,7 +188,8 @@ export interface MarketBenchmark {
   id: string;
   productName: string;
   category: string;
-  kameloPriceARS: number;
+  kameloPriceARS: number; // kept for compatibility
+  mejunjePriceARS?: number;
   competitorAverageARS: number;
   competitorMinARS: number;
   competitorMaxARS: number;

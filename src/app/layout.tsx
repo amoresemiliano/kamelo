@@ -7,8 +7,8 @@ import { KameloProvider } from '@/context/KameloContext';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Kamelo Aromáticos | Plataforma Interna v2',
-  description: 'Gestión integral de laboratorio, fórmulas, compras agrupadas por proveedor, catálogo e inteligencia de mercado para Kamelo Aromáticos.',
+  title: 'MEJUNJE | Atelier de Perfumería Artesanal',
+  description: 'Plataforma interna de gestión de laboratorio, materias primas botánicas, fórmulas de autor, compras agrupadas y catálogo para MEJUNJE · Palermo, Buenos Aires.',
 };
 
 export default function RootLayout({
@@ -18,16 +18,25 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es">
-      <body className="min-h-screen bg-[#F7F4EE] text-[#2A1E17] flex flex-col antialiased selection:bg-[#C86D51] selection:text-white">
+      <body className="min-h-screen bg-mejunje-marfil text-mejunje-tinta flex flex-col antialiased selection:bg-mejunje-arena selection:text-mejunje-espresso font-sans">
         <KameloProvider>
-          <Suspense fallback={<header className="h-16 bg-[#2A1E17] border-b border-[#3D2C22]" />}>
+          <Suspense fallback={<header className="h-16 bg-mejunje-espresso border-b border-mejunje-tabaco" />}>
             <Navigation />
           </Suspense>
           <main className="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8">
             {children}
           </main>
-          <footer className="bg-[#2A1E17] text-[#E6DFC8] border-t border-[#3D2C22] py-6 px-4 text-center text-xs">
-            <p>© 2026 Kamelo Aromáticos — Tierra & Espresso. Sistema Operativo de Laboratorio, Compras & Perfumería ARS.</p>
+          <footer className="bg-mejunje-espresso text-mejunje-arena/80 border-t border-mejunje-tabaco py-8 px-4 text-center text-xs">
+            <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div className="flex items-center gap-2">
+                <span className="font-typewriter text-mejunje-marfil font-bold tracking-widest text-sm">MEJUNJE</span>
+                <span className="text-mejunje-arena/60">·</span>
+                <span className="font-typewriter text-[11px] uppercase tracking-wider text-mejunje-arena/70">Atelier de Perfumería Artesanal</span>
+              </div>
+              <p className="font-typewriter text-[11px] text-mejunje-arena/60 tracking-wider">
+                mezcla. intención. aroma. · Palermo, Buenos Aires
+              </p>
+            </div>
           </footer>
           <ToastContainer />
           <QuickModals />

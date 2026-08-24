@@ -8,15 +8,10 @@ import {
   Plus,
   Search,
   SlidersHorizontal,
-  Edit,
   Trash2,
   Copy,
-  CheckCircle2,
   AlertTriangle,
   Send,
-  Building2,
-  Thermometer,
-  Flame,
   Award,
   BookOpen
 } from 'lucide-react';
@@ -31,15 +26,11 @@ export default function LaboratorioPage() {
     ingredients,
     batchTests,
     suppliers,
-    addFormula,
-    updateFormula,
-    deleteFormula,
     duplicateFormula,
+    deleteFormula,
     addIngredient,
-    updateIngredient,
     deleteIngredient,
     addBatchTest,
-    updateBatchTest,
     deleteBatchTest,
     approveBatchFormula,
     sendBatchToRequirements,
@@ -56,13 +47,10 @@ export default function LaboratorioPage() {
   const [formulaSearch, setFormulaSearch] = useState('');
   const [formulaCategoryFilter, setFormulaCategoryFilter] = useState<string>('Todas');
   const [selectedFormulaId, setSelectedFormulaId] = useState<string>(formulas[0]?.id || '');
-  const [batchProductionUnits, setBatchProductionUnits] = useState<number>(10); // e.g. 10 units
+  const [batchProductionUnits, setBatchProductionUnits] = useState<number>(10); // 10 units default
 
   // Confirm dialog state for formulas
   const [formulaToDelete, setFormulaToDelete] = useState<Formula | null>(null);
-
-  // Edit formula modal state
-  const [editingFormula, setEditingFormula] = useState<Formula | null>(null);
 
   // Active formula details
   const activeFormula = formulas.find((f) => f.id === selectedFormulaId) || formulas[0];
@@ -78,7 +66,6 @@ export default function LaboratorioPage() {
   }, 0) || 0;
 
   const unitCostARS = batchProductionUnits > 0 ? totalBatchCostARS / batchProductionUnits : 0;
-  const suggestedSellingPriceARS = unitCostARS * (1 + (activeFormula?.suggestedMarginPercent || 60) / 100);
 
   // Formulation helper warnings / guidance
   const essenceIngredient = activeFormula?.ingredients.find((i) => i.category === 'Fragancias');
@@ -135,6 +122,7 @@ export default function LaboratorioPage() {
     stock: 500,
     minStock: 200,
     supplierId: suppliers[0]?.id || '',
+    imageUrl: 'https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&fit=crop&w=600&q=80',
   });
 
   const filteredInsumos = ingredients.filter((ing) => {
@@ -164,6 +152,7 @@ export default function LaboratorioPage() {
       minStock: Number(newInsumoForm.minStock),
       supplierId: sup ? sup.id : 'sup-1',
       supplierName: sup ? sup.name : 'Proveedor General',
+      imageUrl: newInsumoForm.imageUrl,
     });
 
     setEditingInsumo(null);
@@ -185,7 +174,7 @@ export default function LaboratorioPage() {
     ratingColdAroma: 4,
     ratingHotAroma: 4,
     ratingBurn: 5,
-    observations: 'Prueba de quemado realizada en vaso de cristal esmerilado.',
+    observations: 'Prueba sensorial en vaso de cristal esmerilado con pabilo de algodón puro.',
   });
 
   const handleSaveNewBatch = (e: React.FormEvent) => {
@@ -213,23 +202,24 @@ export default function LaboratorioPage() {
   };
 
   return (
-    <div className="space-y-8 animate-in fade-in">
+    <div className="space-y-10 animate-in fade-in">
       {/* Page Header */}
       <SectionHero
-        title="Laboratorio Olfativo & Insumos"
-        subtitle="Diseño de pirámides olfativas, guía de formulación por categoría, inventario de insumos y evaluación de lotes de prueba."
-        badgeText="Módulo de Laboratorio & Desarrollo"
-        badgeIcon={<FlaskConical className="w-3.5 h-3.5 text-[#C98F7A]" />}
+        title="Laboratorio Olfativo & Insumos Botánicos"
+        subtitle="Archivo de formulación de autor, calibración de notas olfativas, calculadora de lotes y control sensorial de curado y quemado en taller."
+        badgeText="MEJUNJE · LABORATORIO"
+        badgeIcon={<FlaskConical className="w-3.5 h-3.5 text-mejunje-salmon" />}
         bgImage="https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&fit=crop&w=1600&q=80"
+        noticeText="pesaje artesanal · proporciones exactas"
       >
         {/* Tab Selector Controls */}
-        <div className="flex items-center gap-1.5 bg-[#2D2521]/90 backdrop-blur-md p-1.5 rounded-2xl border border-[#D8C7B8]/20 shadow-lg">
+        <div className="flex items-center gap-1.5 bg-mejunje-espresso/90 backdrop-blur-md p-1.5 rounded-2xl border border-mejunje-arena/20 shadow-atelier-md">
           <button
             onClick={() => setActiveTab('formulas')}
-            className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all ${
+            className={`px-4 py-2 rounded-xl text-xs font-typewriter uppercase tracking-wider transition-all ${
               activeTab === 'formulas'
-                ? 'bg-[#C98F7A] text-white shadow-xs'
-                : 'text-[#D8C7B8] hover:text-white'
+                ? 'bg-mejunje-salmon text-white shadow-xs'
+                : 'text-mejunje-arena/80 hover:text-white'
             }`}
           >
             Fórmulas ({formulas.length})
@@ -237,10 +227,10 @@ export default function LaboratorioPage() {
 
           <button
             onClick={() => setActiveTab('insumos')}
-            className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all ${
+            className={`px-4 py-2 rounded-xl text-xs font-typewriter uppercase tracking-wider transition-all ${
               activeTab === 'insumos'
-                ? 'bg-[#C98F7A] text-white shadow-xs'
-                : 'text-[#D8C7B8] hover:text-white'
+                ? 'bg-mejunje-salmon text-white shadow-xs'
+                : 'text-mejunje-arena/80 hover:text-white'
             }`}
           >
             Insumos ({ingredients.length})
@@ -248,13 +238,13 @@ export default function LaboratorioPage() {
 
           <button
             onClick={() => setActiveTab('batches')}
-            className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all ${
+            className={`px-4 py-2 rounded-xl text-xs font-typewriter uppercase tracking-wider transition-all ${
               activeTab === 'batches'
-                ? 'bg-[#C98F7A] text-white shadow-xs'
-                : 'text-[#D8C7B8] hover:text-white'
+                ? 'bg-mejunje-salmon text-white shadow-xs'
+                : 'text-mejunje-arena/80 hover:text-white'
             }`}
           >
-            Pruebas / Batches ({batchTests.length})
+            Batches ({batchTests.length})
           </button>
         </div>
       </SectionHero>
@@ -265,30 +255,30 @@ export default function LaboratorioPage() {
       {activeTab === 'formulas' && (
         <div className="space-y-6">
           {/* Top Actions & Filters */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-4 rounded-2xl border border-[#E6DFC8]">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-mejunje-card p-4 rounded-2xl border border-mejunje-border shadow-atelier">
             <div className="flex flex-1 items-center gap-3">
               <div className="relative flex-1 max-w-xs">
-                <Search className="w-4 h-4 text-[#7A6B61] absolute left-3 top-2.5" />
+                <Search className="w-4 h-4 text-mejunje-griscalido absolute left-3 top-2.5" />
                 <input
                   type="text"
-                  placeholder="Buscar fórmula..."
+                  placeholder="Buscar fórmula de autor..."
                   value={formulaSearch}
                   onChange={(e) => setFormulaSearch(e.target.value)}
-                  className="w-full bg-[#F7F4EE] border border-[#E6DFC8] rounded-xl pl-9 pr-3 py-1.5 text-xs text-[#2A1E17] focus:outline-none focus:border-[#C86D51]"
+                  className="w-full bg-mejunje-papel/40 border border-mejunje-border rounded-xl pl-9 pr-3 py-1.5 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salmon"
                 />
               </div>
 
               <div className="flex items-center gap-1.5">
-                <SlidersHorizontal className="w-3.5 h-3.5 text-[#7A6B61]" />
+                <SlidersHorizontal className="w-3.5 h-3.5 text-mejunje-griscalido" />
                 <select
                   value={formulaCategoryFilter}
                   onChange={(e) => setFormulaCategoryFilter(e.target.value)}
-                  className="bg-[#F7F4EE] border border-[#E6DFC8] rounded-xl px-3 py-1.5 text-xs text-[#2A1E17] focus:outline-none"
+                  className="bg-mejunje-papel/40 border border-mejunje-border rounded-xl px-3 py-1.5 text-xs text-mejunje-tinta focus:outline-none"
                 >
                   <option value="Todas">Todas las categorías</option>
-                  <option value="Vela">Velas</option>
+                  <option value="Vela">Velas Botánicas</option>
                   <option value="Difusor">Difusores</option>
-                  <option value="Perfume textil">Perfumes Textil</option>
+                  <option value="Perfume textil">Perfumes Finos / Textil</option>
                   <option value="Otro">Otro</option>
                 </select>
               </div>
@@ -296,7 +286,7 @@ export default function LaboratorioPage() {
 
             <button
               onClick={() => setActiveModal('formula')}
-              className="px-4 py-2 bg-[#C86D51] hover:bg-[#a85239] text-white text-xs font-semibold rounded-xl flex items-center gap-1.5 shadow-sm transition-all"
+              className="px-4 py-2 bg-mejunje-salmon hover:bg-mejunje-terracota text-white text-xs font-medium rounded-xl flex items-center gap-1.5 shadow-xs transition-all"
             >
               <Plus className="w-4 h-4" /> Crear Nueva Fórmula
             </button>
@@ -305,8 +295,8 @@ export default function LaboratorioPage() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {/* Left Column: Formulas List */}
             <div className="space-y-3">
-              <span className="text-xs font-bold text-[#7A6B61] uppercase tracking-wider block">
-                Fórmulas ({filteredFormulas.length})
+              <span className="font-typewriter text-[11px] uppercase tracking-wider text-mejunje-griscalido block">
+                Archivo de Fórmulas ({filteredFormulas.length})
               </span>
 
               {filteredFormulas.map((f) => {
@@ -315,40 +305,40 @@ export default function LaboratorioPage() {
                   <div
                     key={f.id}
                     onClick={() => setSelectedFormulaId(f.id)}
-                    className={`p-4 rounded-2xl cursor-pointer transition-all border ${
+                    className={`p-4.5 rounded-2xl cursor-pointer transition-all border ${
                       isSelected
-                        ? 'bg-[#2A1E17] text-white border-[#2A1E17] shadow-lg'
-                        : 'bg-white text-[#2A1E17] border-[#E6DFC8] hover:border-[#C86D51]'
+                        ? 'bg-mejunje-espresso text-white border-mejunje-espresso shadow-atelier-md'
+                        : 'bg-mejunje-card text-mejunje-tinta border-mejunje-border hover:border-mejunje-salmon'
                     }`}
                   >
                     <div className="flex items-center justify-between">
                       <span
-                        className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full ${
-                          isSelected ? 'bg-[#C86D51] text-white' : 'bg-[#F7F4EE] text-[#C86D51]'
+                        className={`text-[9px] font-typewriter uppercase tracking-widest px-2 py-0.5 rounded-full ${
+                          isSelected ? 'bg-mejunje-salmon text-white' : 'bg-mejunje-papel text-mejunje-tabaco border border-mejunje-arena/50'
                         }`}
                       >
                         {f.category}
                       </span>
-                      <span className={`text-[10px] font-mono px-2 py-0.5 rounded ${isSelected ? 'bg-[#3D2C22] text-[#E6DFC8]' : 'bg-gray-100 text-gray-600'}`}>
-                        {f.version} • {f.status}
+                      <span className={`text-[10px] font-typewriter px-2 py-0.5 rounded ${isSelected ? 'bg-mejunje-tabaco text-mejunje-arena' : 'bg-mejunje-papel/60 text-mejunje-griscalido'}`}>
+                        {f.version} · {f.status}
                       </span>
                     </div>
 
-                    <h3 className="font-serif font-bold text-sm mt-2.5">{f.name}</h3>
+                    <h3 className="font-serif italic text-base mt-2.5">{f.name}</h3>
 
-                    <div className="mt-3 pt-3 border-t border-opacity-20 border-gray-400 flex items-center justify-between text-xs">
-                      <span className={isSelected ? 'text-[#E6DFC8]' : 'text-[#7A6B61]'}>
+                    <div className="mt-3 pt-3 border-t border-mejunje-arena/20 flex items-center justify-between text-xs">
+                      <span className={`text-[11px] ${isSelected ? 'text-mejunje-arena' : 'text-mejunje-griscalido'}`}>
                         Rendimiento: {f.yieldSize}
                       </span>
 
-                      <div className="flex items-center gap-1">
+                      <div className="flex items-center gap-1.5">
                         <button
                           onClick={(e) => {
                             e.stopPropagation();
                             duplicateFormula(f.id);
                           }}
-                          title="Duplicar"
-                          className="p-1 hover:text-[#D9822B] transition-colors"
+                          title="Duplicar fórmula"
+                          className="p-1 hover:text-mejunje-salmon transition-colors"
                         >
                           <Copy className="w-3.5 h-3.5" />
                         </button>
@@ -357,8 +347,8 @@ export default function LaboratorioPage() {
                             e.stopPropagation();
                             setFormulaToDelete(f);
                           }}
-                          title="Eliminar"
-                          className="p-1 hover:text-[#C86D51] transition-colors"
+                          title="Eliminar fórmula"
+                          className="p-1 hover:text-mejunje-salmon transition-colors"
                         >
                           <Trash2 className="w-3.5 h-3.5" />
                         </button>
@@ -372,102 +362,83 @@ export default function LaboratorioPage() {
             {/* Right Column: Active Formula Workstation */}
             {activeFormula && (
               <div className="lg:col-span-2 space-y-6">
-                <div className="bg-white rounded-3xl p-6 shadow-xs border border-[#E6DFC8] space-y-6">
+                <div className="bg-mejunje-card rounded-3xl p-6 sm:p-7 shadow-atelier border border-mejunje-border space-y-6">
                   {/* Active Header */}
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#E6DFC8]">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-mejunje-border">
                     <div>
                       <div className="flex items-center gap-2 mb-1">
-                        <span className="text-xs text-[#C86D51] font-bold uppercase">{activeFormula.category}</span>
-                        <span className="text-xs bg-[#6E8B74]/20 text-[#6E8B74] px-2 py-0.5 rounded-full font-bold">
+                        <span className="font-typewriter text-[10px] uppercase tracking-wider text-mejunje-salmon">{activeFormula.category}</span>
+                        <span className="text-[10px] bg-emerald-50 text-emerald-800 px-2 py-0.5 rounded-full font-medium border border-emerald-200">
                           {activeFormula.status}
                         </span>
                       </div>
-                      <h2 className="text-xl font-serif font-bold text-[#2A1E17]">{activeFormula.name}</h2>
+                      <h2 className="text-2xl font-serif italic text-mejunje-tinta">{activeFormula.name}</h2>
                       {activeFormula.associatedProductName && (
-                        <p className="text-xs text-[#7A6B61] mt-0.5">
-                          Vinculado a: <strong className="text-[#2A1E17]">{activeFormula.associatedProductName}</strong>
+                        <p className="text-xs text-mejunje-griscalido mt-0.5 font-sans">
+                          Ficha comercial: <strong className="text-mejunje-tinta font-medium">{activeFormula.associatedProductName}</strong>
                         </p>
                       )}
                     </div>
 
                     {/* Batch Production Unit Input */}
-                    <div className="bg-[#F7F4EE] p-3 rounded-2xl border border-[#E6DFC8] flex items-center gap-3 shrink-0">
-                      <Calculator className="w-5 h-5 text-[#C86D51]" />
+                    <div className="bg-mejunje-papel/40 p-3 rounded-2xl border border-mejunje-border flex items-center gap-3 shrink-0">
+                      <Calculator className="w-5 h-5 text-mejunje-salmon" />
                       <div>
-                        <label className="block text-[10px] font-bold uppercase text-[#7A6B61]">Unidades a Producir</label>
+                        <label className="block font-typewriter text-[9px] uppercase tracking-wider text-mejunje-griscalido">Unidades a Producir</label>
                         <input
                           type="number"
                           min="1"
                           value={batchProductionUnits}
                           onChange={(e) => setBatchProductionUnits(Math.max(1, Number(e.target.value)))}
-                          className="w-20 bg-white border border-[#E6DFC8] rounded-lg px-2 py-1 text-sm font-bold text-[#2A1E17] focus:outline-none focus:border-[#C86D51]"
+                          className="w-20 bg-white border border-mejunje-border rounded-lg px-2 py-1 text-sm font-bold text-mejunje-tinta focus:outline-none focus:border-mejunje-salmon"
                         />
                       </div>
                     </div>
                   </div>
 
-                  {/* Formulation Help & Warnings according to Category */}
+                  {/* Formulation Help & Warnings */}
                   {activeFormula.category === 'Vela' && (
-                    <div className="p-4 rounded-2xl bg-[#F7F4EE] border border-[#E6DFC8] space-y-2 text-xs">
+                    <div className="p-4 rounded-2xl bg-mejunje-papel/30 border border-mejunje-border space-y-2 text-xs">
                       <div className="flex items-center justify-between">
-                        <span className="font-bold text-[#2A1E17] flex items-center gap-1.5">
-                          <BookOpen className="w-4 h-4 text-[#C86D51]" /> Guía Taller: Vela de Soja
+                        <span className="font-typewriter text-xs font-bold text-mejunje-tinta flex items-center gap-1.5 uppercase tracking-wider">
+                          <BookOpen className="w-3.5 h-3.5 text-mejunje-salmon" /> Dosificación de Taller: Vela de Soja
                         </span>
-                        <span className="text-[10px] text-[#7A6B61]">Ref: Esencia 1-10% (curso 5-7%) | Mejorador 1-10% (curso 2-4%)</span>
+                        <span className="text-[10px] text-mejunje-griscalido font-typewriter">Ref: Esencia 5-8% | Mejorador 2-3%</span>
                       </div>
-                      <div className="flex flex-wrap gap-4 text-[11px] text-[#7A6B61]">
-                        <span>Esencia actual: <strong className="text-[#2A1E17]">{essencePercent}%</strong></span>
-                        <span>Aditivo actual: <strong className="text-[#2A1E17]">{additivePercent}%</strong></span>
+                      <div className="flex flex-wrap gap-4 text-[11px] text-mejunje-griscalido font-sans">
+                        <span>Esencia actual: <strong className="text-mejunje-tinta">{essencePercent}%</strong></span>
+                        <span>Aditivo actual: <strong className="text-mejunje-tinta">{additivePercent}%</strong></span>
                       </div>
                       {formulationWarning && (
-                        <div className="p-2 rounded-xl bg-amber-50 border border-amber-200 text-amber-800 text-[11px] font-semibold flex items-center gap-1.5">
-                          <AlertTriangle className="w-4 h-4 shrink-0" /> {formulationWarning}
+                        <div className="p-2.5 rounded-xl bg-amber-50 border border-amber-200 text-amber-900 text-[11px] font-medium flex items-center gap-2">
+                          <AlertTriangle className="w-4 h-4 shrink-0 text-amber-700" /> {formulationWarning}
                         </div>
                       )}
-                    </div>
-                  )}
-
-                  {activeFormula.category === 'Difusor' && (
-                    <div className="p-4 rounded-2xl bg-[#F7F4EE] border border-[#E6DFC8] space-y-1 text-xs text-[#7A6B61]">
-                      <span className="font-bold text-[#2A1E17] flex items-center gap-1.5">
-                        <BookOpen className="w-4 h-4 text-[#D9822B]" /> Guía Taller: Difusores de Ambiente
-                      </span>
-                      <p className="text-[11px]">Ref: Fragancia 10-20% | Solvente Dowanol ~10% | Alcohol Cereal 96° ~70% | Maceración reposo: 30 días.</p>
-                    </div>
-                  )}
-
-                  {activeFormula.category === 'Perfume textil' && (
-                    <div className="p-4 rounded-2xl bg-[#F7F4EE] border border-[#E6DFC8] space-y-1 text-xs text-[#7A6B61]">
-                      <span className="font-bold text-[#2A1E17] flex items-center gap-1.5">
-                        <BookOpen className="w-4 h-4 text-[#6E8B74]" /> Guía Taller: Perfumes Textil
-                      </span>
-                      <p className="text-[11px]">Ref: Alcohol Cereal | Agua Destilada 10-20% | Aceites Esenciales 3-6% | Reposo 30 días.</p>
-                      <p className="text-[10px] italic text-[#C86D51]">Las formulaciones deben validarse con proveedores o laboratorios adecuados antes de comercializar.</p>
                     </div>
                   )}
 
                   {/* Olfactory Pyramid Display */}
                   {(activeFormula.topNotes?.length || activeFormula.heartNotes?.length || activeFormula.baseNotes?.length) && (
                     <div>
-                      <h3 className="text-xs font-bold uppercase tracking-wider text-[#7A6B61] mb-2.5 flex items-center gap-1.5">
-                        <Sparkles className="w-4 h-4 text-[#D9822B]" /> Pirámide Olfativa
+                      <h3 className="font-typewriter text-[11px] uppercase tracking-wider text-mejunje-griscalido mb-3 flex items-center gap-1.5">
+                        <Sparkles className="w-3.5 h-3.5 text-mejunje-salmon" /> Pirámide Olfativa
                       </h3>
                       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                        <div className="p-3 rounded-2xl bg-[#F7F4EE] border border-[#E6DFC8]">
-                          <span className="text-[10px] font-bold uppercase text-[#D9822B]">Salida (Primer Impacto)</span>
-                          <div className="mt-1 text-xs font-semibold text-[#2A1E17]">
+                        <div className="p-3.5 rounded-2xl bg-mejunje-papel/30 border border-mejunje-border">
+                          <span className="font-typewriter text-[9px] uppercase tracking-widest text-mejunje-salmon">Salida (Primer Impacto)</span>
+                          <div className="mt-1 text-xs font-serif italic text-mejunje-tinta font-semibold">
                             {activeFormula.topNotes?.join(', ') || 'Bergamota'}
                           </div>
                         </div>
-                        <div className="p-3 rounded-2xl bg-[#F7F4EE] border border-[#E6DFC8]">
-                          <span className="text-[10px] font-bold uppercase text-[#C86D51]">Corazón (Carácter)</span>
-                          <div className="mt-1 text-xs font-semibold text-[#2A1E17]">
+                        <div className="p-3.5 rounded-2xl bg-mejunje-papel/30 border border-mejunje-border">
+                          <span className="font-typewriter text-[9px] uppercase tracking-widest text-mejunje-tabaco">Corazón (Carácter)</span>
+                          <div className="mt-1 text-xs font-serif italic text-mejunje-tinta font-semibold">
                             {activeFormula.heartNotes?.join(', ') || 'Flor de Azahar'}
                           </div>
                         </div>
-                        <div className="p-3 rounded-2xl bg-[#F7F4EE] border border-[#E6DFC8]">
-                          <span className="text-[10px] font-bold uppercase text-[#2A1E17]">Fondo (Fijación)</span>
-                          <div className="mt-1 text-xs font-semibold text-[#2A1E17]">
+                        <div className="p-3.5 rounded-2xl bg-mejunje-papel/30 border border-mejunje-border">
+                          <span className="font-typewriter text-[9px] uppercase tracking-widest text-mejunje-espresso">Fondo (Fijación)</span>
+                          <div className="mt-1 text-xs font-serif italic text-mejunje-tinta font-semibold">
                             {activeFormula.baseNotes?.join(', ') || 'Ámbar, Cedro'}
                           </div>
                         </div>
@@ -477,35 +448,35 @@ export default function LaboratorioPage() {
 
                   {/* Ingredients Table */}
                   <div>
-                    <h3 className="text-xs font-bold uppercase tracking-wider text-[#7A6B61] mb-3">
-                      Composición & Desglose Recalculado para {batchProductionUnits} unidades ({Math.round(currentBatchGrams)}g/ml total)
+                    <h3 className="font-typewriter text-[11px] uppercase tracking-wider text-mejunje-griscalido mb-3">
+                      Composición & Desglose para {batchProductionUnits} unidades ({Math.round(currentBatchGrams)}g/ml totales)
                     </h3>
-                    <div className="overflow-x-auto border border-[#E6DFC8] rounded-2xl">
+                    <div className="overflow-x-auto border border-mejunje-border rounded-2xl">
                       <table className="w-full text-left text-xs">
-                        <thead className="bg-[#2A1E17] text-[#E6DFC8]">
+                        <thead className="bg-mejunje-espresso text-mejunje-marfil font-typewriter text-[10px] uppercase tracking-wider">
                           <tr>
-                            <th className="p-3 font-semibold">Insumo / Ingrediente</th>
-                            <th className="p-3 font-semibold">Proveedor</th>
-                            <th className="p-3 font-semibold text-center">Proporción</th>
-                            <th className="p-3 font-semibold text-center">Cantidad Recalculada</th>
-                            <th className="p-3 font-semibold text-right">Costo Subtotal ARS</th>
+                            <th className="p-3 font-normal">Materia Prima</th>
+                            <th className="p-3 font-normal">Proveedor</th>
+                            <th className="p-3 font-normal text-center">Proporción</th>
+                            <th className="p-3 font-normal text-center">Cantidad Recalculada</th>
+                            <th className="p-3 font-normal text-right">Subtotal ARS</th>
                           </tr>
                         </thead>
-                        <tbody className="divide-y divide-[#E6DFC8]">
+                        <tbody className="divide-y divide-mejunje-border bg-white">
                           {activeFormula.ingredients.map((item, idx) => {
                             const calculatedQty = Math.round(item.quantity * multiplier);
                             const subtotal = Math.round(calculatedQty * item.unitCostARS);
                             return (
-                              <tr key={idx} className="hover:bg-[#F7F4EE]/60 transition-colors">
-                                <td className="p-3 font-bold text-[#2A1E17]">{item.ingredientName}</td>
-                                <td className="p-3 text-[#7A6B61] text-[11px]">{item.supplierName || 'General'}</td>
-                                <td className="p-3 text-center font-mono text-[#7A6B61]">
-                                  {item.percentage > 0 ? `${item.percentage}%` : 'Unidad'}
+                              <tr key={idx} className="hover:bg-mejunje-papel/20 transition-colors">
+                                <td className="p-3 font-medium text-mejunje-tinta">{item.ingredientName}</td>
+                                <td className="p-3 text-mejunje-griscalido text-[11px]">{item.supplierName || 'General'}</td>
+                                <td className="p-3 text-center font-typewriter text-mejunje-griscalido">
+                                  {item.percentage > 0 ? `${item.percentage}%` : 'Unid.'}
                                 </td>
-                                <td className="p-3 text-center font-bold text-[#C86D51]">
+                                <td className="p-3 text-center font-bold text-mejunje-salmon">
                                   {calculatedQty} {item.unit}
                                 </td>
-                                <td className="p-3 text-right font-bold text-[#2A1E17]">${subtotal.toLocaleString('es-AR')}</td>
+                                <td className="p-3 text-right font-semibold text-mejunje-tinta">${subtotal.toLocaleString('es-AR')}</td>
                               </tr>
                             );
                           })}
@@ -515,22 +486,22 @@ export default function LaboratorioPage() {
                   </div>
 
                   {/* Summary & Send to Purchases Bar */}
-                  <div className="bg-[#2A1E17] text-white p-5 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4">
+                  <div className="bg-mejunje-espresso text-mejunje-marfil p-5 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4 shadow-atelier">
                     <div>
-                      <span className="text-xs text-[#E6DFC8]">Costo Total del Batch ({batchProductionUnits} unidades):</span>
-                      <div className="text-2xl font-bold text-white font-serif">
+                      <span className="font-typewriter text-[10px] uppercase tracking-wider text-mejunje-arena/80">Costo Total del Batch ({batchProductionUnits} unidades):</span>
+                      <div className="text-2xl font-serif italic text-white">
                         ${Math.round(totalBatchCostARS).toLocaleString('es-AR')} ARS
                       </div>
-                      <p className="text-[11px] text-[#E6DFC8]/70 mt-0.5">
+                      <p className="text-[11px] text-mejunje-arena/70 mt-0.5 font-sans">
                         Costo unitario aproximado: <strong>${Math.round(unitCostARS).toLocaleString('es-AR')} ARS</strong>
                       </p>
                     </div>
 
                     <button
                       onClick={handleSendBatchToPurchases}
-                      className="px-5 py-2.5 bg-[#6E8B74] hover:bg-[#58725d] text-white text-xs font-semibold rounded-xl flex items-center gap-2 shadow-md transition-all shrink-0 active:scale-95"
+                      className="px-5 py-2.5 bg-mejunje-salmon hover:bg-mejunje-terracota text-white text-xs font-medium rounded-xl flex items-center gap-2 shadow-xs transition-all shrink-0 active:scale-95"
                     >
-                      <Send className="w-4 h-4" /> Enviar requerimientos a Compras
+                      <Send className="w-4 h-4" /> Consolidar en Compras
                     </button>
                   </div>
                 </div>
@@ -546,23 +517,23 @@ export default function LaboratorioPage() {
       {activeTab === 'insumos' && (
         <div className="space-y-6">
           {/* Top Actions & Filters */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-4 rounded-2xl border border-[#E6DFC8]">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-mejunje-card p-4 rounded-2xl border border-mejunje-border shadow-atelier">
             <div className="flex flex-1 items-center gap-3">
               <div className="relative flex-1 max-w-xs">
-                <Search className="w-4 h-4 text-[#7A6B61] absolute left-3 top-2.5" />
+                <Search className="w-4 h-4 text-mejunje-griscalido absolute left-3 top-2.5" />
                 <input
                   type="text"
                   placeholder="Buscar insumo o proveedor..."
                   value={insumoSearch}
                   onChange={(e) => setInsumoSearch(e.target.value)}
-                  className="w-full bg-[#F7F4EE] border border-[#E6DFC8] rounded-xl pl-9 pr-3 py-1.5 text-xs text-[#2A1E17] focus:outline-none focus:border-[#C86D51]"
+                  className="w-full bg-mejunje-papel/40 border border-mejunje-border rounded-xl pl-9 pr-3 py-1.5 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salmon"
                 />
               </div>
 
               <select
                 value={insumoCategoryFilter}
                 onChange={(e) => setInsumoCategoryFilter(e.target.value)}
-                className="bg-[#F7F4EE] border border-[#E6DFC8] rounded-xl px-3 py-1.5 text-xs text-[#2A1E17] focus:outline-none"
+                className="bg-mejunje-papel/40 border border-mejunje-border rounded-xl px-3 py-1.5 text-xs text-mejunje-tinta focus:outline-none"
               >
                 <option value="Todas">Todas las categorías</option>
                 <option value="Ceras">Ceras</option>
@@ -594,54 +565,64 @@ export default function LaboratorioPage() {
                   supplierId: suppliers[0]?.id || '',
                   supplierName: suppliers[0]?.name || '',
                   lastUpdated: new Date().toLocaleDateString('es-AR'),
+                  imageUrl: 'https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&fit=crop&w=600&q=80',
                 })
               }
-              className="px-4 py-2 bg-[#C86D51] hover:bg-[#a85239] text-white text-xs font-semibold rounded-xl flex items-center gap-1.5 shadow-sm"
+              className="px-4 py-2 bg-mejunje-salmon hover:bg-mejunje-terracota text-white text-xs font-medium rounded-xl flex items-center gap-1.5 shadow-xs"
             >
-              <Plus className="w-4 h-4" /> Registrar Nuevo Insumo
+              <Plus className="w-4 h-4" /> Registrar Materia Prima
             </button>
           </div>
 
-          {/* Insumos Table */}
-          <div className="bg-white rounded-3xl p-6 shadow-xs border border-[#E6DFC8]">
+          {/* Insumos Table with Editorial Images */}
+          <div className="bg-mejunje-card rounded-3xl p-6 shadow-atelier border border-mejunje-border">
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs">
-                <thead className="bg-[#2A1E17] text-[#E6DFC8]">
+                <thead className="bg-mejunje-espresso text-mejunje-marfil font-typewriter text-[10px] uppercase tracking-wider">
                   <tr>
-                    <th className="p-3.5 font-semibold">Insumo</th>
-                    <th className="p-3.5 font-semibold">Categoría</th>
-                    <th className="p-3.5 font-semibold">Proveedor</th>
-                    <th className="p-3.5 font-semibold text-right">Precio Compra ARS</th>
-                    <th className="p-3.5 font-semibold text-right">Costo Unitario Calculado</th>
-                    <th className="p-3.5 font-semibold text-center">Stock Actual</th>
-                    <th className="p-3.5 font-semibold text-center">Acciones</th>
+                    <th className="p-3.5 font-normal">Materia Prima</th>
+                    <th className="p-3.5 font-normal">Categoría</th>
+                    <th className="p-3.5 font-normal">Proveedor</th>
+                    <th className="p-3.5 font-normal text-right">Precio Compra ARS</th>
+                    <th className="p-3.5 font-normal text-right">Costo Unitario Calculado</th>
+                    <th className="p-3.5 font-normal text-center">Stock Actual</th>
+                    <th className="p-3.5 font-normal text-center">Acciones</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-[#E6DFC8]">
+                <tbody className="divide-y divide-mejunje-border bg-white">
                   {filteredInsumos.map((ing) => (
-                    <tr key={ing.id} className="hover:bg-[#F7F4EE]/60 transition-colors">
-                      <td className="p-3.5 font-bold text-[#2A1E17]">{ing.name}</td>
+                    <tr key={ing.id} className="hover:bg-mejunje-papel/20 transition-colors">
+                      <td className="p-3.5 font-semibold text-mejunje-tinta flex items-center gap-3">
+                        {ing.imageUrl && (
+                          <img
+                            src={ing.imageUrl}
+                            alt={ing.name}
+                            className="w-10 h-10 rounded-lg object-cover border border-mejunje-border shrink-0 shadow-xs"
+                          />
+                        )}
+                        <span>{ing.name}</span>
+                      </td>
                       <td className="p-3.5">
-                        <span className="bg-[#F7F4EE] text-[#C86D51] border border-[#C86D51]/30 font-bold px-2 py-0.5 rounded-full text-[10px]">
+                        <span className="bg-mejunje-papel text-mejunje-tabaco border border-mejunje-arena/50 font-typewriter text-[9px] uppercase tracking-wider px-2 py-0.5 rounded-full">
                           {ing.category}
                         </span>
                       </td>
-                      <td className="p-3.5 text-[#7A6B61]">{ing.supplierName}</td>
-                      <td className="p-3.5 text-right font-medium text-[#2A1E17]">
+                      <td className="p-3.5 text-mejunje-griscalido">{ing.supplierName}</td>
+                      <td className="p-3.5 text-right font-medium text-mejunje-tinta">
                         ${ing.purchasePriceARS.toLocaleString('es-AR')} x {ing.referenceQty} {ing.unit}
                       </td>
-                      <td className="p-3.5 text-right font-bold text-[#C86D51]">
+                      <td className="p-3.5 text-right font-bold text-mejunje-salmon">
                         ${ing.unitCostARS.toLocaleString('es-AR')} / {ing.unit === 'kg' ? 'g' : ing.unit === 'l' ? 'ml' : ing.unit}
                       </td>
                       <td className="p-3.5 text-center font-mono">
-                        <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${ing.stock <= ing.minStock ? 'bg-amber-100 text-amber-800' : 'bg-emerald-100 text-emerald-800'}`}>
+                        <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-medium font-sans ${ing.stock <= ing.minStock ? 'bg-amber-100 text-amber-900 border border-amber-300' : 'bg-emerald-50 text-emerald-800 border border-emerald-200'}`}>
                           {ing.stock} {ing.unit}
                         </span>
                       </td>
                       <td className="p-3.5 text-center">
                         <button
                           onClick={() => setInsumoToDelete(ing)}
-                          className="p-1 text-[#C86D51] hover:text-red-700 transition-colors"
+                          className="p-1 text-mejunje-griscalido hover:text-red-700 transition-colors"
                         >
                           <Trash2 className="w-4 h-4" />
                         </button>
@@ -660,21 +641,21 @@ export default function LaboratorioPage() {
       {/* =================================================================== */}
       {activeTab === 'batches' && (
         <div className="space-y-6">
-          <div className="bg-white rounded-3xl p-6 shadow-xs border border-[#E6DFC8] space-y-6">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#E6DFC8]">
+          <div className="bg-mejunje-card rounded-3xl p-6 shadow-atelier border border-mejunje-border space-y-6">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-mejunje-border">
               <div>
-                <h3 className="font-serif font-bold text-lg text-[#2A1E17]">Registrar Nuevo Batch de Prueba</h3>
-                <p className="text-xs text-[#7A6B61]">Control de temperaturas de vertido y evaluación sensorial de quemado</p>
+                <h3 className="font-serif italic text-lg text-mejunje-tinta">Registrar Nuevo Batch de Prueba</h3>
+                <p className="text-xs text-mejunje-griscalido">Control de temperaturas de vertido y evaluación sensorial de quemado</p>
               </div>
             </div>
 
             <form onSubmit={handleSaveNewBatch} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 text-xs">
               <div>
-                <label className="block font-semibold text-[#7A6B61] mb-1">Fórmula en Prueba</label>
+                <label className="block font-typewriter text-[10px] uppercase tracking-wider text-mejunje-griscalido mb-1">Fórmula en Prueba</label>
                 <select
                   value={newBatchForm.formulaId}
                   onChange={(e) => setNewBatchForm({ ...newBatchForm, formulaId: e.target.value })}
-                  className="w-full bg-[#F7F4EE] border border-[#E6DFC8] rounded-xl px-3 py-2 text-[#2A1E17] focus:outline-none"
+                  className="w-full bg-mejunje-papel/40 border border-mejunje-border rounded-xl px-3 py-2 text-mejunje-tinta focus:outline-none"
                 >
                   {formulas.map((f) => (
                     <option key={f.id} value={f.id}>{f.name} ({f.version})</option>
@@ -683,55 +664,55 @@ export default function LaboratorioPage() {
               </div>
 
               <div>
-                <label className="block font-semibold text-[#7A6B61] mb-1">Cantidad Producida</label>
+                <label className="block font-typewriter text-[10px] uppercase tracking-wider text-mejunje-griscalido mb-1">Cantidad Producida</label>
                 <input
                   type="text"
                   value={newBatchForm.qtyProduced}
                   onChange={(e) => setNewBatchForm({ ...newBatchForm, qtyProduced: e.target.value })}
-                  className="w-full bg-[#F7F4EE] border border-[#E6DFC8] rounded-xl px-3 py-2 text-[#2A1E17]"
+                  className="w-full bg-mejunje-papel/40 border border-mejunje-border rounded-xl px-3 py-2 text-mejunje-tinta"
                 />
               </div>
 
               <div>
-                <label className="block font-semibold text-[#7A6B61] mb-1">Temp. Vertido (°C)</label>
+                <label className="block font-typewriter text-[10px] uppercase tracking-wider text-mejunje-griscalido mb-1">Temp. Vertido (°C)</label>
                 <input
                   type="number"
                   value={newBatchForm.pouringTemp}
                   onChange={(e) => setNewBatchForm({ ...newBatchForm, pouringTemp: Number(e.target.value) })}
-                  className="w-full bg-[#F7F4EE] border border-[#E6DFC8] rounded-xl px-3 py-2 text-[#2A1E17]"
+                  className="w-full bg-mejunje-papel/40 border border-mejunje-border rounded-xl px-3 py-2 text-mejunje-tinta"
                 />
               </div>
 
               <div>
-                <label className="block font-semibold text-[#7A6B61] mb-1">Evaluación Apariencia (1-5)</label>
+                <label className="block font-typewriter text-[10px] uppercase tracking-wider text-mejunje-griscalido mb-1">Evaluación Apariencia (1-5)</label>
                 <input
                   type="number"
                   min="1"
                   max="5"
                   value={newBatchForm.ratingAppearance}
                   onChange={(e) => setNewBatchForm({ ...newBatchForm, ratingAppearance: Number(e.target.value) })}
-                  className="w-full bg-[#F7F4EE] border border-[#E6DFC8] rounded-xl px-3 py-2 text-[#2A1E17]"
+                  className="w-full bg-mejunje-papel/40 border border-mejunje-border rounded-xl px-3 py-2 text-mejunje-tinta"
                 />
               </div>
 
               <div>
-                <label className="block font-semibold text-[#7A6B61] mb-1">Evaluación Quemado Parejo (1-5)</label>
+                <label className="block font-typewriter text-[10px] uppercase tracking-wider text-mejunje-griscalido mb-1">Evaluación Quemado Parejo (1-5)</label>
                 <input
                   type="number"
                   min="1"
                   max="5"
                   value={newBatchForm.ratingBurn}
                   onChange={(e) => setNewBatchForm({ ...newBatchForm, ratingBurn: Number(e.target.value) })}
-                  className="w-full bg-[#F7F4EE] border border-[#E6DFC8] rounded-xl px-3 py-2 text-[#2A1E17]"
+                  className="w-full bg-mejunje-papel/40 border border-mejunje-border rounded-xl px-3 py-2 text-mejunje-tinta"
                 />
               </div>
 
               <div className="flex items-end">
                 <button
                   type="submit"
-                  className="w-full px-4 py-2 bg-[#2A1E17] hover:bg-[#3D2C22] text-white font-semibold rounded-xl transition-all"
+                  className="w-full px-4 py-2 bg-mejunje-espresso hover:bg-mejunje-tabaco text-white font-medium rounded-xl transition-all"
                 >
-                  Registrar Batch de Prueba
+                  Registrar Batch en Bitácora
                 </button>
               </div>
             </form>
@@ -740,20 +721,20 @@ export default function LaboratorioPage() {
           {/* Batches History Cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {batchTests.map((bt) => (
-              <div key={bt.id} className="bg-white rounded-3xl p-5 border border-[#E6DFC8] shadow-xs space-y-3 text-xs">
-                <div className="flex items-center justify-between border-b border-[#E6DFC8] pb-2">
-                  <span className="font-mono font-bold text-[#C86D51]">{bt.code}</span>
-                  <span className="px-2.5 py-0.5 rounded-full bg-[#6E8B74]/20 text-[#6E8B74] font-bold text-[10px]">
+              <div key={bt.id} className="bg-mejunje-card rounded-3xl p-5 border border-mejunje-border shadow-atelier space-y-3 text-xs">
+                <div className="flex items-center justify-between border-b border-mejunje-border pb-2">
+                  <span className="font-typewriter font-bold text-mejunje-salmon">{bt.code}</span>
+                  <span className="px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-800 font-medium text-[10px] border border-emerald-200">
                     {bt.status}
                   </span>
                 </div>
 
                 <div>
-                  <h4 className="font-serif font-bold text-sm text-[#2A1E17]">{bt.formulaName}</h4>
-                  <p className="text-[#7A6B61]">Versión: {bt.version} • Creado el {bt.date}</p>
+                  <h4 className="font-serif italic text-base text-mejunje-tinta">{bt.formulaName}</h4>
+                  <p className="text-mejunje-griscalido font-sans">Versión: {bt.version} · Fecha: {bt.date}</p>
                 </div>
 
-                <div className="grid grid-cols-2 gap-2 bg-[#F7F4EE] p-3 rounded-2xl border border-[#E6DFC8] text-[11px]">
+                <div className="grid grid-cols-2 gap-2 bg-mejunje-papel/30 p-3 rounded-2xl border border-mejunje-border text-[11px] font-sans">
                   <div>Temp. Vertido: <strong>{bt.pouringTemp || 37}°C</strong></div>
                   <div>Temp. Esencia: <strong>{bt.fragranceTemp || 42}°C</strong></div>
                   <div>Apariencia: <strong>{bt.ratingAppearance || 5}/5</strong></div>
@@ -761,20 +742,20 @@ export default function LaboratorioPage() {
                 </div>
 
                 {bt.observations && (
-                  <p className="text-[#7A6B61] italic text-[11px]">{bt.observations}</p>
+                  <p className="text-mejunje-griscalido italic text-[11px]">{bt.observations}</p>
                 )}
 
                 <div className="pt-2 flex items-center justify-between">
                   <button
                     onClick={() => approveBatchFormula(bt.id, bt.formulaId)}
-                    className="px-3 py-1.5 bg-[#6E8B74] hover:bg-[#58725d] text-white text-[11px] font-semibold rounded-xl flex items-center gap-1"
+                    className="px-3 py-1.5 bg-emerald-700 hover:bg-emerald-800 text-white text-[11px] font-medium rounded-xl flex items-center gap-1"
                   >
                     <Award className="w-3.5 h-3.5" /> Aprobar Fórmula Oficialmente
                   </button>
 
                   <button
                     onClick={() => setBatchToDelete(bt)}
-                    className="p-1 text-[#C86D51] hover:text-red-700"
+                    className="p-1 text-mejunje-griscalido hover:text-red-700"
                   >
                     <Trash2 className="w-4 h-4" />
                   </button>
@@ -796,8 +777,8 @@ export default function LaboratorioPage() {
 
       <ConfirmDialog
         isOpen={!!insumoToDelete}
-        title="Eliminar Insumo"
-        message={`¿Está seguro de eliminar el insumo "${insumoToDelete?.name}"?`}
+        title="Eliminar Materia Prima"
+        message={`¿Está seguro de eliminar la materia prima "${insumoToDelete?.name}"?`}
         onConfirm={() => insumoToDelete && deleteIngredient(insumoToDelete.id)}
         onCancel={() => setInsumoToDelete(null)}
       />
@@ -813,27 +794,27 @@ export default function LaboratorioPage() {
       {/* Edit Insumo Modal */}
       {editingInsumo && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4">
-          <div className="bg-[#2A1E17] text-white p-6 rounded-3xl max-w-md w-full space-y-4">
-            <h3 className="font-serif font-bold text-lg">Registrar / Editar Insumo</h3>
+          <div className="bg-mejunje-espresso text-white p-6 rounded-3xl max-w-md w-full space-y-4 shadow-atelier-lg border border-mejunje-tabaco">
+            <h3 className="font-serif italic text-lg text-white">Registrar Materia Prima</h3>
             <form onSubmit={handleSaveNewInsumo} className="space-y-3 text-xs">
               <div>
-                <label className="block text-[#E6DFC8] mb-1">Nombre Insumo</label>
+                <label className="block text-mejunje-arena mb-1 font-typewriter text-[10px] uppercase">Nombre Insumo</label>
                 <input
                   type="text"
                   required
                   value={newInsumoForm.name}
                   onChange={(e) => setNewInsumoForm({ ...newInsumoForm, name: e.target.value })}
-                  className="w-full bg-[#3D2C22] border border-[#523B2E] rounded-xl px-3 py-2 text-white"
+                  className="w-full bg-mejunje-tabaco/60 border border-mejunje-arena/30 rounded-xl px-3 py-2 text-white"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-2">
                 <div>
-                  <label className="block text-[#E6DFC8] mb-1">Categoría</label>
+                  <label className="block text-mejunje-arena mb-1 font-typewriter text-[10px] uppercase">Categoría</label>
                   <select
                     value={newInsumoForm.category}
                     onChange={(e) => setNewInsumoForm({ ...newInsumoForm, category: e.target.value as any })}
-                    className="w-full bg-[#3D2C22] border border-[#523B2E] rounded-xl px-3 py-2 text-white"
+                    className="w-full bg-mejunje-tabaco/60 border border-mejunje-arena/30 rounded-xl px-3 py-2 text-white"
                   >
                     <option value="Ceras">Ceras</option>
                     <option value="Fragancias">Fragancias</option>
@@ -850,11 +831,11 @@ export default function LaboratorioPage() {
                 </div>
 
                 <div>
-                  <label className="block text-[#E6DFC8] mb-1">Unidad Medida</label>
+                  <label className="block text-mejunje-arena mb-1 font-typewriter text-[10px] uppercase">Unidad Medida</label>
                   <select
                     value={newInsumoForm.unit}
                     onChange={(e) => setNewInsumoForm({ ...newInsumoForm, unit: e.target.value as any })}
-                    className="w-full bg-[#3D2C22] border border-[#523B2E] rounded-xl px-3 py-2 text-white"
+                    className="w-full bg-mejunje-tabaco/60 border border-mejunje-arena/30 rounded-xl px-3 py-2 text-white"
                   >
                     <option value="g">Gramos (g)</option>
                     <option value="kg">Kilos (kg)</option>
@@ -867,22 +848,22 @@ export default function LaboratorioPage() {
 
               <div className="grid grid-cols-2 gap-2">
                 <div>
-                  <label className="block text-[#E6DFC8] mb-1">Precio Compra ARS</label>
+                  <label className="block text-mejunje-arena mb-1 font-typewriter text-[10px] uppercase">Precio Compra ARS</label>
                   <input
                     type="number"
                     value={newInsumoForm.purchasePriceARS}
                     onChange={(e) => setNewInsumoForm({ ...newInsumoForm, purchasePriceARS: Number(e.target.value) })}
-                    className="w-full bg-[#3D2C22] border border-[#523B2E] rounded-xl px-3 py-2 text-white"
+                    className="w-full bg-mejunje-tabaco/60 border border-mejunje-arena/30 rounded-xl px-3 py-2 text-white"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-[#E6DFC8] mb-1">Cantidad Referencia</label>
+                  <label className="block text-mejunje-arena mb-1 font-typewriter text-[10px] uppercase">Cantidad Referencia</label>
                   <input
                     type="number"
                     value={newInsumoForm.referenceQty}
                     onChange={(e) => setNewInsumoForm({ ...newInsumoForm, referenceQty: Number(e.target.value) })}
-                    className="w-full bg-[#3D2C22] border border-[#523B2E] rounded-xl px-3 py-2 text-white"
+                    className="w-full bg-mejunje-tabaco/60 border border-mejunje-arena/30 rounded-xl px-3 py-2 text-white"
                   />
                 </div>
               </div>
@@ -891,15 +872,15 @@ export default function LaboratorioPage() {
                 <button
                   type="button"
                   onClick={() => setEditingInsumo(null)}
-                  className="px-4 py-2 bg-[#3D2C22] text-[#E6DFC8] rounded-xl"
+                  className="px-4 py-2 bg-mejunje-tabaco text-mejunje-arena rounded-xl"
                 >
                   Cancelar
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 bg-[#C86D51] text-white font-semibold rounded-xl"
+                  className="px-4 py-2 bg-mejunje-salmon text-white font-semibold rounded-xl"
                 >
-                  Guardar Insumo
+                  Guardar Materia Prima
                 </button>
               </div>
             </form>

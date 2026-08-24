@@ -10,7 +10,6 @@ import {
   AlertTriangle,
   CheckCircle2,
   ArrowRight,
-  Sparkles,
   Plus,
   Clock,
   Package,
@@ -44,90 +43,91 @@ export default function DashboardPage() {
   const opportunitiesCount = marketBenchmarks.filter((b) => b.status === 'Oportunidad Aumento').length;
 
   return (
-    <div className="space-y-8 animate-in fade-in">
-      {/* Header Banner */}
+    <div className="space-y-10 animate-in fade-in">
+      {/* Header Banner with Warm Analog Photography */}
       <SectionHero
-        title="Control General de Laboratorio & Compras ARS"
-        subtitle="Plataforma interactiva para desarrollo de fragancias, cálculo de batches, agrupación de pedidos a proveedores por mínimos de compra y monitoreo competitivo de precios."
-        badgeText="Panel Operativo — Kamelo Aromáticos"
-        badgeIcon={<LotusIcon className="w-4 h-4 text-[#D6A36D]" />}
+        title="Atelier de Perfumería & Archivo Olfativo"
+        subtitle="Gestión interna de formulación botánica, dosificación de materias primas, cálculo de batch, consolidación de pedidos mínimos a proveedores y observatorio de precios en Argentina."
+        badgeText="MEJUNJE · PALERMO, BUENOS AIRES"
+        badgeIcon={<LotusIcon className="w-3.5 h-3.5 text-mejunje-salmon" />}
         bgImage="https://images.unsplash.com/photo-1603006905003-be475563bc59?auto=format&fit=crop&w=1600&q=80"
+        noticeText="mezcla · intención · aroma"
       >
-        {/* Quick Actions Bar */}
-        <div className="flex flex-wrap items-center gap-2 bg-[#2D2521]/90 backdrop-blur-md p-3 rounded-2xl border border-[#D8C7B8]/20 shrink-0 shadow-lg">
+        {/* Quick Action Ledger Bar */}
+        <div className="flex flex-wrap items-center gap-2 bg-mejunje-espresso/90 backdrop-blur-md p-3 rounded-2xl border border-mejunje-arena/20 shrink-0 shadow-atelier-md">
           <button
             onClick={() => setActiveModal('formula')}
-            className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-[#C98F7A] hover:bg-[#b87e6a] text-white text-xs font-semibold shadow-xs transition-all active:scale-95"
+            className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-mejunje-salmon hover:bg-mejunje-terracota text-white text-xs font-medium shadow-xs transition-all active:scale-95"
           >
-            <Plus className="w-3.5 h-3.5" /> Crear Fórmula
+            <Plus className="w-3.5 h-3.5" /> Nueva Fórmula
           </button>
 
           <button
             onClick={() => setActiveModal('product')}
-            className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-[#D6A36D] hover:bg-[#c5935d] text-white text-xs font-semibold shadow-xs transition-all active:scale-95"
+            className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-mejunje-ambar hover:bg-mejunje-tabaco text-mejunje-marfil text-xs font-medium shadow-xs transition-all active:scale-95"
           >
-            <Package className="w-3.5 h-3.5" /> Crear Producto
+            <Package className="w-3.5 h-3.5" /> Ficha Comercial
           </button>
 
           <button
             onClick={() => setActiveModal('purchaseOrder')}
-            className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-[#7D9882] hover:bg-[#6b8570] text-white text-xs font-semibold shadow-xs transition-all active:scale-95"
+            className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-mejunje-tabaco hover:bg-mejunje-espresso text-mejunje-marfil text-xs font-medium shadow-xs transition-all active:scale-95"
           >
-            <ShoppingBag className="w-3.5 h-3.5" /> Crear Orden
+            <ShoppingBag className="w-3.5 h-3.5" /> Orden de Compra
           </button>
 
           <button
             onClick={() => setActiveModal('supplier')}
-            className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-[#4B4038] hover:bg-[#5a4e45] text-[#D8C7B8] text-xs font-semibold border border-[#D8C7B8]/20 transition-all"
+            className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-mejunje-espresso hover:bg-mejunje-tabaco text-mejunje-arena text-xs font-medium border border-mejunje-arena/25 transition-all"
           >
             <Building2 className="w-3.5 h-3.5" /> Proveedor
           </button>
 
           <button
             onClick={() => runMarketQueries()}
-            className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-[#D6A36D]/20 hover:bg-[#D6A36D]/30 text-[#D6A36D] text-xs font-semibold border border-[#D6A36D]/40 transition-all"
+            className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-mejunje-salmon/20 hover:bg-mejunje-salmon/30 text-mejunje-salmon text-xs font-typewriter tracking-wider border border-mejunje-salmon/35 transition-all"
           >
-            <Play className="w-3.5 h-3.5" /> Consultar Mercado
+            <Play className="w-3 h-3" /> Relevar Precios
           </button>
         </div>
       </SectionHero>
 
-      {/* KPI & Operational Alerts Cards */}
+      {/* Editorial Index Cards (Key Indicators) */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {/* Card 1: Alert Stock */}
         <Link
           href="/laboratorio"
-          className="bg-[#FBF8F4] p-5 rounded-2xl shadow-xs border border-[#E7DDD4] flex flex-col justify-between hover:border-[#C98F7A] hover:shadow-xs transition-all group"
+          className="bg-mejunje-card p-5 rounded-2xl shadow-atelier border border-mejunje-border flex flex-col justify-between hover:border-mejunje-salmon hover:shadow-atelier-md transition-all group"
         >
           <div className="flex items-center justify-between">
-            <span className="text-xs font-medium text-[#7A6E65]">Alertas de Stock & Insumos</span>
-            <div className={`p-2 rounded-xl ${lowStockCount > 0 ? 'bg-[#FAF3E8] text-[#7A5222]' : 'bg-[#EAF0EB] text-[#3D5442]'}`}>
+            <span className="font-typewriter text-[11px] uppercase tracking-wider text-mejunje-griscalido">Materias Primas</span>
+            <div className={`p-2 rounded-xl ${lowStockCount > 0 ? 'bg-amber-50 text-amber-800 border border-amber-200' : 'bg-emerald-50 text-emerald-800 border border-emerald-200'}`}>
               <AlertTriangle className="w-4 h-4" />
             </div>
           </div>
           <div className="mt-4">
-            <div className="text-2xl font-bold text-[#4B4038] font-serif">{lowStockCount} Insumos Críticos</div>
-            <p className="text-xs text-[#7A6E65] mt-1">Requieren reabastecimiento urgente</p>
+            <div className="text-2xl font-serif italic text-mejunje-tinta">{lowStockCount} Insumos en Alerta</div>
+            <p className="text-xs text-mejunje-griscalido mt-1 font-sans">Requieren reposición para producción</p>
           </div>
         </Link>
 
         {/* Card 2: Purchases */}
         <Link
           href="/compras"
-          className="bg-[#FBF8F4] p-5 rounded-2xl shadow-xs border border-[#E7DDD4] flex flex-col justify-between hover:border-[#7D9882] hover:shadow-xs transition-all group"
+          className="bg-mejunje-card p-5 rounded-2xl shadow-atelier border border-mejunje-border flex flex-col justify-between hover:border-mejunje-ambar hover:shadow-atelier-md transition-all group"
         >
           <div className="flex items-center justify-between">
-            <span className="text-xs font-medium text-[#7A6E65]">Compras Requeridas ARS</span>
-            <div className="p-2 rounded-xl bg-[#7D9882]/20 text-[#7D9882]">
+            <span className="font-typewriter text-[11px] uppercase tracking-wider text-mejunje-griscalido">Abastecimiento ARS</span>
+            <div className="p-2 rounded-xl bg-mejunje-arena/30 text-mejunje-tabaco border border-mejunje-arena/50">
               <ShoppingBag className="w-4 h-4" />
             </div>
           </div>
           <div className="mt-4">
-            <div className="text-2xl font-bold text-[#4B4038] font-serif">
-              ${totalRequirementARS.toLocaleString('es-AR')} ARS
+            <div className="text-2xl font-serif italic text-mejunje-tinta">
+              ${totalRequirementARS.toLocaleString('es-AR')}
             </div>
-            <p className="text-xs text-[#7D9882] mt-1 font-semibold">
-              {metMinimumsCount} de {requirements.length} proveed. cumplen mínimo
+            <p className="text-xs text-mejunje-tabaco mt-1 font-sans font-medium">
+              {metMinimumsCount} de {requirements.length} proveedores cumplen mínimo
             </p>
           </div>
         </Link>
@@ -135,54 +135,54 @@ export default function DashboardPage() {
         {/* Card 3: Formulas & Tests */}
         <Link
           href="/laboratorio"
-          className="bg-[#FBF8F4] p-5 rounded-2xl shadow-xs border border-[#E7DDD4] flex flex-col justify-between hover:border-[#C98F7A] hover:shadow-xs transition-all group"
+          className="bg-mejunje-card p-5 rounded-2xl shadow-atelier border border-mejunje-border flex flex-col justify-between hover:border-mejunje-terracota hover:shadow-atelier-md transition-all group"
         >
           <div className="flex items-center justify-between">
-            <span className="text-xs font-medium text-[#7A6E65]">Batches & Pruebas Activas</span>
-            <div className="p-2 rounded-xl bg-[#C98F7A]/15 text-[#C98F7A]">
+            <span className="font-typewriter text-[11px] uppercase tracking-wider text-mejunje-griscalido">Laboratorio</span>
+            <div className="p-2 rounded-xl bg-mejunje-salmon/15 text-mejunje-salmon border border-mejunje-salmon/30">
               <FlaskConical className="w-4 h-4" />
             </div>
           </div>
           <div className="mt-4">
-            <div className="text-2xl font-bold text-[#4B4038] font-serif">{inTestFormulas.length} Pruebas en Curso</div>
-            <p className="text-xs text-[#7A6E65] mt-1">{formulas.length} fórmulas registradas</p>
+            <div className="text-2xl font-serif italic text-mejunje-tinta">{inTestFormulas.length} Batches en Curso</div>
+            <p className="text-xs text-mejunje-griscalido mt-1 font-sans">{formulas.length} fórmulas de autor registradas</p>
           </div>
         </Link>
 
         {/* Card 4: Market Benchmarks */}
         <Link
           href="/mercado"
-          className="bg-[#FBF8F4] p-5 rounded-2xl shadow-xs border border-[#E7DDD4] flex flex-col justify-between hover:border-[#D6A36D] hover:shadow-xs transition-all group"
+          className="bg-mejunje-card p-5 rounded-2xl shadow-atelier border border-mejunje-border flex flex-col justify-between hover:border-mejunje-ambar hover:shadow-atelier-md transition-all group"
         >
           <div className="flex items-center justify-between">
-            <span className="text-xs font-medium text-[#7A6E65]">Monitoreo de Mercado</span>
-            <div className="p-2 rounded-xl bg-[#D6A36D]/15 text-[#D6A36D]">
+            <span className="font-typewriter text-[11px] uppercase tracking-wider text-mejunje-griscalido">Observatorio</span>
+            <div className="p-2 rounded-xl bg-mejunje-arena/30 text-mejunje-ambar border border-mejunje-arena/50">
               <TrendingUp className="w-4 h-4" />
             </div>
           </div>
           <div className="mt-4">
-            <div className="text-2xl font-bold text-[#4B4038] font-serif">{marketBenchmarks.length} Benchmarks</div>
-            <p className="text-xs text-[#D6A36D] font-semibold mt-1">
-              {opportunitiesCount} Oportunidad(es) de Aumento
+            <div className="text-2xl font-serif italic text-mejunje-tinta">{marketBenchmarks.length} Benchmarks</div>
+            <p className="text-xs text-mejunje-ambar font-sans font-medium mt-1">
+              {opportunitiesCount} Oportunidad(es) de ajuste de precio
             </p>
           </div>
         </Link>
       </div>
 
-      {/* Main Grid: Activity Feed + Supplier Progress */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Left Column: Supplier Minimums Progress (2 cols on large) */}
+      {/* Main Grid: Supplier Minimums Progress + Laboratory Activity Ledger */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        {/* Left Column: Supplier Minimums Progress (2 cols) */}
         <div className="lg:col-span-2 space-y-6">
-          <div className="bg-[#FBF8F4] rounded-3xl p-6 shadow-xs border border-[#E7DDD4]">
+          <div className="bg-mejunje-card rounded-3xl p-6 sm:p-7 shadow-atelier border border-mejunje-border">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-6">
               <div>
-                <h3 className="font-serif font-bold text-lg text-[#4B4038] flex items-center gap-2">
-                  <Building2 className="w-5 h-5 text-[#C98F7A]" /> Compras Agrupadas por Proveedor
+                <h3 className="font-typewriter text-base font-bold text-mejunje-tinta flex items-center gap-2 uppercase tracking-wider">
+                  <Building2 className="w-4 h-4 text-mejunje-salmon" /> Consolidación de Compras por Proveedor
                 </h3>
-                <p className="text-xs text-[#7A6E65]">Estado de cumplimiento del pedido mínimo de compra ARS</p>
+                <p className="text-xs text-mejunje-griscalido mt-0.5">Control de órdenes agrupadas respecto a los mínimos de compra en ARS</p>
               </div>
-              <Link href="/compras" className="text-xs text-[#C98F7A] font-bold hover:underline flex items-center gap-1">
-                Ver Módulo Compras <ArrowRight className="w-3.5 h-3.5" />
+              <Link href="/compras" className="text-xs text-mejunje-salmon font-medium hover:underline flex items-center gap-1">
+                Ver Abastecimiento <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             </div>
 
@@ -190,30 +190,30 @@ export default function DashboardPage() {
               {requirements.map((group) => {
                 const percent = Math.min(100, Math.round((group.totalARS / (group.minPurchaseARS || 1)) * 100));
                 return (
-                  <div key={group.supplierId} className="p-4 rounded-2xl bg-[#F7F3EE] border border-[#E7DDD4]">
-                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
+                  <div key={group.supplierId} className="p-4 rounded-2xl bg-mejunje-papel/40 border border-mejunje-border/80">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2.5">
                       <div className="flex items-center gap-2">
-                        <span className="font-bold text-sm text-[#4B4038]">{group.supplierName}</span>
+                        <span className="font-sans font-semibold text-sm text-mejunje-tinta">{group.supplierName}</span>
                         {group.meetsMinimum ? (
-                          <span className="px-2.5 py-0.5 rounded-full bg-[#EAF0EB] text-[#3D5442] text-[10px] font-bold flex items-center gap-1 border border-[#7D9882]/30">
-                            <CheckCircle2 className="w-3 h-3 text-[#7D9882]" /> Mínimo Cumplido
+                          <span className="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-800 text-[10px] font-medium flex items-center gap-1 border border-emerald-200 font-sans">
+                            <CheckCircle2 className="w-3 h-3 text-emerald-600" /> Mínimo Cumplido
                           </span>
                         ) : (
-                          <span className="px-2.5 py-0.5 rounded-full bg-[#FAF3E8] text-[#7A5222] text-[10px] font-bold flex items-center gap-1 border border-[#D6A36D]/30">
-                            <AlertTriangle className="w-3 h-3 text-[#D6A36D]" /> Faltan ${(group.minPurchaseARS - group.totalARS).toLocaleString('es-AR')} ARS
+                          <span className="px-2 py-0.5 rounded-full bg-amber-50 text-amber-800 text-[10px] font-medium flex items-center gap-1 border border-amber-200 font-sans">
+                            <AlertTriangle className="w-3 h-3 text-amber-600" /> Faltan ${(group.minPurchaseARS - group.totalARS).toLocaleString('es-AR')} ARS
                           </span>
                         )}
                       </div>
-                      <div className="text-xs text-[#7A6E65]">
-                        Acumulado: <strong className="text-[#4B4038]">${group.totalARS.toLocaleString('es-AR')} ARS</strong> / Mín: ${group.minPurchaseARS.toLocaleString('es-AR')} ARS
+                      <div className="text-xs text-mejunje-griscalido font-sans">
+                        Acumulado: <strong className="text-mejunje-tinta">${group.totalARS.toLocaleString('es-AR')} ARS</strong> / Mín: ${group.minPurchaseARS.toLocaleString('es-AR')} ARS
                       </div>
                     </div>
 
-                    {/* Progress Bar */}
-                    <div className="w-full bg-[#E7DDD4] rounded-full h-2.5 overflow-hidden">
+                    {/* Progress Bar with Mejunje Earth Tones */}
+                    <div className="w-full bg-mejunje-arena/30 rounded-full h-2 overflow-hidden">
                       <div
-                        className={`h-2.5 rounded-full transition-all duration-500 ${
-                          group.meetsMinimum ? 'bg-[#7D9882]' : 'bg-[#D6A36D]'
+                        className={`h-2 rounded-full transition-all duration-500 ${
+                          group.meetsMinimum ? 'bg-mejunje-ambar' : 'bg-mejunje-salmon'
                         }`}
                         style={{ width: `${percent}%` }}
                       />
@@ -228,46 +228,46 @@ export default function DashboardPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <Link
               href="/laboratorio"
-              className="bg-[#3E342F] text-[#FBF8F4] p-5 rounded-2xl border border-[#4B4038] hover:border-[#C98F7A] transition-all flex items-center justify-between group"
+              className="bg-mejunje-espresso text-mejunje-marfil p-5 rounded-2xl border border-mejunje-tabaco hover:border-mejunje-salmon transition-all flex items-center justify-between group shadow-atelier"
             >
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-[#C98F7A]/20 text-[#DFA28F] flex items-center justify-center">
+              <div className="flex items-center gap-3.5">
+                <div className="w-10 h-10 rounded-xl bg-mejunje-salmon/20 text-mejunje-salmon flex items-center justify-center border border-mejunje-salmon/30">
                   <FlaskConical className="w-5 h-5" />
                 </div>
                 <div>
-                  <h4 className="font-serif font-bold text-sm text-white">Laboratorio de Fórmulas</h4>
-                  <p className="text-[11px] text-[#D8C7B8]">Pirámides olfativas y calculadora de batch</p>
+                  <h4 className="font-serif italic text-base text-white">Laboratorio de Fórmulas</h4>
+                  <p className="text-[11px] text-mejunje-arena/80 font-sans">Pirámides olfativas y calculadora de batches</p>
                 </div>
               </div>
-              <ArrowRight className="w-4 h-4 text-[#C98F7A] group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="w-4 h-4 text-mejunje-salmon group-hover:translate-x-1 transition-transform" />
             </Link>
 
             <Link
               href="/catalogo"
-              className="bg-[#3E342F] text-[#FBF8F4] p-5 rounded-2xl border border-[#4B4038] hover:border-[#D6A36D] transition-all flex items-center justify-between group"
+              className="bg-mejunje-espresso text-mejunje-marfil p-5 rounded-2xl border border-mejunje-tabaco hover:border-mejunje-ambar transition-all flex items-center justify-between group shadow-atelier"
             >
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-[#D6A36D]/20 text-[#D6A36D] flex items-center justify-center">
+              <div className="flex items-center gap-3.5">
+                <div className="w-10 h-10 rounded-xl bg-mejunje-ambar/20 text-mejunje-ambar flex items-center justify-center border border-mejunje-ambar/30">
                   <BookOpen className="w-5 h-5" />
                 </div>
                 <div>
-                  <h4 className="font-serif font-bold text-sm text-white">Catálogo Interactivo</h4>
-                  <p className="text-[11px] text-[#D8C7B8]">Variantes y envío por WhatsApp</p>
+                  <h4 className="font-serif italic text-base text-white">Catálogo Editorial</h4>
+                  <p className="text-[11px] text-mejunje-arena/80 font-sans">Fichas botánicas y envío por WhatsApp</p>
                 </div>
               </div>
-              <ArrowRight className="w-4 h-4 text-[#D6A36D] group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="w-4 h-4 text-mejunje-ambar group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>
         </div>
 
-        {/* Right Column: Activity Feed */}
-        <div className="bg-[#FBF8F4] rounded-3xl p-6 shadow-xs border border-[#E7DDD4] flex flex-col justify-between">
+        {/* Right Column: Activity Ledger (Bitácora) */}
+        <div className="bg-mejunje-card rounded-3xl p-6 sm:p-7 shadow-atelier border border-mejunje-border flex flex-col justify-between">
           <div>
-            <div className="flex items-center justify-between mb-4 pb-3 border-b border-[#E7DDD4]">
-              <h3 className="font-serif font-bold text-base text-[#4B4038] flex items-center gap-2">
-                <Clock className="w-4 h-4 text-[#C98F7A]" /> Actividad Reciente
+            <div className="flex items-center justify-between mb-5 pb-3 border-b border-mejunje-border">
+              <h3 className="font-typewriter text-sm font-bold text-mejunje-tinta flex items-center gap-2 uppercase tracking-wider">
+                <Clock className="w-3.5 h-3.5 text-mejunje-salmon" /> Bitácora del Atelier
               </h3>
-              <span className="text-[10px] bg-[#EAF0EB] text-[#3D5442] border border-[#7D9882]/30 font-bold px-2 py-0.5 rounded-full">
+              <span className="font-typewriter text-[10px] bg-mejunje-papel text-mejunje-tabaco border border-mejunje-arena/60 font-semibold px-2 py-0.5 rounded-full">
                 En vivo
               </span>
             </div>
@@ -277,22 +277,22 @@ export default function DashboardPage() {
                 return (
                   <div
                     key={log.id}
-                    className="p-3 rounded-xl bg-[#F7F3EE] border border-[#E7DDD4] space-y-1 text-xs transition-colors hover:bg-white"
+                    className="p-3.5 rounded-xl bg-mejunje-papel/30 border border-mejunje-border space-y-1 text-xs transition-colors hover:bg-white"
                   >
                     <div className="flex items-center justify-between">
-                      <span className="font-bold text-[#4B4038]">{log.title}</span>
-                      <span className="text-[10px] text-[#7A6E65] font-mono">{log.timestamp}</span>
+                      <span className="font-sans font-semibold text-mejunje-tinta">{log.title}</span>
+                      <span className="text-[10px] text-mejunje-griscalido font-typewriter">{log.timestamp}</span>
                     </div>
-                    <p className="text-[#7A6E65] text-[11px] leading-relaxed">{log.description}</p>
+                    <p className="text-mejunje-griscalido text-[11px] leading-relaxed font-sans">{log.description}</p>
                   </div>
                 );
               })}
             </div>
           </div>
 
-          <div className="mt-4 pt-3 border-t border-[#E7DDD4] text-center">
-            <span className="text-[11px] text-[#7A6E65]">
-              Todos los datos son operados en tiempo real localmente.
+          <div className="mt-5 pt-3 border-t border-mejunje-border text-center">
+            <span className="font-typewriter text-[10px] text-mejunje-griscalido uppercase tracking-wider">
+              MEJUNJE · Atelier Olfativo Palermo
             </span>
           </div>
         </div>

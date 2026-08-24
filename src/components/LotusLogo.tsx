@@ -1,73 +1,58 @@
+'use client';
+
 import React from 'react';
 
-export function LotusIcon({ className = "w-7 h-7", primaryColor = "#C98F7A", secondaryColor = "#DFA28F", accentColor = "#D6A36D", leafColor = "#7D9882" }: { className?: string; primaryColor?: string; secondaryColor?: string; accentColor?: string; leafColor?: string }) {
+/**
+ * Discrete neutral archive monogram for MEJUNJE Atelier
+ */
+export function MejunjeMark({ className = "w-7 h-7" }: { className?: string }) {
   return (
-    <svg className={className} viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-      {/* Outer base leaf line */}
-      <path
-        d="M4 29.5C12 32.5 24 32.5 32 29.5"
-        stroke={leafColor}
-        strokeWidth="2.2"
-        strokeLinecap="round"
-      />
-      {/* Central Petal Bud */}
-      <path
-        d="M18 4C16.2 9.5 15.2 14 18 21C20.8 14 19.8 9.5 18 4Z"
-        fill={accentColor}
-        stroke="#4B4038"
-        strokeWidth="0.8"
-      />
-      {/* Inner Left Petal */}
-      <path
-        d="M18 21C13.5 15.5 8.5 14 6.5 17.5C5 20 7 23.5 12.5 24.2C14.8 24.5 16.8 22.8 18 21Z"
-        fill={primaryColor}
-        stroke="#4B4038"
-        strokeWidth="0.8"
-      />
-      {/* Inner Right Petal */}
-      <path
-        d="M18 21C22.5 15.5 27.5 14 29.5 17.5C31 20 29 23.5 23.5 24.2C21.2 24.5 19.2 22.8 18 21Z"
-        fill={primaryColor}
-        stroke="#4B4038"
-        strokeWidth="0.8"
-      />
-      {/* Lower Left Petal */}
-      <path
-        d="M18 22.5C11.5 20 5.5 21 3.5 24.2C2 26.5 3.8 28.5 9.5 28.5C14 28.5 16.8 25 18 22.5Z"
-        fill={secondaryColor}
-        stroke="#4B4038"
-        strokeWidth="0.8"
-      />
-      {/* Lower Right Petal */}
-      <path
-        d="M18 22.5C24.5 20 30.5 21 32.5 24.2C34 26.5 32.2 28.5 26.5 28.5C22 28.5 19.2 25 18 22.5Z"
-        fill={secondaryColor}
-        stroke="#4B4038"
-        strokeWidth="0.8"
-      />
-    </svg>
+    <div className={`relative flex items-center justify-center font-typewriter font-bold text-mejunje-espresso ${className}`}>
+      <span className="text-base tracking-tighter">[ M ]</span>
+    </div>
   );
 }
 
+/**
+ * Re-export LotusIcon as discrete neutral symbol to keep backward compatibility
+ */
+export function LotusIcon({ className = "w-5 h-5" }: { className?: string; primaryColor?: string; secondaryColor?: string; accentColor?: string; leafColor?: string }) {
+  return (
+    <span className={`font-typewriter text-xs font-bold tracking-widest text-mejunje-ambar ${className}`}>
+      ✻
+    </span>
+  );
+}
+
+/**
+ * Official MEJUNJE Antique Typewriter Wordmark & Header Component
+ */
 export function LotusLogoHeader({ className = "" }: { className?: string }) {
   return (
-    <div className={`flex items-center gap-3 ${className}`}>
-      <div className="w-10 h-10 rounded-2xl bg-[#4B4038] p-1.5 flex items-center justify-center border border-[#C98F7A]/40 shadow-sm transition-transform group-hover:scale-105">
-        <LotusIcon className="w-7 h-7" primaryColor="#DFA28F" secondaryColor="#C98F7A" accentColor="#D6A36D" leafColor="#7D9882" />
+    <div className={`flex items-center gap-3.5 group cursor-pointer ${className}`}>
+      {/* Discrete Analog Monogram Stamp */}
+      <div className="w-9 h-9 rounded-xl bg-mejunje-papel p-1 flex items-center justify-center border border-mejunje-arena text-mejunje-espresso shadow-atelier transition-transform group-hover:scale-105">
+        <span className="font-typewriter text-xs font-bold tracking-tighter text-mejunje-espresso">
+          [M]
+        </span>
       </div>
-      <div>
+
+      {/* Wordmark and Editorial Subtitle */}
+      <div className="flex flex-col">
         <div className="flex items-center gap-2">
-          <span className="font-serif font-bold text-lg tracking-wider text-[#FBF8F4]">
-            KAMELO
+          <span className="font-typewriter font-bold text-lg sm:text-xl tracking-[0.18em] text-mejunje-espresso group-hover:text-mejunje-ambar transition-colors">
+            MEJUNJE
           </span>
-          <span className="text-[10px] bg-[#C98F7A]/30 text-[#DFA28F] px-2 py-0.5 rounded-full border border-[#C98F7A]/40 font-mono font-medium">
-            Aromáticos
+          <span className="text-[9px] font-typewriter tracking-widest uppercase px-1.5 py-0.5 rounded bg-mejunje-arena/40 text-mejunje-tabaco border border-mejunje-arena">
+            Atelier
           </span>
         </div>
-        <p className="text-[9px] text-[#D8C7B8] tracking-widest uppercase font-medium">
-          Laboratorio & Perfumería
+        <p className="font-typewriter text-[9px] text-mejunje-griscalido tracking-widest uppercase">
+          Palermo · Buenos Aires
         </p>
       </div>
     </div>
   );
 }
+
+export default LotusLogoHeader;

@@ -9,17 +9,11 @@ import {
   Plus,
   Trash2,
   Copy,
-  SlidersHorizontal,
-  Package,
-  ExternalLink,
-  Sparkles,
-  Share2,
   LayoutGrid,
   List,
   Eye,
-  Image as ImageIcon,
+  Share2,
   X,
-  CheckCircle2
 } from 'lucide-react';
 import { useKamelo } from '@/context/KameloContext';
 import { CatalogProduct, ProductVariant } from '@/types';
@@ -69,16 +63,17 @@ export default function CatalogoPage() {
     const displayPrice = selectedVariant ? selectedVariant.salePriceARS : (sharingProduct.variants?.[0]?.salePriceARS || 18500);
 
     return (
-      `${greeting}Te comparto la ficha comercial de *Kamelo Aromáticos* ✨\n\n` +
-      `🌸 *${sharingProduct.name}*\n` +
+      `${greeting}Te comparto la ficha comercial de *MEJUNJE · Atelier de Perfumería Artesanal* ✨\n\n` +
+      `🌿 *${sharingProduct.name}*\n` +
       `📌 *Categoría:* ${sharingProduct.category}\n` +
       `🏺 *Familia Olfativa:* ${sharingProduct.fragranceFamily}${variantInfo}\n\n` +
-      `🍃 *Pirámide Olfativa:*\n` +
+      `🍂 *Pirámide Olfativa:*\n` +
       `- Salida: ${sharingProduct.topNotes}\n` +
       `- Corazón: ${sharingProduct.heartNotes}\n` +
       `- Fondo: ${sharingProduct.baseNotes}\n\n` +
       `✨ *Precio:* $${displayPrice.toLocaleString('es-AR')} ARS\n\n` +
-      `¿Te gustaría encargar esta fragancia o recibir asesoramiento personalizado?`
+      `_MEJUNJE · mezcla. intención. aroma. · Palermo, Buenos Aires_\n` +
+      `¿Te gustaría encargar esta pieza o recibir asesoramiento olfativo personalizado?`
     );
   };
 
@@ -91,7 +86,7 @@ export default function CatalogoPage() {
 
   const handleCopyWhatsApp = () => {
     navigator.clipboard.writeText(buildWhatsAppText());
-    showToast('Ficha comercial copiada al portapapeles.', 'success');
+    showToast('Ficha comercial de MEJUNJE copiada al portapapeles.', 'success');
   };
 
   const openProductDetail = (product: CatalogProduct) => {
@@ -107,34 +102,35 @@ export default function CatalogoPage() {
   };
 
   return (
-    <div className="space-y-8 animate-in fade-in pb-12">
+    <div className="space-y-10 animate-in fade-in pb-12">
       {/* Header Banner */}
       <SectionHero
-        title="Catálogo Interactivo de Productos"
-        subtitle="Gestión de catálogo comercial, variantes de presentación y fichas técnicas con compartición directa a clientes por WhatsApp."
-        badgeText="Módulo de Ventas & Catálogo Digital"
-        badgeIcon={<BookOpen className="w-3.5 h-3.5 text-[#C98F7A]" />}
+        title="Catálogo & Fichas Olfativas"
+        subtitle="Colecciones artesanales, notas de cata botánica, variantes de presentación y envío directo de fichas editoriales a clientes por WhatsApp."
+        badgeText="MEJUNJE · CATÁLOGO COMERCIAL"
+        badgeIcon={<BookOpen className="w-3.5 h-3.5 text-mejunje-salmon" />}
         bgImage="https://images.unsplash.com/photo-1602928321679-560bb453f190?auto=format&fit=crop&w=1600&q=80"
+        noticeText="producción en lotes pequeños · diseño botánico de autor"
       >
         <button
           onClick={() => setActiveModal('product')}
-          className="px-4 py-2.5 bg-[#C98F7A] hover:bg-[#b87e6a] text-white text-xs font-semibold rounded-xl flex items-center gap-1.5 shadow-md shrink-0 transition-all active:scale-95"
+          className="px-4 py-2.5 bg-mejunje-salmon hover:bg-mejunje-terracota text-white text-xs font-medium rounded-xl flex items-center gap-1.5 shadow-xs shrink-0 transition-all active:scale-95"
         >
           <Plus className="w-4 h-4" /> Crear Nuevo Producto
         </button>
       </SectionHero>
 
       {/* Filter, Search, and View Controls */}
-      <div className="bg-[#FBF8F4] p-4 rounded-2xl shadow-xs border border-[#E7DDD4] flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div className="bg-mejunje-card p-4 rounded-2xl shadow-atelier border border-mejunje-border flex flex-col sm:flex-row items-center justify-between gap-4">
         {/* Search */}
         <div className="relative w-full sm:w-80">
-          <Search className="w-4 h-4 text-[#7A6E65] absolute left-3 top-2.5" />
+          <Search className="w-4 h-4 text-mejunje-griscalido absolute left-3 top-2.5" />
           <input
             type="text"
             placeholder="Buscar por aroma, notas o nombre..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-9 pr-4 py-1.5 bg-white border border-[#E7DDD4] rounded-xl text-xs text-[#3E342F] focus:outline-none focus:border-[#C98F7A]"
+            className="w-full pl-9 pr-4 py-1.5 bg-mejunje-papel/40 border border-mejunje-border rounded-xl text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salmon"
           />
         </div>
 
@@ -145,10 +141,10 @@ export default function CatalogoPage() {
               <button
                 key={cat}
                 onClick={() => setSelectedCategory(cat)}
-                className={`px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-colors ${
+                className={`px-3 py-1.5 rounded-xl text-xs font-typewriter uppercase tracking-wider whitespace-nowrap transition-colors ${
                   selectedCategory === cat
-                    ? 'bg-[#C98F7A] text-white shadow-xs'
-                    : 'bg-white text-[#7A6E65] hover:bg-[#E7DDD4]/50 border border-[#E7DDD4]'
+                    ? 'bg-mejunje-salmon text-white shadow-xs'
+                    : 'bg-white text-mejunje-griscalido hover:bg-mejunje-papel border border-mejunje-border'
                 }`}
               >
                 {cat}
@@ -156,11 +152,11 @@ export default function CatalogoPage() {
             ))}
           </div>
 
-          <div className="flex items-center gap-1 bg-white p-1 rounded-xl border border-[#E7DDD4] shrink-0">
+          <div className="flex items-center gap-1 bg-white p-1 rounded-xl border border-mejunje-border shrink-0">
             <button
               onClick={() => setViewMode('grid')}
               className={`p-1.5 rounded-lg transition-colors ${
-                viewMode === 'grid' ? 'bg-[#3E342F] text-white' : 'text-[#7A6E65] hover:text-[#3E342F]'
+                viewMode === 'grid' ? 'bg-mejunje-espresso text-white' : 'text-mejunje-griscalido hover:text-mejunje-tinta'
               }`}
               title="Vista en Cuadrícula"
             >
@@ -169,7 +165,7 @@ export default function CatalogoPage() {
             <button
               onClick={() => setViewMode('list')}
               className={`p-1.5 rounded-lg transition-colors ${
-                viewMode === 'list' ? 'bg-[#3E342F] text-white' : 'text-[#7A6E65] hover:text-[#3E342F]'
+                viewMode === 'list' ? 'bg-mejunje-espresso text-white' : 'text-mejunje-griscalido hover:text-mejunje-tinta'
               }`}
               title="Vista en Lista"
             >
@@ -191,43 +187,43 @@ export default function CatalogoPage() {
             return (
               <div
                 key={product.id}
-                className="bg-[#FBF8F4] rounded-3xl shadow-xs border border-[#E7DDD4] overflow-hidden flex flex-col justify-between hover:border-[#C98F7A] transition-all group hover:shadow-md"
+                className="bg-mejunje-card rounded-3xl shadow-atelier border border-mejunje-border overflow-hidden flex flex-col justify-between hover:border-mejunje-salmon transition-all group hover:shadow-atelier-md"
               >
                 <div>
                   {/* Product Image Banner */}
-                  <div className="relative h-52 w-full overflow-hidden bg-[#3E342F]">
+                  <div className="relative h-56 w-full overflow-hidden bg-mejunje-espresso">
                     <img
                       src={mainImg}
                       alt={product.name}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 filter saturate-95"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#2B231F]/90 via-transparent to-black/30" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-mejunje-espresso/90 via-transparent to-black/30" />
 
                     {/* Badge Category & Actions Overlay */}
                     <div className="absolute top-3 left-3 right-3 flex items-center justify-between z-10">
-                      <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-[#C98F7A] text-white shadow-xs">
+                      <span className="text-[9px] font-typewriter uppercase tracking-widest px-2.5 py-1 rounded-full bg-mejunje-salmon text-white shadow-xs">
                         {product.category}
                       </span>
 
-                      <div className="flex items-center gap-1 bg-[#2B231F]/70 backdrop-blur-md px-2 py-1 rounded-full border border-white/20">
+                      <div className="flex items-center gap-1 bg-mejunje-espresso/80 backdrop-blur-md px-2 py-1 rounded-full border border-white/20">
                         <button
                           onClick={() => openProductDetail(product)}
                           title="Ver Ficha Detallada"
-                          className="p-1 text-[#D8C7B8] hover:text-white transition-colors"
+                          className="p-1 text-mejunje-arena hover:text-white transition-colors"
                         >
                           <Eye className="w-3.5 h-3.5" />
                         </button>
                         <button
                           onClick={() => duplicateProduct(product.id)}
                           title="Duplicar Producto"
-                          className="p-1 text-[#D8C7B8] hover:text-[#D6A36D] transition-colors"
+                          className="p-1 text-mejunje-arena hover:text-mejunje-salmon transition-colors"
                         >
                           <Copy className="w-3.5 h-3.5" />
                         </button>
                         <button
                           onClick={() => setProductToDelete(product)}
                           title="Eliminar Producto"
-                          className="p-1 text-[#D8C7B8] hover:text-red-400 transition-colors"
+                          className="p-1 text-mejunje-arena hover:text-rose-400 transition-colors"
                         >
                           <Trash2 className="w-3.5 h-3.5" />
                         </button>
@@ -237,48 +233,48 @@ export default function CatalogoPage() {
                     {/* Bottom Title inside Image */}
                     <div className="absolute bottom-3 left-4 right-4 z-10 cursor-pointer" onClick={() => openProductDetail(product)}>
                       {product.badge && (
-                        <span className="inline-block text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-[#D6A36D] text-white mb-1 shadow-xs">
+                        <span className="inline-block text-[9px] font-typewriter uppercase tracking-wider px-2 py-0.5 rounded bg-mejunje-ambar text-white mb-1 shadow-xs">
                           {product.badge}
                         </span>
                       )}
-                      <h2 className="font-serif font-bold text-lg text-white group-hover:text-[#D8C7B8] transition-colors drop-shadow-xs">
+                      <h2 className="font-serif italic text-xl text-white group-hover:text-mejunje-arena transition-colors drop-shadow-xs">
                         {product.name}
                       </h2>
-                      <p className="text-[11px] text-[#D8C7B8]/90 line-clamp-1">{product.shortDescription || 'Perfumería Artesanal'}</p>
+                      <p className="text-[11px] text-mejunje-arena/90 font-sans line-clamp-1">{product.shortDescription || 'Perfumería Artesanal'}</p>
                     </div>
                   </div>
 
                   {/* Card Body */}
                   <div className="p-5 space-y-4">
-                    <p className="text-xs text-[#7A6E65] leading-relaxed line-clamp-2">
+                    <p className="text-xs text-mejunje-griscalido leading-relaxed font-sans line-clamp-2">
                       {product.description}
                     </p>
 
                     {/* Olfactory Pyramid */}
-                    <div className="p-3 bg-white rounded-2xl border border-[#E7DDD4] space-y-1 text-xs">
-                      <span className="text-[10px] uppercase font-bold text-[#C98F7A] flex items-center gap-1">
-                        <Flower2 className="w-3.5 h-3.5" /> Pirámide Olfativa
+                    <div className="p-3 bg-white rounded-2xl border border-mejunje-border space-y-1 text-xs">
+                      <span className="font-typewriter text-[9px] uppercase tracking-wider text-mejunje-salmon flex items-center gap-1">
+                        <Flower2 className="w-3 h-3" /> Pirámide Olfativa
                       </span>
-                      <div className="text-[11px] text-[#3E342F] truncate">
-                        <strong>Salida:</strong> {product.topNotes}
+                      <div className="text-[11px] text-mejunje-tinta truncate font-sans">
+                        <strong className="font-medium">Salida:</strong> {product.topNotes}
                       </div>
-                      <div className="text-[11px] text-[#3E342F] truncate">
-                        <strong>Corazón:</strong> {product.heartNotes}
+                      <div className="text-[11px] text-mejunje-tinta truncate font-sans">
+                        <strong className="font-medium">Corazón:</strong> {product.heartNotes}
                       </div>
-                      <div className="text-[11px] text-[#3E342F] truncate">
-                        <strong>Fondo:</strong> {product.baseNotes}
+                      <div className="text-[11px] text-mejunje-tinta truncate font-sans">
+                        <strong className="font-medium">Fondo:</strong> {product.baseNotes}
                       </div>
                     </div>
 
                     {/* Variants List */}
                     {product.variants && product.variants.length > 0 && (
                       <div className="space-y-1.5">
-                        <span className="text-[10px] font-bold uppercase text-[#7A6E65]">Presentaciones:</span>
+                        <span className="font-typewriter text-[9px] uppercase text-mejunje-griscalido tracking-wider">Presentaciones:</span>
                         <div className="space-y-1">
                           {product.variants.map((v) => (
-                            <div key={v.id} className="flex items-center justify-between text-[11px] bg-white px-3 py-1.5 rounded-xl border border-[#E7DDD4]">
-                              <span className="font-medium text-[#3E342F]">{v.size} ({v.aroma})</span>
-                              <span className="font-bold text-[#C98F7A]">${v.salePriceARS.toLocaleString('es-AR')} ARS</span>
+                            <div key={v.id} className="flex items-center justify-between text-[11px] bg-white px-3 py-1.5 rounded-xl border border-mejunje-border">
+                              <span className="font-medium text-mejunje-tinta font-sans">{v.size} ({v.aroma})</span>
+                              <span className="font-semibold text-mejunje-salmon">${v.salePriceARS.toLocaleString('es-AR')} ARS</span>
                             </div>
                           ))}
                         </div>
@@ -288,10 +284,10 @@ export default function CatalogoPage() {
                 </div>
 
                 {/* Card Footer */}
-                <div className="p-4 bg-white/80 border-t border-[#E7DDD4] flex items-center justify-between gap-2">
+                <div className="p-4 bg-white border-t border-mejunje-border flex items-center justify-between gap-2">
                   <div>
-                    <span className="text-[10px] text-[#7A6E65] block font-medium">Precio Base ARS</span>
-                    <span className="text-base font-serif font-bold text-[#3E342F]">
+                    <span className="font-typewriter text-[9px] uppercase text-mejunje-griscalido block">Precio Base ARS</span>
+                    <span className="text-base font-serif italic text-mejunje-tinta font-semibold">
                       ${basePrice.toLocaleString('es-AR')}
                     </span>
                   </div>
@@ -299,16 +295,16 @@ export default function CatalogoPage() {
                   <div className="flex items-center gap-2">
                     <button
                       onClick={() => openProductDetail(product)}
-                      className="px-3 py-1.5 rounded-xl bg-[#E7DDD4]/60 hover:bg-[#E7DDD4] text-[#3E342F] text-xs font-semibold flex items-center gap-1 transition-colors"
+                      className="px-3 py-1.5 rounded-xl bg-mejunje-papel hover:bg-mejunje-arena/40 text-mejunje-tinta text-xs font-medium flex items-center gap-1 transition-colors border border-mejunje-border"
                     >
-                      <Eye className="w-3.5 h-3.5" /> Ver
+                      <Eye className="w-3.5 h-3.5" /> Ficha
                     </button>
                     <button
                       onClick={() => {
                         setSharingProduct(product);
                         setSelectedVariant(product.variants?.[0] || null);
                       }}
-                      className="px-3.5 py-1.5 rounded-xl bg-[#25D366] hover:bg-[#1eb855] text-white text-xs font-bold flex items-center gap-1.5 shadow-xs transition-colors"
+                      className="px-3.5 py-1.5 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-medium flex items-center gap-1.5 shadow-xs transition-colors"
                     >
                       <MessageCircle className="w-4 h-4 fill-white" /> Compartir
                     </button>
@@ -330,17 +326,17 @@ export default function CatalogoPage() {
             return (
               <div
                 key={product.id}
-                className="bg-[#FBF8F4] rounded-2xl border border-[#E7DDD4] overflow-hidden flex flex-col sm:flex-row items-stretch justify-between hover:border-[#C98F7A] transition-all p-4 gap-4"
+                className="bg-mejunje-card rounded-2xl border border-mejunje-border overflow-hidden flex flex-col sm:flex-row items-stretch justify-between hover:border-mejunje-salmon transition-all p-4 gap-4 shadow-atelier"
               >
                 <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 flex-1">
                   {/* Thumbnail Image */}
                   <div
-                    className="w-full sm:w-36 h-36 shrink-0 rounded-xl overflow-hidden relative bg-[#3E342F] cursor-pointer"
+                    className="w-full sm:w-36 h-36 shrink-0 rounded-xl overflow-hidden relative bg-mejunje-espresso cursor-pointer"
                     onClick={() => openProductDetail(product)}
                   >
                     <img src={mainImg} alt={product.name} className="w-full h-full object-cover hover:scale-105 transition-transform" />
                     {product.badge && (
-                      <span className="absolute top-2 left-2 text-[9px] font-bold uppercase px-2 py-0.5 rounded bg-[#D6A36D] text-white">
+                      <span className="absolute top-2 left-2 font-typewriter text-[9px] uppercase px-2 py-0.5 rounded bg-mejunje-ambar text-white">
                         {product.badge}
                       </span>
                     )}
@@ -349,24 +345,24 @@ export default function CatalogoPage() {
                   {/* Info */}
                   <div className="space-y-2 flex-1 text-center sm:text-left">
                     <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2">
-                      <span className="text-[10px] font-bold uppercase px-2 py-0.5 rounded-full bg-[#C98F7A]/20 text-[#C98F7A]">
+                      <span className="font-typewriter text-[9px] uppercase px-2 py-0.5 rounded-full bg-mejunje-salmon/15 text-mejunje-salmon border border-mejunje-salmon/30">
                         {product.category}
                       </span>
-                      <span className="text-xs text-[#7A6E65] font-medium">
-                        Familia: <strong className="text-[#3E342F]">{product.fragranceFamily}</strong>
+                      <span className="text-xs text-mejunje-griscalido font-sans">
+                        Familia: <strong className="text-mejunje-tinta">{product.fragranceFamily}</strong>
                       </span>
                     </div>
 
                     <h3
-                      className="font-serif font-bold text-lg text-[#3E342F] hover:text-[#C98F7A] cursor-pointer"
+                      className="font-serif italic text-lg text-mejunje-tinta hover:text-mejunje-salmon cursor-pointer"
                       onClick={() => openProductDetail(product)}
                     >
                       {product.name}
                     </h3>
 
-                    <p className="text-xs text-[#7A6E65] line-clamp-2 max-w-2xl">{product.description}</p>
+                    <p className="text-xs text-mejunje-griscalido line-clamp-2 max-w-2xl font-sans">{product.description}</p>
 
-                    <div className="text-[11px] text-[#7A6E65] flex flex-wrap items-center justify-center sm:justify-start gap-x-4 gap-y-1">
+                    <div className="text-[11px] text-mejunje-griscalido flex flex-wrap items-center justify-center sm:justify-start gap-x-4 gap-y-1 font-sans">
                       <span><strong>Salida:</strong> {product.topNotes}</span>
                       <span><strong>Corazón:</strong> {product.heartNotes}</span>
                       <span><strong>Fondo:</strong> {product.baseNotes}</span>
@@ -375,10 +371,10 @@ export default function CatalogoPage() {
                 </div>
 
                 {/* Right Side: Price & Actions */}
-                <div className="flex sm:flex-col items-center justify-between sm:justify-center border-t sm:border-t-0 sm:border-l border-[#E7DDD4] pt-3 sm:pt-0 sm:pl-6 gap-3 shrink-0">
+                <div className="flex sm:flex-col items-center justify-between sm:justify-center border-t sm:border-t-0 sm:border-l border-mejunje-border pt-3 sm:pt-0 sm:pl-6 gap-3 shrink-0">
                   <div className="text-left sm:text-right">
-                    <span className="text-[10px] text-[#7A6E65] block">Desde</span>
-                    <span className="text-xl font-serif font-bold text-[#3E342F]">
+                    <span className="font-typewriter text-[9px] uppercase text-mejunje-griscalido block">Desde</span>
+                    <span className="text-xl font-serif italic text-mejunje-tinta font-semibold">
                       ${basePrice.toLocaleString('es-AR')}
                     </span>
                   </div>
@@ -386,7 +382,7 @@ export default function CatalogoPage() {
                   <div className="flex items-center gap-1.5">
                     <button
                       onClick={() => openProductDetail(product)}
-                      className="p-2 rounded-xl bg-white border border-[#E7DDD4] text-[#3E342F] hover:bg-[#E7DDD4]/50"
+                      className="p-2 rounded-xl bg-white border border-mejunje-border text-mejunje-tinta hover:bg-mejunje-papel"
                       title="Ver Detalle"
                     >
                       <Eye className="w-4 h-4" />
@@ -396,7 +392,7 @@ export default function CatalogoPage() {
                         setSharingProduct(product);
                         setSelectedVariant(product.variants?.[0] || null);
                       }}
-                      className="px-3.5 py-2 rounded-xl bg-[#25D366] hover:bg-[#1eb855] text-white text-xs font-bold flex items-center gap-1.5 shadow-xs"
+                      className="px-3.5 py-2 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-medium flex items-center gap-1.5 shadow-xs"
                     >
                       <MessageCircle className="w-4 h-4 fill-white" /> WhatsApp
                     </button>
@@ -413,10 +409,10 @@ export default function CatalogoPage() {
       {/* =================================================================== */}
       {detailProduct && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4 overflow-y-auto">
-          <div className="bg-[#FBF8F4] text-[#3E342F] border border-[#E7DDD4] rounded-3xl max-w-3xl w-full p-6 sm:p-8 shadow-2xl relative my-8 animate-in fade-in space-y-6">
+          <div className="bg-mejunje-card text-mejunje-tinta border border-mejunje-border rounded-3xl max-w-3xl w-full p-6 sm:p-8 shadow-atelier-lg relative my-8 animate-in fade-in space-y-6">
             <button
               onClick={() => setDetailProduct(null)}
-              className="absolute top-5 right-5 text-[#7A6E65] hover:text-[#3E342F] p-1.5 rounded-full bg-white border border-[#E7DDD4] transition-colors"
+              className="absolute top-5 right-5 text-mejunje-griscalido hover:text-mejunje-tinta p-1.5 rounded-full bg-white border border-mejunje-border transition-colors"
             >
               <X className="w-5 h-5" />
             </button>
@@ -424,7 +420,7 @@ export default function CatalogoPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* Left Gallery */}
               <div className="space-y-3">
-                <div className="h-64 rounded-2xl overflow-hidden bg-[#3E342F] border border-[#E7DDD4] relative">
+                <div className="h-64 rounded-2xl overflow-hidden bg-mejunje-espresso border border-mejunje-border relative">
                   <img
                     src={
                       detailProduct.images?.[selectedImageIndex] ||
@@ -435,7 +431,7 @@ export default function CatalogoPage() {
                     className="w-full h-full object-cover"
                   />
                   {detailProduct.badge && (
-                    <span className="absolute top-3 left-3 text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-[#C98F7A] text-white shadow-xs">
+                    <span className="absolute top-3 left-3 font-typewriter text-[9px] uppercase tracking-widest px-2.5 py-1 rounded-full bg-mejunje-salmon text-white shadow-xs">
                       {detailProduct.badge}
                     </span>
                   )}
@@ -449,7 +445,7 @@ export default function CatalogoPage() {
                         key={idx}
                         onClick={() => setSelectedImageIndex(idx)}
                         className={`w-16 h-16 rounded-xl overflow-hidden border-2 transition-all shrink-0 ${
-                          selectedImageIndex === idx ? 'border-[#C98F7A] scale-105 shadow-xs' : 'border-[#E7DDD4] opacity-70 hover:opacity-100'
+                          selectedImageIndex === idx ? 'border-mejunje-salmon scale-105 shadow-xs' : 'border-mejunje-border opacity-70 hover:opacity-100'
                         }`}
                       >
                         <img src={imgUrl} alt="Thumbnail" className="w-full h-full object-cover" />
@@ -463,34 +459,34 @@ export default function CatalogoPage() {
               <div className="space-y-4 flex flex-col justify-between">
                 <div className="space-y-3">
                   <div className="flex items-center gap-2">
-                    <span className="text-[10px] font-bold uppercase px-2.5 py-0.5 rounded-full bg-[#C98F7A]/20 text-[#C98F7A]">
+                    <span className="font-typewriter text-[9px] uppercase px-2.5 py-0.5 rounded-full bg-mejunje-salmon/15 text-mejunje-salmon border border-mejunje-salmon/30">
                       {detailProduct.category}
                     </span>
-                    <span className="text-xs text-[#7A6E65]">{detailProduct.collection}</span>
+                    <span className="text-xs text-mejunje-griscalido font-sans">{detailProduct.collection}</span>
                   </div>
 
-                  <h2 className="text-2xl font-serif font-bold text-[#3E342F]">
+                  <h2 className="text-2xl font-serif italic text-mejunje-tinta">
                     {detailProduct.name}
                   </h2>
 
-                  <p className="text-xs text-[#7A6E65] leading-relaxed">
+                  <p className="text-xs text-mejunje-griscalido leading-relaxed font-sans">
                     {detailProduct.description}
                   </p>
 
-                  <div className="p-3 bg-white rounded-2xl border border-[#E7DDD4] space-y-1.5 text-xs">
-                    <span className="text-[10px] uppercase font-bold text-[#C98F7A] flex items-center gap-1">
+                  <div className="p-3.5 bg-white rounded-2xl border border-mejunje-border space-y-1.5 text-xs">
+                    <span className="font-typewriter text-[9px] uppercase text-mejunje-salmon flex items-center gap-1">
                       <Flower2 className="w-3.5 h-3.5" /> Pirámide Olfativa
                     </span>
-                    <p className="text-[11px] text-[#3E342F]"><strong>Salida:</strong> {detailProduct.topNotes}</p>
-                    <p className="text-[11px] text-[#3E342F]"><strong>Corazón:</strong> {detailProduct.heartNotes}</p>
-                    <p className="text-[11px] text-[#3E342F]"><strong>Fondo:</strong> {detailProduct.baseNotes}</p>
+                    <p className="text-[11px] text-mejunje-tinta font-sans"><strong>Salida:</strong> {detailProduct.topNotes}</p>
+                    <p className="text-[11px] text-mejunje-tinta font-sans"><strong>Corazón:</strong> {detailProduct.heartNotes}</p>
+                    <p className="text-[11px] text-mejunje-tinta font-sans"><strong>Fondo:</strong> {detailProduct.baseNotes}</p>
                   </div>
                 </div>
 
-                <div className="pt-4 border-t border-[#E7DDD4] flex items-center justify-between gap-3">
+                <div className="pt-4 border-t border-mejunje-border flex items-center justify-between gap-3">
                   <div>
-                    <span className="text-[10px] text-[#7A6E65] block font-medium">Precio Base ARS</span>
-                    <span className="text-xl font-serif font-bold text-[#3E342F]">
+                    <span className="font-typewriter text-[9px] uppercase text-mejunje-griscalido block">Precio Base ARS</span>
+                    <span className="text-xl font-serif italic text-mejunje-tinta font-semibold">
                       ${(detailProduct.variants?.[0]?.salePriceARS || 18500).toLocaleString('es-AR')}
                     </span>
                   </div>
@@ -501,7 +497,7 @@ export default function CatalogoPage() {
                       setSelectedVariant(detailProduct.variants?.[0] || null);
                       setDetailProduct(null);
                     }}
-                    className="px-4 py-2.5 rounded-xl bg-[#25D366] hover:bg-[#1eb855] text-white text-xs font-bold flex items-center gap-1.5 shadow-sm"
+                    className="px-4 py-2.5 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-medium flex items-center gap-1.5 shadow-xs"
                   >
                     <MessageCircle className="w-4 h-4 fill-white" /> Compartir por WhatsApp
                   </button>
@@ -517,66 +513,66 @@ export default function CatalogoPage() {
       {/* =================================================================== */}
       {sharingProduct && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4">
-          <div className="bg-[#FBF8F4] rounded-3xl p-6 max-w-lg w-full space-y-4 shadow-2xl border border-[#E7DDD4]">
-            <div className="flex items-center justify-between border-b border-[#E7DDD4] pb-3">
-              <h3 className="font-serif font-bold text-lg text-[#3E342F] flex items-center gap-2">
-                <MessageCircle className="w-5 h-5 text-[#25D366]" /> Compartir por WhatsApp
+          <div className="bg-mejunje-card rounded-3xl p-6 max-w-lg w-full space-y-4 shadow-atelier-lg border border-mejunje-border">
+            <div className="flex items-center justify-between border-b border-mejunje-border pb-3">
+              <h3 className="font-serif italic text-lg text-mejunje-tinta flex items-center gap-2">
+                <MessageCircle className="w-5 h-5 text-emerald-600" /> Compartir Ficha por WhatsApp
               </h3>
               <button
                 onClick={() => setSharingProduct(null)}
-                className="text-[#7A6E65] hover:text-[#3E342F] text-xs font-bold p-1"
+                className="text-mejunje-griscalido hover:text-mejunje-tinta text-xs font-medium p-1"
               >
                 Cerrar
               </button>
             </div>
 
             {/* Compact Product Header Card */}
-            <div className="flex items-center gap-3 p-3 bg-white rounded-2xl border border-[#E7DDD4]">
+            <div className="flex items-center gap-3 p-3 bg-white rounded-2xl border border-mejunje-border">
               <img
                 src={getProductImage(sharingProduct)}
                 alt={sharingProduct.name}
-                className="w-16 h-16 rounded-xl object-cover shrink-0 border border-[#E7DDD4]"
+                className="w-16 h-16 rounded-xl object-cover shrink-0 border border-mejunje-border"
               />
               <div className="overflow-hidden">
-                <span className="text-[10px] font-bold text-[#C98F7A] uppercase">{sharingProduct.category}</span>
-                <h4 className="font-serif font-bold text-sm text-[#3E342F] truncate">{sharingProduct.name}</h4>
-                <p className="text-[11px] text-[#7A6E65] truncate">{sharingProduct.fragranceFamily}</p>
+                <span className="font-typewriter text-[9px] text-mejunje-salmon uppercase tracking-wider">{sharingProduct.category}</span>
+                <h4 className="font-serif italic text-base text-mejunje-tinta truncate">{sharingProduct.name}</h4>
+                <p className="text-[11px] text-mejunje-griscalido truncate font-sans">{sharingProduct.fragranceFamily}</p>
               </div>
             </div>
 
             <div className="space-y-3 text-xs">
               <div>
-                <label className="block font-semibold text-[#7A6E65] mb-1">Nombre del Cliente (Opcional)</label>
+                <label className="block font-typewriter text-[10px] uppercase text-mejunje-griscalido mb-1">Nombre del Cliente (Opcional)</label>
                 <input
                   type="text"
-                  placeholder="Ej: María Sofía"
+                  placeholder="Ej: Sofía"
                   value={clientName}
                   onChange={(e) => setClientName(e.target.value)}
-                  className="w-full bg-white border border-[#E7DDD4] rounded-xl px-3 py-2 text-[#3E342F]"
+                  className="w-full bg-white border border-mejunje-border rounded-xl px-3 py-2 text-mejunje-tinta"
                 />
               </div>
 
               <div>
-                <label className="block font-semibold text-[#7A6E65] mb-1">Teléfono WhatsApp (Opcional)</label>
+                <label className="block font-typewriter text-[10px] uppercase text-mejunje-griscalido mb-1">Teléfono WhatsApp (Opcional)</label>
                 <input
                   type="text"
                   placeholder="Ej: 5491122334455"
                   value={clientPhone}
                   onChange={(e) => setClientPhone(e.target.value)}
-                  className="w-full bg-white border border-[#E7DDD4] rounded-xl px-3 py-2 text-[#3E342F]"
+                  className="w-full bg-white border border-mejunje-border rounded-xl px-3 py-2 text-mejunje-tinta"
                 />
               </div>
 
               {sharingProduct.variants && sharingProduct.variants.length > 0 && (
                 <div>
-                  <label className="block font-semibold text-[#7A6E65] mb-1">Seleccionar Presentación</label>
+                  <label className="block font-typewriter text-[10px] uppercase text-mejunje-griscalido mb-1">Presentación a Cotizar</label>
                   <select
                     value={selectedVariant?.id || ''}
                     onChange={(e) => {
                       const v = sharingProduct.variants.find((v) => v.id === e.target.value);
                       setSelectedVariant(v || null);
                     }}
-                    className="w-full bg-white border border-[#E7DDD4] rounded-xl px-3 py-2 text-[#3E342F]"
+                    className="w-full bg-white border border-mejunje-border rounded-xl px-3 py-2 text-mejunje-tinta"
                   >
                     {sharingProduct.variants.map((v) => (
                       <option key={v.id} value={v.id}>
@@ -589,25 +585,25 @@ export default function CatalogoPage() {
 
               {/* Message Preview */}
               <div>
-                <label className="block font-semibold text-[#7A6E65] mb-1">Vista Previa del Mensaje</label>
-                <div className="p-3 rounded-2xl bg-[#DCF8C6]/40 border border-[#25D366]/30 text-[11px] font-sans whitespace-pre-wrap text-[#3E342F] max-h-40 overflow-y-auto">
+                <label className="block font-typewriter text-[10px] uppercase text-mejunje-griscalido mb-1">Vista Previa del Mensaje</label>
+                <div className="p-3.5 rounded-2xl bg-mejunje-papel/50 border border-mejunje-border text-[11px] font-sans whitespace-pre-wrap text-mejunje-tinta max-h-40 overflow-y-auto">
                   {buildWhatsAppText()}
                 </div>
               </div>
             </div>
 
-            <div className="flex justify-end gap-2 pt-2 border-t border-[#E7DDD4]">
+            <div className="flex justify-end gap-2 pt-2 border-t border-mejunje-border">
               <button
                 type="button"
                 onClick={handleCopyWhatsApp}
-                className="px-4 py-2 bg-white border border-[#E7DDD4] text-[#3E342F] font-semibold text-xs rounded-xl hover:bg-[#E7DDD4]/50"
+                className="px-4 py-2 bg-white border border-mejunje-border text-mejunje-tinta font-medium text-xs rounded-xl hover:bg-mejunje-papel"
               >
-                Copiar Texto
+                Copiar Ficha
               </button>
               <button
                 type="button"
                 onClick={handleOpenWhatsApp}
-                className="px-4 py-2 bg-[#25D366] hover:bg-[#1eb855] text-white font-bold text-xs rounded-xl flex items-center gap-1.5 shadow-xs"
+                className="px-4 py-2 bg-emerald-700 hover:bg-emerald-800 text-white font-medium text-xs rounded-xl flex items-center gap-1.5 shadow-xs"
               >
                 <Share2 className="w-4 h-4" /> Abrir WhatsApp
               </button>

@@ -2,23 +2,25 @@
 
 import React from 'react';
 import Link from 'next/link';
+import { useKamelo } from '@/context/KameloContext';
+import { LotusIcon } from '@/components/LotusLogo';
+import SectionHero from '@/components/SectionHero';
 import {
   FlaskConical,
   ShoppingBag,
   TrendingUp,
   BookOpen,
   AlertTriangle,
-  CheckCircle2,
+  CheckCircle,
   ArrowRight,
   Plus,
-  Clock,
-  Package,
-  Building2,
-  Play
-} from 'lucide-react';
-import { useKamelo } from '@/context/KameloContext';
-import { LotusIcon } from '@/components/LotusLogo';
-import SectionHero from '@/components/SectionHero';
+  CandleIcon,
+  DropperIcon,
+  ApothecaryBottleIcon,
+  TagStringIcon,
+  BotanicalBranchMini,
+  DropletMini,
+} from '@/components/Icons';
 
 export default function DashboardPage() {
   const {
@@ -27,7 +29,6 @@ export default function DashboardPage() {
     requirements,
     purchaseOrders,
     batchTests,
-    catalogProducts,
     marketBenchmarks,
     activityLogs,
     setActiveModal,
@@ -36,135 +37,143 @@ export default function DashboardPage() {
 
   // Calculations
   const lowStockCount = ingredients.filter((ing) => ing.stock <= ing.minStock).length;
-  const pendingOrders = purchaseOrders.filter((po) => po.status === 'Solicitada' || po.status === 'Pendiente');
   const inTestFormulas = batchTests.filter((bt) => bt.status === 'Curado' || bt.status === 'Evaluación' || bt.status === 'Preparación');
   const totalRequirementARS = requirements.reduce((acc, g) => acc + g.totalARS, 0);
   const metMinimumsCount = requirements.filter((g) => g.meetsMinimum).length;
   const opportunitiesCount = marketBenchmarks.filter((b) => b.status === 'Oportunidad Aumento').length;
 
   return (
-    <div className="space-y-10 animate-in fade-in">
+    <div className="space-y-10 animate-in fade-in pb-12">
       {/* Header Banner with Warm Analog Photography */}
       <SectionHero
         title="Atelier de Perfumería & Archivo Olfativo"
-        subtitle="Gestión interna de formulación botánica, dosificación de materias primas, cálculo de batch, consolidación de pedidos mínimos a proveedores y observatorio de precios en Argentina."
-        badgeText="MEJUNJE · PALERMO, BUENOS AIRES"
-        badgeIcon={<LotusIcon className="w-3.5 h-3.5 text-mejunje-salvia" />}
+        subtitle="Formulación botánica de autor, pesaje y balance de batches, consolidación inteligente de compras por proveedor y observatorio de precios en CABA y Argentina."
+        badgeText="MEJUNJE · PALERMO SOHO · BUENOS AIRES"
+        badgeIcon={<LotusIcon className="w-3.5 h-3.5 text-mejunje-verdeseco" />}
         bgImage="https://images.unsplash.com/photo-1603006905003-be475563bc59?auto=format&fit=crop&w=1600&q=80"
         noticeText="mezcla · intención · aroma"
       >
         {/* Quick Action Ledger Bar */}
-        <div className="flex flex-wrap items-center gap-2 bg-white/95 backdrop-blur-md p-2 rounded-2xl border border-mejunje-border shrink-0 shadow-xs">
+        <div className="flex flex-wrap items-center gap-2 bg-white/95 backdrop-blur-md p-2 rounded-2xl border border-mejunje-border shrink-0 shadow-xs font-typewriter">
           <button
             onClick={() => setActiveModal('formula')}
-            className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-mejunje-salvia hover:bg-mejunje-salviaoscura text-white text-xs font-medium shadow-xs transition-all active:scale-95"
+            className="flex items-center gap-1.5 px-3 py-2 rounded-xl btn-mejunje-primary text-xs shadow-xs active:scale-95"
           >
             <Plus className="w-3.5 h-3.5" /> Nueva Fórmula
           </button>
 
           <button
             onClick={() => setActiveModal('product')}
-            className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-mejunje-papel hover:bg-mejunje-arena/50 text-mejunje-tinta text-xs font-medium border border-mejunje-border transition-all active:scale-95"
+            className="flex items-center gap-1.5 px-3 py-2 rounded-xl btn-mejunje-secondary text-xs active:scale-95"
           >
-            <Package className="w-3.5 h-3.5 text-mejunje-salviaoscura" /> Ficha Comercial
+            <TagStringIcon className="w-3.5 h-3.5 text-mejunje-terracota" /> Ficha Comercial
           </button>
 
           <button
             onClick={() => setActiveModal('purchaseOrder')}
-            className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-mejunje-papel hover:bg-mejunje-arena/50 text-mejunje-tinta text-xs font-medium border border-mejunje-border transition-all active:scale-95"
+            className="flex items-center gap-1.5 px-3 py-2 rounded-xl btn-mejunje-secondary text-xs active:scale-95"
           >
-            <ShoppingBag className="w-3.5 h-3.5 text-mejunje-salviaoscura" /> Orden de Compra
-          </button>
-
-          <button
-            onClick={() => setActiveModal('supplier')}
-            className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white hover:bg-mejunje-papel text-mejunje-griscalido text-xs font-medium border border-mejunje-border transition-all"
-          >
-            <Building2 className="w-3.5 h-3.5 text-mejunje-salviaoscura" /> Proveedor
+            <ShoppingBag className="w-3.5 h-3.5 text-mejunje-verdeprofundo" /> Orden de Compra
           </button>
 
           <button
             onClick={() => runMarketQueries()}
-            className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-mejunje-salvia/10 hover:bg-mejunje-salvia/20 text-mejunje-salviaoscura text-xs font-typewriter tracking-wider border border-mejunje-salvia/30 transition-all"
+            className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-mejunje-papel hover:bg-mejunje-arena/40 text-mejunje-carbon text-xs border border-mejunje-border transition-all"
           >
-            <Play className="w-3 h-3" /> Relevar Precios
+            <TrendingUp className="w-3.5 h-3.5 text-mejunje-ambar" /> Relevar Precios
           </button>
         </div>
       </SectionHero>
 
-      {/* Editorial Index Cards (Key Indicators) */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      {/* Editorial Index Cards (Asymmetrical & Typographic) */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 font-typewriter">
         {/* Card 1: Alert Stock */}
         <Link
           href="/laboratorio"
-          className="bg-white p-5 rounded-2xl shadow-xs border border-mejunje-border flex flex-col justify-between hover:border-mejunje-salvia hover:shadow-sm transition-all group"
+          className="atelier-sheet p-5 flex flex-col justify-between group relative overflow-hidden"
         >
           <div className="flex items-center justify-between">
-            <span className="font-typewriter text-[11px] uppercase tracking-wider text-mejunje-griscalido">Materias Primas</span>
-            <div className={`p-2 rounded-xl ${lowStockCount > 0 ? 'bg-amber-50 text-amber-800 border border-amber-200' : 'bg-mejunje-salvia/10 text-mejunje-salviaoscura border border-mejunje-salvia/20'}`}>
-              <AlertTriangle className="w-4 h-4" />
+            <span className="text-[10px] uppercase tracking-wider text-mejunje-secundario">Materias Primas</span>
+            <div className={`p-2 rounded-xl ${lowStockCount > 0 ? 'bg-amber-50 text-mejunje-ambar border border-amber-200' : 'bg-mejunje-papel text-mejunje-verdeprofundo border border-mejunje-border'}`}>
+              <ApothecaryBottleIcon className="w-4 h-4" />
             </div>
           </div>
           <div className="mt-4">
-            <div className="text-2xl font-serif italic text-mejunje-tinta">{lowStockCount} Insumos en Alerta</div>
-            <p className="text-xs text-mejunje-griscalido mt-1 font-sans">Requieren reposición para producción</p>
+            <div className="text-xl sm:text-2xl font-bold text-mejunje-carbon">{lowStockCount} En Alerta</div>
+            <p className="text-[11px] text-mejunje-secundario mt-1">Insumos bajo stock de seguridad</p>
+          </div>
+          <div className="mt-3 pt-2.5 border-t border-mejunje-border flex items-center justify-between text-[10px] text-mejunje-verdeprofundo font-bold">
+            <span>Revisar inventario</span>
+            <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
           </div>
         </Link>
 
         {/* Card 2: Purchases */}
         <Link
           href="/compras"
-          className="bg-white p-5 rounded-2xl shadow-xs border border-mejunje-border flex flex-col justify-between hover:border-mejunje-salvia hover:shadow-sm transition-all group"
+          className="atelier-sheet p-5 flex flex-col justify-between group relative overflow-hidden"
         >
           <div className="flex items-center justify-between">
-            <span className="font-typewriter text-[11px] uppercase tracking-wider text-mejunje-griscalido">Abastecimiento ARS</span>
-            <div className="p-2 rounded-xl bg-mejunje-salvia/10 text-mejunje-salviaoscura border border-mejunje-salvia/20">
+            <span className="text-[10px] uppercase tracking-wider text-mejunje-secundario">Abastecimiento</span>
+            <div className="p-2 rounded-xl bg-mejunje-papel text-mejunje-verdeprofundo border border-mejunje-border">
               <ShoppingBag className="w-4 h-4" />
             </div>
           </div>
           <div className="mt-4">
-            <div className="text-2xl font-serif italic text-mejunje-tinta">
+            <div className="text-xl sm:text-2xl font-bold text-mejunje-carbon">
               ${totalRequirementARS.toLocaleString('es-AR')}
             </div>
-            <p className="text-xs text-mejunje-salviaoscura mt-1 font-sans font-medium">
-              {metMinimumsCount} de {requirements.length} proveedores cumplen mínimo
+            <p className="text-[11px] text-mejunje-verdeprofundo mt-1 font-bold">
+              {metMinimumsCount} de {requirements.length} proveedores en mínimo
             </p>
+          </div>
+          <div className="mt-3 pt-2.5 border-t border-mejunje-border flex items-center justify-between text-[10px] text-mejunje-verdeprofundo font-bold">
+            <span>Generar órdenes</span>
+            <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
           </div>
         </Link>
 
         {/* Card 3: Formulas & Tests */}
         <Link
           href="/laboratorio"
-          className="bg-white p-5 rounded-2xl shadow-xs border border-mejunje-border flex flex-col justify-between hover:border-mejunje-salvia hover:shadow-sm transition-all group"
+          className="atelier-sheet p-5 flex flex-col justify-between group relative overflow-hidden"
         >
           <div className="flex items-center justify-between">
-            <span className="font-typewriter text-[11px] uppercase tracking-wider text-mejunje-griscalido">Laboratorio</span>
-            <div className="p-2 rounded-xl bg-mejunje-salvia/10 text-mejunje-salviaoscura border border-mejunje-salvia/20">
+            <span className="text-[10px] uppercase tracking-wider text-mejunje-secundario">Laboratorio</span>
+            <div className="p-2 rounded-xl bg-mejunje-papel text-mejunje-terracota border border-mejunje-border">
               <FlaskConical className="w-4 h-4" />
             </div>
           </div>
           <div className="mt-4">
-            <div className="text-2xl font-serif italic text-mejunje-tinta">{inTestFormulas.length} Batches en Curso</div>
-            <p className="text-xs text-mejunje-griscalido mt-1 font-sans">{formulas.length} fórmulas de autor registradas</p>
+            <div className="text-xl sm:text-2xl font-bold text-mejunje-carbon">{inTestFormulas.length} Batches en Curso</div>
+            <p className="text-[11px] text-mejunje-secundario mt-1">{formulas.length} fórmulas registradas</p>
+          </div>
+          <div className="mt-3 pt-2.5 border-t border-mejunje-border flex items-center justify-between text-[10px] text-mejunje-terracota font-bold">
+            <span>Mesa de pesaje</span>
+            <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
           </div>
         </Link>
 
         {/* Card 4: Market Benchmarks */}
         <Link
           href="/mercado"
-          className="bg-white p-5 rounded-2xl shadow-xs border border-mejunje-border flex flex-col justify-between hover:border-mejunje-salvia hover:shadow-sm transition-all group"
+          className="atelier-sheet p-5 flex flex-col justify-between group relative overflow-hidden"
         >
           <div className="flex items-center justify-between">
-            <span className="font-typewriter text-[11px] uppercase tracking-wider text-mejunje-griscalido">Observatorio</span>
-            <div className="p-2 rounded-xl bg-mejunje-salvia/10 text-mejunje-salviaoscura border border-mejunje-salvia/20">
+            <span className="text-[10px] uppercase tracking-wider text-mejunje-secundario">Observatorio</span>
+            <div className="p-2 rounded-xl bg-amber-50 text-mejunje-ambar border border-amber-200">
               <TrendingUp className="w-4 h-4" />
             </div>
           </div>
           <div className="mt-4">
-            <div className="text-2xl font-serif italic text-mejunje-tinta">{marketBenchmarks.length} Benchmarks</div>
-            <p className="text-xs text-mejunje-salviaoscura font-sans font-medium mt-1">
-              {opportunitiesCount} Oportunidad(es) de ajuste de precio
+            <div className="text-xl sm:text-2xl font-bold text-mejunje-carbon">{marketBenchmarks.length} Benchmarks</div>
+            <p className="text-[11px] text-mejunje-ambar mt-1 font-bold">
+              {opportunitiesCount} oportunidad(es) detectadas
             </p>
+          </div>
+          <div className="mt-3 pt-2.5 border-t border-mejunje-border flex items-center justify-between text-[10px] text-mejunje-ambar font-bold">
+            <span>Monitorear precios</span>
+            <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
           </div>
         </Link>
       </div>
@@ -173,47 +182,49 @@ export default function DashboardPage() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Left Column: Supplier Minimums Progress (2 cols) */}
         <div className="lg:col-span-2 space-y-6">
-          <div className="bg-white rounded-3xl p-6 sm:p-7 shadow-xs border border-mejunje-border">
+          <div className="atelier-sheet p-6 sm:p-7">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-6">
               <div>
-                <h3 className="font-typewriter text-base font-bold text-mejunje-tinta flex items-center gap-2 uppercase tracking-wider">
-                  <Building2 className="w-4 h-4 text-mejunje-salvia" /> Consolidación de Compras por Proveedor
+                <h3 className="font-typewriter text-sm sm:text-base font-bold text-mejunje-carbon flex items-center gap-2 uppercase tracking-wider">
+                  <DropperIcon className="w-4 h-4 text-mejunje-verdeseco" /> Consolidación de Compras por Proveedor
                 </h3>
-                <p className="text-xs text-mejunje-griscalido mt-0.5">Control de órdenes agrupadas respecto a los mínimos de compra en ARS</p>
+                <p className="text-xs text-mejunje-secundario mt-0.5 font-typewriter">
+                  Control de mínimos de compra para desbloquear precios mayoristas en ARS
+                </p>
               </div>
-              <Link href="/compras" className="text-xs text-mejunje-salviaoscura font-medium hover:underline flex items-center gap-1 font-sans">
+              <Link href="/compras" className="text-xs text-mejunje-verdeprofundo font-bold hover:underline flex items-center gap-1 font-typewriter">
                 Ver Abastecimiento <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             </div>
 
-            <div className="space-y-4">
+            <div className="space-y-4 font-typewriter">
               {requirements.map((group) => {
                 const percent = Math.min(100, Math.round((group.totalARS / (group.minPurchaseARS || 1)) * 100));
                 return (
-                  <div key={group.supplierId} className="p-4 rounded-2xl bg-mejunje-papel/50 border border-mejunje-border">
+                  <div key={group.supplierId} className="p-4 rounded-2xl bg-mejunje-papel border border-mejunje-border">
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2.5">
                       <div className="flex items-center gap-2">
-                        <span className="font-sans font-semibold text-sm text-mejunje-tinta">{group.supplierName}</span>
+                        <span className="font-bold text-xs sm:text-sm text-mejunje-carbon">{group.supplierName}</span>
                         {group.meetsMinimum ? (
-                          <span className="px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-800 text-[10px] font-medium flex items-center gap-1 border border-emerald-200 font-sans">
-                            <CheckCircle2 className="w-3 h-3 text-emerald-600" /> Mínimo Cumplido
+                          <span className="px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-800 text-[10px] font-bold flex items-center gap-1 border border-emerald-200">
+                            <CheckCircle className="w-3 h-3 text-emerald-600" /> Mínimo Cumplido
                           </span>
                         ) : (
-                          <span className="px-2.5 py-0.5 rounded-full bg-amber-50 text-amber-800 text-[10px] font-medium flex items-center gap-1 border border-amber-200 font-sans">
-                            <AlertTriangle className="w-3 h-3 text-amber-600" /> Faltan ${(group.minPurchaseARS - group.totalARS).toLocaleString('es-AR')} ARS
+                          <span className="px-2.5 py-0.5 rounded-full bg-amber-50 text-mejunje-ambar text-[10px] font-bold flex items-center gap-1 border border-amber-200">
+                            <AlertTriangle className="w-3 h-3 text-mejunje-ambar" /> Faltan ${(group.minPurchaseARS - group.totalARS).toLocaleString('es-AR')} ARS
                           </span>
                         )}
                       </div>
-                      <div className="text-xs text-mejunje-griscalido font-sans">
-                        Acumulado: <strong className="text-mejunje-tinta">${group.totalARS.toLocaleString('es-AR')} ARS</strong> / Mín: ${group.minPurchaseARS.toLocaleString('es-AR')} ARS
+                      <div className="text-xs text-mejunje-secundario">
+                        Acumulado: <strong className="text-mejunje-carbon">${group.totalARS.toLocaleString('es-AR')} ARS</strong> / Mín: ${group.minPurchaseARS.toLocaleString('es-AR')} ARS
                       </div>
                     </div>
 
-                    {/* Progress Bar with Mejunje Sage Tones */}
-                    <div className="w-full bg-mejunje-arena/40 rounded-full h-2 overflow-hidden">
+                    {/* Progress Bar in Botanical / Earth Colors */}
+                    <div className="w-full bg-mejunje-arena/50 rounded-full h-2 overflow-hidden">
                       <div
                         className={`h-2 rounded-full transition-all duration-500 ${
-                          group.meetsMinimum ? 'bg-mejunje-salviaoscura' : 'bg-mejunje-salvia'
+                          group.meetsMinimum ? 'bg-mejunje-verdeprofundo' : 'bg-mejunje-verdeseco'
                         }`}
                         style={{ width: `${percent}%` }}
                       />
@@ -224,51 +235,51 @@ export default function DashboardPage() {
             </div>
           </div>
 
-          {/* Quick Module Navigation Links */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {/* Quick Editorial Module Links */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 font-typewriter">
             <Link
               href="/laboratorio"
-              className="bg-white text-mejunje-tinta p-5 rounded-2xl border border-mejunje-border hover:border-mejunje-salvia transition-all flex items-center justify-between group shadow-xs hover:shadow-sm"
+              className="atelier-sheet p-5 flex items-center justify-between group"
             >
               <div className="flex items-center gap-3.5">
-                <div className="w-10 h-10 rounded-xl bg-mejunje-salvia/10 text-mejunje-salviaoscura flex items-center justify-center border border-mejunje-salvia/25">
-                  <FlaskConical className="w-5 h-5" />
+                <div className="w-10 h-10 rounded-xl bg-mejunje-papel text-mejunje-verdeprofundo flex items-center justify-center border border-mejunje-border">
+                  <CandleIcon className="w-5 h-5 text-mejunje-verdeprofundo" />
                 </div>
                 <div>
-                  <h4 className="font-serif italic text-base text-mejunje-tinta">Laboratorio de Fórmulas</h4>
-                  <p className="text-[11px] text-mejunje-griscalido font-sans">Pirámides olfativas y calculadora de batches</p>
+                  <h4 className="font-bold text-sm text-mejunje-carbon">Laboratorio de Fórmulas</h4>
+                  <p className="text-[10px] text-mejunje-secundario">Pirámides olfativas y calculadora de batch</p>
                 </div>
               </div>
-              <ArrowRight className="w-4 h-4 text-mejunje-salvia group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="w-4 h-4 text-mejunje-verdeseco group-hover:translate-x-1 transition-transform" />
             </Link>
 
             <Link
               href="/catalogo"
-              className="bg-white text-mejunje-tinta p-5 rounded-2xl border border-mejunje-border hover:border-mejunje-salvia transition-all flex items-center justify-between group shadow-xs hover:shadow-sm"
+              className="atelier-sheet p-5 flex items-center justify-between group"
             >
               <div className="flex items-center gap-3.5">
-                <div className="w-10 h-10 rounded-xl bg-mejunje-salvia/10 text-mejunje-salviaoscura flex items-center justify-center border border-mejunje-salvia/25">
-                  <BookOpen className="w-5 h-5" />
+                <div className="w-10 h-10 rounded-xl bg-mejunje-papel text-mejunje-terracota flex items-center justify-center border border-mejunje-border">
+                  <BookOpen className="w-5 h-5 text-mejunje-terracota" />
                 </div>
                 <div>
-                  <h4 className="font-serif italic text-base text-mejunje-tinta">Catálogo Editorial</h4>
-                  <p className="text-[11px] text-mejunje-griscalido font-sans">Fichas botánicas y envío por WhatsApp</p>
+                  <h4 className="font-bold text-sm text-mejunje-carbon">Catálogo Editorial</h4>
+                  <p className="text-[10px] text-mejunje-secundario">Fichas botánicas y envío por WhatsApp</p>
                 </div>
               </div>
-              <ArrowRight className="w-4 h-4 text-mejunje-salvia group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="w-4 h-4 text-mejunje-terracota group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>
         </div>
 
         {/* Right Column: Activity Ledger (Bitácora) */}
-        <div className="bg-white rounded-3xl p-6 sm:p-7 shadow-xs border border-mejunje-border flex flex-col justify-between">
+        <div className="atelier-sheet p-6 sm:p-7 flex flex-col justify-between font-typewriter">
           <div>
             <div className="flex items-center justify-between mb-5 pb-3 border-b border-mejunje-border">
-              <h3 className="font-typewriter text-sm font-bold text-mejunje-tinta flex items-center gap-2 uppercase tracking-wider">
-                <Clock className="w-3.5 h-3.5 text-mejunje-salvia" /> Bitácora del Atelier
+              <h3 className="text-xs sm:text-sm font-bold text-mejunje-carbon flex items-center gap-2 uppercase tracking-wider">
+                <LotusIcon className="w-3.5 h-3.5 text-mejunje-verdeseco" /> Bitácora del Atelier
               </h3>
-              <span className="font-typewriter text-[10px] bg-mejunje-papel text-mejunje-salviaoscura border border-mejunje-border font-semibold px-2 py-0.5 rounded-full">
-                En vivo
+              <span className="text-[9px] bg-mejunje-papel text-mejunje-verdeprofundo border border-mejunje-border font-bold px-2 py-0.5 rounded-full">
+                Archivo
               </span>
             </div>
 
@@ -277,26 +288,28 @@ export default function DashboardPage() {
                 return (
                   <div
                     key={log.id}
-                    className="p-3.5 rounded-xl bg-mejunje-papel/40 border border-mejunje-border space-y-1 text-xs transition-colors hover:bg-white"
+                    className="p-3.5 rounded-xl bg-mejunje-papel/60 border border-mejunje-border space-y-1 text-xs transition-colors hover:bg-white"
                   >
                     <div className="flex items-center justify-between">
-                      <span className="font-sans font-semibold text-mejunje-tinta">{log.title}</span>
-                      <span className="text-[10px] text-mejunje-griscalido font-typewriter">{log.timestamp}</span>
+                      <span className="font-bold text-mejunje-carbon text-xs">{log.title}</span>
+                      <span className="text-[9px] text-mejunje-secundario">{log.timestamp}</span>
                     </div>
-                    <p className="text-mejunje-griscalido text-[11px] leading-relaxed font-sans">{log.description}</p>
+                    <p className="text-mejunje-secundario text-[11px] leading-relaxed">{log.description}</p>
                   </div>
                 );
               })}
             </div>
           </div>
 
-          <div className="mt-5 pt-3 border-t border-mejunje-border text-center">
-            <span className="font-typewriter text-[10px] text-mejunje-griscalido uppercase tracking-wider">
-              MEJUNJE · Atelier Olfativo Palermo
+          <div className="mt-5 pt-3 border-t border-mejunje-border flex items-center justify-between">
+            <span className="text-[9px] text-mejunje-secundario uppercase tracking-wider">
+              MEJUNJE · Palermo, Bs As
             </span>
+            <BotanicalBranchMini className="w-10 h-5 text-mejunje-salvia" />
           </div>
         </div>
       </div>
     </div>
   );
 }
+

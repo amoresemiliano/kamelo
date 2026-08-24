@@ -9,36 +9,64 @@ module.exports = {
     extend: {
       colors: {
         mejunje: {
-          blanco: "#FFFFFF",     // Blanco puro
-          marfil: "#FCFBF8",     // Marfil luminoso (fondo principal)
-          papel: "#F7F4EE",      // Papel / lino sutil (tarjetas secundarias)
-          arena: "#E9E1D7",      // Arena suave (bordes y divisores delicados)
-          arenasubtil: "#F0EAE1",// Arena muy suave
-          salvia: "#77866F",     // Verde salvia principal (acento botánico de autor)
-          salviaclara: "#A6B39A",// Salvia clara
-          salviasuave: "#8E9A7B",// Salvia suave
-          salviaoscura: "#596454",// Salvia oscura / bosque profundo
-          salmon: "#77866F",     // Alias para compatibilidad -> salvia
-          terracota: "#596454",  // Alias para compatibilidad -> salvia oscura
-          blush: "#D8A094",      // Blush / terracota suave (secundario mínimo)
-          ambar: "#C8A26B",      // Ámbar suave artesanal
-          tabaco: "#44403C",     // Tabaco / carbón cálido suave
-          espresso: "#1C1917",   // Carbón tinta profundo (para textos de máxima jerarquía o detalles mínimos)
-          tinta: "#1C1917",      // Tinta negra / carbón atelier
-          griscalido: "#78716C", // Gris cálido editorial
-          card: "#FFFFFF",       // Superficie limpia de tarjetas
-          border: "#E9E1D7",     // Bordes sutiles
+          // Base
+          blanco: "#FFFFFF",
+          blancocalido: "#FCFAF7",
+          marfil: "#F6F1E9",
+          beige: "#E7DDD0",
+          arena: "#D7C6B5",
+          papel: "#F7F4EE",
+
+          // Verdes
+          salvia: "#A2AD94",
+          verdeseco: "#7D8972",
+          oliva: "#92966D",
+          verdeprofundo: "#58604E",
+          salviaoscura: "#58604E", // alias for compatibility
+          salviaclara: "#A2AD94",  // alias
+
+          // Ámbar / Amarillo
+          ambar: "#D5A24C",
+          mostaza: "#D9B568",
+          amarillobotanico: "#E2C979",
+
+          // Naranja / Terracota / Arcilla
+          terracota: "#C87955",
+          naranjaquemado: "#D28A4A",
+          arcilla: "#BC735B",
+          salmon: "#C87955", // alias
+          blush: "#BC735B",  // alias
+
+          // Rojo / Alerta
+          rojo: "#A95F52",
+          rojoladrillo: "#A95F52",
+          rojovino: "#875B57",
+
+          // Textos
+          carbon: "#282522",
+          tinta: "#282522",
+          griscalido: "#716A63",
+          secundario: "#716A63",
+          tabaco: "#44403C",
+          espresso: "#282522",
+
+          // UI Surface & Borders
+          card: "#FFFFFF",
+          border: "#E7DDD0",
+          borderarena: "#D7C6B5",
         },
       },
       fontFamily: {
-        typewriter: ['"Special Elite"', '"Courier Prime"', 'Courier', 'monospace'],
+        typewriter: ['"Courier Prime"', '"Special Elite"', 'Courier', 'monospace'],
+        typewriterElite: ['"Special Elite"', '"Courier Prime"', 'Courier', 'monospace'],
         serif: ['"Newsreader"', '"EB Garamond"', 'Georgia', 'serif'],
-        sans: ['"Plus Jakarta Sans"', 'Inter', 'system-ui', '-apple-system', 'sans-serif'],
+        sans: ['"Courier Prime"', '"Plus Jakarta Sans"', 'Inter', 'system-ui', 'monospace'],
       },
       boxShadow: {
-        'atelier': '0 1px 3px 0 rgba(52, 42, 36, 0.05), 0 1px 2px -1px rgba(52, 42, 36, 0.05)',
-        'atelier-md': '0 4px 6px -1px rgba(52, 42, 36, 0.07), 0 2px 4px -2px rgba(52, 42, 36, 0.07)',
-        'atelier-lg': '0 10px 15px -3px rgba(52, 42, 36, 0.08), 0 4px 6px -4px rgba(52, 42, 36, 0.08)',
+        'atelier': '0 1px 3px 0 rgba(40, 37, 34, 0.04), 0 1px 2px -1px rgba(40, 37, 34, 0.04)',
+        'atelier-md': '0 4px 8px -1px rgba(40, 37, 34, 0.06), 0 2px 4px -2px rgba(40, 37, 34, 0.06)',
+        'atelier-lg': '0 10px 20px -3px rgba(40, 37, 34, 0.07), 0 4px 6px -4px rgba(40, 37, 34, 0.07)',
+        'fichapapel': '0 2px 6px 0 rgba(40, 37, 34, 0.05)',
       }
     },
   },

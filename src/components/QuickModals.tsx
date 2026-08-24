@@ -272,8 +272,8 @@ export default function QuickModals() {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4 overflow-y-auto animate-in fade-in">
-      <div className="bg-mejunje-card text-mejunje-tinta border border-mejunje-border rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-atelier-lg relative my-8">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-xs p-4 overflow-y-auto animate-in fade-in">
+      <div className="bg-white text-mejunje-tinta border border-mejunje-border rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl relative my-8">
         <button
           onClick={() => setActiveModal(null)}
           className="absolute top-5 right-5 text-mejunje-griscalido hover:text-mejunje-tinta p-1.5 rounded-full bg-white border border-mejunje-border transition-colors"
@@ -287,7 +287,7 @@ export default function QuickModals() {
         {activeModal === 'formula' && (
           <div>
             <div className="flex items-center gap-3 mb-6 pb-4 border-b border-mejunje-border">
-              <div className="w-10 h-10 rounded-2xl bg-mejunje-salmon/15 border border-mejunje-salmon/30 flex items-center justify-center text-mejunje-salmon">
+              <div className="w-10 h-10 rounded-2xl bg-mejunje-salvia/15 border border-mejunje-salvia/30 flex items-center justify-center text-mejunje-salviaoscura">
                 <FlaskConical className="w-5 h-5" />
               </div>
               <div>
@@ -306,7 +306,7 @@ export default function QuickModals() {
                     placeholder="Ej. Vela Botánica Ámbar & Canela 200g"
                     value={formulaForm.name}
                     onChange={(e) => setFormulaForm({ ...formulaForm, name: e.target.value })}
-                    className="w-full bg-white border border-mejunje-border rounded-xl px-3.5 py-2 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salmon"
+                    className="w-full bg-white border border-mejunje-border rounded-xl px-3.5 py-2 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salvia"
                   />
                 </div>
 
@@ -315,7 +315,7 @@ export default function QuickModals() {
                   <select
                     value={formulaForm.category}
                     onChange={(e) => setFormulaForm({ ...formulaForm, category: e.target.value as any })}
-                    className="w-full bg-white border border-mejunje-border rounded-xl px-3.5 py-2 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salmon"
+                    className="w-full bg-white border border-mejunje-border rounded-xl px-3.5 py-2 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salvia"
                   >
                     <option value="Vela">Vela de Soja</option>
                     <option value="Difusor">Difusor de Ambiente</option>
@@ -331,7 +331,7 @@ export default function QuickModals() {
                     placeholder="Ej. 200 g o 250 ml"
                     value={formulaForm.yieldSize}
                     onChange={(e) => setFormulaForm({ ...formulaForm, yieldSize: e.target.value })}
-                    className="w-full bg-white border border-mejunje-border rounded-xl px-3.5 py-2 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salmon"
+                    className="w-full bg-white border border-mejunje-border rounded-xl px-3.5 py-2 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salvia"
                   />
                 </div>
 
@@ -341,7 +341,7 @@ export default function QuickModals() {
                     type="number"
                     value={formulaForm.batchSizeGrams}
                     onChange={(e) => setFormulaForm({ ...formulaForm, batchSizeGrams: Number(e.target.value) })}
-                    className="w-full bg-white border border-mejunje-border rounded-xl px-3.5 py-2 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salmon"
+                    className="w-full bg-white border border-mejunje-border rounded-xl px-3.5 py-2 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salvia"
                   />
                 </div>
               </div>
@@ -351,7 +351,7 @@ export default function QuickModals() {
                 <select
                   value={formulaForm.associatedProductId}
                   onChange={(e) => setFormulaForm({ ...formulaForm, associatedProductId: e.target.value })}
-                  className="w-full bg-white border border-mejunje-border rounded-xl px-3.5 py-2 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salmon"
+                  className="w-full bg-white border border-mejunje-border rounded-xl px-3.5 py-2 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salvia"
                 >
                   <option value="">-- Sin producto vinculado por el momento --</option>
                   {catalogProducts.map((p) => (
@@ -372,7 +372,7 @@ export default function QuickModals() {
                         ingredients: [...formulaForm.ingredients, { ingredientId: '', quantity: 100, percentage: 5, unit: 'g' }],
                       })
                     }
-                    className="text-[11px] text-mejunje-salmon hover:underline flex items-center gap-1 font-medium font-sans"
+                    className="text-[11px] text-mejunje-salviaoscura hover:underline flex items-center gap-1 font-medium font-sans"
                   >
                     <Plus className="w-3.5 h-3.5" /> Agregar Materia Prima
                   </button>
@@ -387,7 +387,7 @@ export default function QuickModals() {
                         next[idx].ingredientId = e.target.value;
                         setFormulaForm({ ...formulaForm, ingredients: next });
                       }}
-                      className="flex-1 bg-white border border-mejunje-border rounded-lg px-2.5 py-1.5 text-xs text-mejunje-tinta"
+                      className="flex-1 bg-white border border-mejunje-border rounded-lg px-2.5 py-1.5 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salvia"
                     >
                       <option value="">-- Seleccionar Materia Prima --</option>
                       {ingredients.map((i) => (
@@ -406,7 +406,7 @@ export default function QuickModals() {
                         next[idx].quantity = Number(e.target.value);
                         setFormulaForm({ ...formulaForm, ingredients: next });
                       }}
-                      className="w-20 bg-white border border-mejunje-border rounded-lg px-2.5 py-1.5 text-xs text-mejunje-tinta"
+                      className="w-20 bg-white border border-mejunje-border rounded-lg px-2.5 py-1.5 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salvia"
                     />
 
                     <input
@@ -418,7 +418,7 @@ export default function QuickModals() {
                         next[idx].unit = e.target.value;
                         setFormulaForm({ ...formulaForm, ingredients: next });
                       }}
-                      className="w-16 bg-white border border-mejunje-border rounded-lg px-2.5 py-1.5 text-xs text-mejunje-tinta"
+                      className="w-16 bg-white border border-mejunje-border rounded-lg px-2.5 py-1.5 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salvia"
                     />
 
                     <button
@@ -443,21 +443,21 @@ export default function QuickModals() {
                     placeholder="Salida (ej. Bergamota)"
                     value={formulaForm.topNotes}
                     onChange={(e) => setFormulaForm({ ...formulaForm, topNotes: e.target.value })}
-                    className="bg-white border border-mejunje-border rounded-xl px-3 py-1.5 text-xs text-mejunje-tinta"
+                    className="bg-white border border-mejunje-border rounded-xl px-3 py-1.5 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salvia"
                   />
                   <input
                     type="text"
                     placeholder="Corazón (ej. Rosa Damascena)"
                     value={formulaForm.heartNotes}
                     onChange={(e) => setFormulaForm({ ...formulaForm, heartNotes: e.target.value })}
-                    className="bg-white border border-mejunje-border rounded-xl px-3 py-1.5 text-xs text-mejunje-tinta"
+                    className="bg-white border border-mejunje-border rounded-xl px-3 py-1.5 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salvia"
                   />
                   <input
                     type="text"
                     placeholder="Fondo (ej. Ámbar & Sándalo)"
                     value={formulaForm.baseNotes}
                     onChange={(e) => setFormulaForm({ ...formulaForm, baseNotes: e.target.value })}
-                    className="bg-white border border-mejunje-border rounded-xl px-3 py-1.5 text-xs text-mejunje-tinta"
+                    className="bg-white border border-mejunje-border rounded-xl px-3 py-1.5 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salvia"
                   />
                 </div>
               </div>
@@ -466,13 +466,13 @@ export default function QuickModals() {
                 <button
                   type="button"
                   onClick={() => setActiveModal(null)}
-                  className="px-4 py-2 rounded-xl text-xs font-medium text-mejunje-tinta bg-white border border-mejunje-border hover:bg-mejunje-papel"
+                  className="px-4 py-2 rounded-xl text-xs font-medium text-mejunje-tinta bg-white border border-mejunje-border hover:bg-mejunje-papel transition-colors"
                 >
                   Cancelar
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 rounded-xl text-xs font-medium text-white bg-mejunje-salmon hover:bg-mejunje-terracota shadow-xs flex items-center gap-1.5"
+                  className="px-5 py-2 rounded-xl text-xs font-medium text-white bg-mejunje-salvia hover:bg-mejunje-salviaoscura shadow-xs flex items-center gap-1.5 transition-colors"
                 >
                   <Sparkles className="w-4 h-4" /> Guardar Fórmula
                 </button>
@@ -487,7 +487,7 @@ export default function QuickModals() {
         {activeModal === 'product' && (
           <div>
             <div className="flex items-center gap-3 mb-6 pb-4 border-b border-mejunje-border">
-              <div className="w-10 h-10 rounded-2xl bg-mejunje-ambar/20 border border-mejunje-ambar/40 flex items-center justify-center text-mejunje-tabaco">
+              <div className="w-10 h-10 rounded-2xl bg-mejunje-salvia/15 border border-mejunje-salvia/30 flex items-center justify-center text-mejunje-salviaoscura">
                 <Package className="w-5 h-5" />
               </div>
               <div>
@@ -506,7 +506,7 @@ export default function QuickModals() {
                     placeholder="Ej. Vela Soja Canela & Naranja"
                     value={productForm.name}
                     onChange={(e) => setProductForm({ ...productForm, name: e.target.value })}
-                    className="w-full bg-white border border-mejunje-border rounded-xl px-3.5 py-2 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salmon"
+                    className="w-full bg-white border border-mejunje-border rounded-xl px-3.5 py-2 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salvia"
                   />
                 </div>
 
@@ -516,7 +516,7 @@ export default function QuickModals() {
                     type="text"
                     value={productForm.sku}
                     onChange={(e) => setProductForm({ ...productForm, sku: e.target.value })}
-                    className="w-full bg-white border border-mejunje-border rounded-xl px-3.5 py-2 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salmon"
+                    className="w-full bg-white border border-mejunje-border rounded-xl px-3.5 py-2 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salvia"
                   />
                 </div>
 
@@ -525,7 +525,7 @@ export default function QuickModals() {
                   <select
                     value={productForm.category}
                     onChange={(e) => setProductForm({ ...productForm, category: e.target.value as any })}
-                    className="w-full bg-white border border-mejunje-border rounded-xl px-3.5 py-2 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salmon"
+                    className="w-full bg-white border border-mejunje-border rounded-xl px-3.5 py-2 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salvia"
                   >
                     <option value="Velas Botánicas">Velas Botánicas</option>
                     <option value="Difusores de Ambiente">Difusores de Ambiente</option>
@@ -540,7 +540,7 @@ export default function QuickModals() {
                     type="text"
                     value={productForm.collection}
                     onChange={(e) => setProductForm({ ...productForm, collection: e.target.value })}
-                    className="w-full bg-white border border-mejunje-border rounded-xl px-3.5 py-2 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salmon"
+                    className="w-full bg-white border border-mejunje-border rounded-xl px-3.5 py-2 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salvia"
                   />
                 </div>
               </div>
@@ -552,7 +552,7 @@ export default function QuickModals() {
                   placeholder="Ej. Cera de soja 100% botánica en vaso de cristal ambarino."
                   value={productForm.shortDescription}
                   onChange={(e) => setProductForm({ ...productForm, shortDescription: e.target.value })}
-                  className="w-full bg-white border border-mejunje-border rounded-xl px-3.5 py-2 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salmon"
+                  className="w-full bg-white border border-mejunje-border rounded-xl px-3.5 py-2 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salvia"
                 />
               </div>
 
@@ -563,7 +563,7 @@ export default function QuickModals() {
                   placeholder="https://images.unsplash.com/... (Dejar vacío para usar imagen automática)"
                   value={productForm.imageUrl}
                   onChange={(e) => setProductForm({ ...productForm, imageUrl: e.target.value })}
-                  className="w-full bg-white border border-mejunje-border rounded-xl px-3.5 py-2 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salmon"
+                  className="w-full bg-white border border-mejunje-border rounded-xl px-3.5 py-2 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salvia"
                 />
               </div>
 
@@ -576,7 +576,7 @@ export default function QuickModals() {
                       type="text"
                       value={productForm.variantSize}
                       onChange={(e) => setProductForm({ ...productForm, variantSize: e.target.value })}
-                      className="w-full bg-white border border-mejunje-border rounded-lg px-2.5 py-1.5 text-xs text-mejunje-tinta"
+                      className="w-full bg-white border border-mejunje-border rounded-lg px-2.5 py-1.5 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salvia"
                     />
                   </div>
                   <div>
@@ -585,7 +585,7 @@ export default function QuickModals() {
                       type="number"
                       value={productForm.variantPrice}
                       onChange={(e) => setProductForm({ ...productForm, variantPrice: Number(e.target.value) })}
-                      className="w-full bg-white border border-mejunje-border rounded-lg px-2.5 py-1.5 text-xs text-mejunje-tinta"
+                      className="w-full bg-white border border-mejunje-border rounded-lg px-2.5 py-1.5 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salvia"
                     />
                   </div>
                   <div>
@@ -594,7 +594,7 @@ export default function QuickModals() {
                       type="number"
                       value={productForm.variantCost}
                       onChange={(e) => setProductForm({ ...productForm, variantCost: Number(e.target.value) })}
-                      className="w-full bg-white border border-mejunje-border rounded-lg px-2.5 py-1.5 text-xs text-mejunje-tinta"
+                      className="w-full bg-white border border-mejunje-border rounded-lg px-2.5 py-1.5 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salvia"
                     />
                   </div>
                 </div>
@@ -604,13 +604,13 @@ export default function QuickModals() {
                 <button
                   type="button"
                   onClick={() => setActiveModal(null)}
-                  className="px-4 py-2 rounded-xl text-xs font-medium text-mejunje-tinta bg-white border border-mejunje-border hover:bg-mejunje-papel"
+                  className="px-4 py-2 rounded-xl text-xs font-medium text-mejunje-tinta bg-white border border-mejunje-border hover:bg-mejunje-papel transition-colors"
                 >
                   Cancelar
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 rounded-xl text-xs font-medium text-white bg-mejunje-salmon hover:bg-mejunje-terracota shadow-xs flex items-center gap-1.5"
+                  className="px-5 py-2 rounded-xl text-xs font-medium text-white bg-mejunje-salvia hover:bg-mejunje-salviaoscura shadow-xs flex items-center gap-1.5 transition-colors"
                 >
                   <Plus className="w-4 h-4" /> Crear Pieza
                 </button>
@@ -641,7 +641,7 @@ export default function QuickModals() {
                   <select
                     value={poForm.supplierId}
                     onChange={(e) => setPoForm({ ...poForm, supplierId: e.target.value })}
-                    className="w-full bg-white border border-mejunje-border rounded-xl px-3.5 py-2 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salmon"
+                    className="w-full bg-white border border-mejunje-border rounded-xl px-3.5 py-2 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salvia"
                   >
                     {suppliers.map((s) => (
                       <option key={s.id} value={s.id}>
@@ -657,7 +657,7 @@ export default function QuickModals() {
                     type="text"
                     value={poForm.date}
                     onChange={(e) => setPoForm({ ...poForm, date: e.target.value })}
-                    className="w-full bg-white border border-mejunje-border rounded-xl px-3.5 py-2 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salmon"
+                    className="w-full bg-white border border-mejunje-border rounded-xl px-3.5 py-2 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salvia"
                   />
                 </div>
               </div>
@@ -691,7 +691,7 @@ export default function QuickModals() {
                         next[idx].ingredientName = e.target.value;
                         setPoForm({ ...poForm, items: next });
                       }}
-                      className="flex-1 bg-white border border-mejunje-border rounded-lg px-2.5 py-1.5 text-xs text-mejunje-tinta"
+                      className="flex-1 bg-white border border-mejunje-border rounded-lg px-2.5 py-1.5 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salvia"
                     />
 
                     <input
@@ -703,7 +703,7 @@ export default function QuickModals() {
                         next[idx].requiredQty = Number(e.target.value);
                         setPoForm({ ...poForm, items: next });
                       }}
-                      className="w-20 bg-white border border-mejunje-border rounded-lg px-2.5 py-1.5 text-xs text-mejunje-tinta"
+                      className="w-20 bg-white border border-mejunje-border rounded-lg px-2.5 py-1.5 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salvia"
                     />
 
                     <input
@@ -715,7 +715,7 @@ export default function QuickModals() {
                         next[idx].unitPriceARS = Number(e.target.value);
                         setPoForm({ ...poForm, items: next });
                       }}
-                      className="w-28 bg-white border border-mejunje-border rounded-lg px-2.5 py-1.5 text-xs text-mejunje-tinta"
+                      className="w-28 bg-white border border-mejunje-border rounded-lg px-2.5 py-1.5 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salvia"
                     />
 
                     <button
@@ -739,7 +739,7 @@ export default function QuickModals() {
                   value={poForm.observations}
                   onChange={(e) => setPoForm({ ...poForm, observations: e.target.value })}
                   placeholder="Ej. Entregar en taller Palermo Soho. Pago con transferencia."
-                  className="w-full bg-white border border-mejunje-border rounded-xl px-3.5 py-2 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salmon"
+                  className="w-full bg-white border border-mejunje-border rounded-xl px-3.5 py-2 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salvia"
                 />
               </div>
 
@@ -747,13 +747,13 @@ export default function QuickModals() {
                 <button
                   type="button"
                   onClick={() => setActiveModal(null)}
-                  className="px-4 py-2 rounded-xl text-xs font-medium text-mejunje-tinta bg-white border border-mejunje-border hover:bg-mejunje-papel"
+                  className="px-4 py-2 rounded-xl text-xs font-medium text-mejunje-tinta bg-white border border-mejunje-border hover:bg-mejunje-papel transition-colors"
                 >
                   Cancelar
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 rounded-xl text-xs font-medium text-white bg-emerald-700 hover:bg-emerald-800 shadow-xs flex items-center gap-1.5"
+                  className="px-5 py-2 rounded-xl text-xs font-medium text-white bg-emerald-700 hover:bg-emerald-800 shadow-xs flex items-center gap-1.5 transition-colors"
                 >
                   <ShoppingBag className="w-4 h-4" /> Emitir Orden
                 </button>
@@ -768,7 +768,7 @@ export default function QuickModals() {
         {activeModal === 'supplier' && (
           <div>
             <div className="flex items-center gap-3 mb-6 pb-4 border-b border-mejunje-border">
-              <div className="w-10 h-10 rounded-2xl bg-mejunje-arena/40 border border-mejunje-border flex items-center justify-center text-mejunje-tabaco">
+              <div className="w-10 h-10 rounded-2xl bg-mejunje-salvia/15 border border-mejunje-salvia/30 flex items-center justify-center text-mejunje-salviaoscura">
                 <Building2 className="w-5 h-5" />
               </div>
               <div>
@@ -787,7 +787,7 @@ export default function QuickModals() {
                     placeholder="Ej. Botánica Natural S.A."
                     value={supplierForm.name}
                     onChange={(e) => setSupplierForm({ ...supplierForm, name: e.target.value })}
-                    className="w-full bg-white border border-mejunje-border rounded-xl px-3.5 py-2 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salmon"
+                    className="w-full bg-white border border-mejunje-border rounded-xl px-3.5 py-2 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salvia"
                   />
                 </div>
 
@@ -798,7 +798,7 @@ export default function QuickModals() {
                     placeholder="Ej. Julián"
                     value={supplierForm.contactPerson}
                     onChange={(e) => setSupplierForm({ ...supplierForm, contactPerson: e.target.value })}
-                    className="w-full bg-white border border-mejunje-border rounded-xl px-3.5 py-2 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salmon"
+                    className="w-full bg-white border border-mejunje-border rounded-xl px-3.5 py-2 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salvia"
                   />
                 </div>
 
@@ -810,7 +810,7 @@ export default function QuickModals() {
                     placeholder="Ej. +5491167772233"
                     value={supplierForm.phoneWhatsApp}
                     onChange={(e) => setSupplierForm({ ...supplierForm, phoneWhatsApp: e.target.value })}
-                    className="w-full bg-white border border-mejunje-border rounded-xl px-3.5 py-2 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salmon"
+                    className="w-full bg-white border border-mejunje-border rounded-xl px-3.5 py-2 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salvia"
                   />
                 </div>
 
@@ -821,7 +821,7 @@ export default function QuickModals() {
                     placeholder="ventas@proveedor.com"
                     value={supplierForm.email}
                     onChange={(e) => setSupplierForm({ ...supplierForm, email: e.target.value })}
-                    className="w-full bg-white border border-mejunje-border rounded-xl px-3.5 py-2 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salmon"
+                    className="w-full bg-white border border-mejunje-border rounded-xl px-3.5 py-2 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salvia"
                   />
                 </div>
 
@@ -831,7 +831,7 @@ export default function QuickModals() {
                     type="number"
                     value={supplierForm.minPurchaseARS}
                     onChange={(e) => setSupplierForm({ ...supplierForm, minPurchaseARS: Number(e.target.value) })}
-                    className="w-full bg-white border border-mejunje-border rounded-xl px-3.5 py-2 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salmon"
+                    className="w-full bg-white border border-mejunje-border rounded-xl px-3.5 py-2 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salvia"
                   />
                 </div>
 
@@ -841,7 +841,7 @@ export default function QuickModals() {
                     type="number"
                     value={supplierForm.deliveryTimeDays}
                     onChange={(e) => setSupplierForm({ ...supplierForm, deliveryTimeDays: Number(e.target.value) })}
-                    className="w-full bg-white border border-mejunje-border rounded-xl px-3.5 py-2 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salmon"
+                    className="w-full bg-white border border-mejunje-border rounded-xl px-3.5 py-2 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salvia"
                   />
                 </div>
               </div>
@@ -853,7 +853,7 @@ export default function QuickModals() {
                   placeholder="Ej. Villa Crespo, CABA"
                   value={supplierForm.location}
                   onChange={(e) => setSupplierForm({ ...supplierForm, location: e.target.value })}
-                  className="w-full bg-white border border-mejunje-border rounded-xl px-3.5 py-2 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salmon"
+                  className="w-full bg-white border border-mejunje-border rounded-xl px-3.5 py-2 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salvia"
                 />
               </div>
 
@@ -861,13 +861,13 @@ export default function QuickModals() {
                 <button
                   type="button"
                   onClick={() => setActiveModal(null)}
-                  className="px-4 py-2 rounded-xl text-xs font-medium text-mejunje-tinta bg-white border border-mejunje-border hover:bg-mejunje-papel"
+                  className="px-4 py-2 rounded-xl text-xs font-medium text-mejunje-tinta bg-white border border-mejunje-border hover:bg-mejunje-papel transition-colors"
                 >
                   Cancelar
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 rounded-xl text-xs font-medium text-white bg-mejunje-salmon hover:bg-mejunje-terracota shadow-xs flex items-center gap-1.5"
+                  className="px-5 py-2 rounded-xl text-xs font-medium text-white bg-mejunje-salvia hover:bg-mejunje-salviaoscura shadow-xs flex items-center gap-1.5 transition-colors"
                 >
                   <Building2 className="w-4 h-4" /> Registrar Proveedor
                 </button>
@@ -882,7 +882,7 @@ export default function QuickModals() {
         {activeModal === 'marketQuery' && (
           <div>
             <div className="flex items-center gap-3 mb-6 pb-4 border-b border-mejunje-border">
-              <div className="w-10 h-10 rounded-2xl bg-mejunje-salmon/15 border border-mejunje-salmon/30 flex items-center justify-center text-mejunje-salmon">
+              <div className="w-10 h-10 rounded-2xl bg-mejunje-salvia/15 border border-mejunje-salvia/30 flex items-center justify-center text-mejunje-salviaoscura">
                 <TrendingUp className="w-5 h-5" />
               </div>
               <div>
@@ -900,7 +900,7 @@ export default function QuickModals() {
                   placeholder="Ej. Vela Soja 200g - Benchmark Palermo"
                   value={marketQueryForm.name}
                   onChange={(e) => setMarketQueryForm({ ...marketQueryForm, name: e.target.value })}
-                  className="w-full bg-white border border-mejunje-border rounded-xl px-3.5 py-2 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salmon"
+                  className="w-full bg-white border border-mejunje-border rounded-xl px-3.5 py-2 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salvia"
                 />
               </div>
 
@@ -910,7 +910,7 @@ export default function QuickModals() {
                   <select
                     value={marketQueryForm.category}
                     onChange={(e) => setMarketQueryForm({ ...marketQueryForm, category: e.target.value })}
-                    className="w-full bg-white border border-mejunje-border rounded-xl px-3.5 py-2 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salmon"
+                    className="w-full bg-white border border-mejunje-border rounded-xl px-3.5 py-2 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salvia"
                   >
                     <option value="Vela">Vela de Soja</option>
                     <option value="Difusor">Difusor de Ambiente</option>
@@ -924,7 +924,7 @@ export default function QuickModals() {
                   <select
                     value={marketQueryForm.zone}
                     onChange={(e) => setMarketQueryForm({ ...marketQueryForm, zone: e.target.value as any })}
-                    className="w-full bg-white border border-mejunje-border rounded-xl px-3.5 py-2 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salmon"
+                    className="w-full bg-white border border-mejunje-border rounded-xl px-3.5 py-2 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salvia"
                   >
                     <option value="Palermo / CABA">Palermo / CABA</option>
                     <option value="CABA">CABA</option>
@@ -942,7 +942,7 @@ export default function QuickModals() {
                   placeholder="Ej. vela soja 200g artesanal botánica"
                   value={marketQueryForm.keywords}
                   onChange={(e) => setMarketQueryForm({ ...marketQueryForm, keywords: e.target.value })}
-                  className="w-full bg-white border border-mejunje-border rounded-xl px-3.5 py-2 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salmon"
+                  className="w-full bg-white border border-mejunje-border rounded-xl px-3.5 py-2 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salvia"
                 />
               </div>
 
@@ -951,7 +951,7 @@ export default function QuickModals() {
                 <select
                   value={marketQueryForm.source}
                   onChange={(e) => setMarketQueryForm({ ...marketQueryForm, source: e.target.value as any })}
-                  className="w-full bg-white border border-mejunje-border rounded-xl px-3.5 py-2 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salmon"
+                  className="w-full bg-white border border-mejunje-border rounded-xl px-3.5 py-2 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salvia"
                 >
                   <option value="Mercado Libre">Mercado Libre</option>
                   <option value="Ecommerce">Tiendas Online Directas</option>
@@ -964,13 +964,13 @@ export default function QuickModals() {
                 <button
                   type="button"
                   onClick={() => setActiveModal(null)}
-                  className="px-4 py-2 rounded-xl text-xs font-medium text-mejunje-tinta bg-white border border-mejunje-border hover:bg-mejunje-papel"
+                  className="px-4 py-2 rounded-xl text-xs font-medium text-mejunje-tinta bg-white border border-mejunje-border hover:bg-mejunje-papel transition-colors"
                 >
                   Cancelar
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 rounded-xl text-xs font-medium text-white bg-mejunje-salmon hover:bg-mejunje-terracota shadow-xs flex items-center gap-1.5"
+                  className="px-5 py-2 rounded-xl text-xs font-medium text-white bg-mejunje-salvia hover:bg-mejunje-salviaoscura shadow-xs flex items-center gap-1.5 transition-colors"
                 >
                   <TrendingUp className="w-4 h-4" /> Guardar Consulta
                 </button>

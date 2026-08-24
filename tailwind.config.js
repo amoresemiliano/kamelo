@@ -9,19 +9,25 @@ module.exports = {
     extend: {
       colors: {
         mejunje: {
-          papel: "#EFE6D8",      // Papel / lino envejecido
-          marfil: "#F5EFE6",     // Marfil cálido (superficies)
-          arena: "#D7C3A8",      // Arena (bordes suaves y divisores)
-          beigetabaco: "#B8A086",// Beige tabaco
-          ambar: "#8A5A32",      // Vidrio ámbar
-          tabaco: "#5A4030",     // Marrón tabaco
-          espresso: "#342A24",   // Espresso envejecido
-          salmon: "#C88978",     // Salmón empolvado
-          terracota: "#A96F5B",  // Terracota muy apagada
-          tinta: "#292622",      // Carbón tinta
-          griscalido: "#857A70", // Gris cálido
-          card: "#FAF6F0",       // Fondo tarjetas
-          border: "#E5D9C8",     // Bordes sutiles
+          blanco: "#FFFFFF",     // Blanco puro
+          marfil: "#FCFBF8",     // Marfil luminoso (fondo principal)
+          papel: "#F7F4EE",      // Papel / lino sutil (tarjetas secundarias)
+          arena: "#E9E1D7",      // Arena suave (bordes y divisores delicados)
+          arenasubtil: "#F0EAE1",// Arena muy suave
+          salvia: "#77866F",     // Verde salvia principal (acento botánico de autor)
+          salviaclara: "#A6B39A",// Salvia clara
+          salviasuave: "#8E9A7B",// Salvia suave
+          salviaoscura: "#596454",// Salvia oscura / bosque profundo
+          salmon: "#77866F",     // Alias para compatibilidad -> salvia
+          terracota: "#596454",  // Alias para compatibilidad -> salvia oscura
+          blush: "#D8A094",      // Blush / terracota suave (secundario mínimo)
+          ambar: "#C8A26B",      // Ámbar suave artesanal
+          tabaco: "#44403C",     // Tabaco / carbón cálido suave
+          espresso: "#1C1917",   // Carbón tinta profundo (para textos de máxima jerarquía o detalles mínimos)
+          tinta: "#1C1917",      // Tinta negra / carbón atelier
+          griscalido: "#78716C", // Gris cálido editorial
+          card: "#FFFFFF",       // Superficie limpia de tarjetas
+          border: "#E9E1D7",     // Bordes sutiles
         },
       },
       fontFamily: {

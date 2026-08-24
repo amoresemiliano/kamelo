@@ -29,7 +29,7 @@ export default function Navigation() {
   const pendingRequirementsCount = requirements.filter((r) => r.requirements.length > 0).length;
 
   return (
-    <header className="sticky top-0 z-40 bg-mejunje-espresso text-mejunje-marfil shadow-atelier-md border-b border-mejunje-tabaco/60">
+    <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md text-mejunje-tinta shadow-[0_1px_3px_0_rgba(0,0,0,0.02)] border-b border-mejunje-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Mejunje Typewriter Wordmark & Subtitle */}
@@ -51,14 +51,14 @@ export default function Navigation() {
                   href={item.href}
                   className={`relative flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs transition-all font-sans ${
                     isActive
-                      ? 'bg-mejunje-salmon/25 text-mejunje-marfil border border-mejunje-salmon/40 font-semibold shadow-xs'
-                      : 'text-mejunje-arena/80 hover:bg-mejunje-tabaco/50 hover:text-white'
+                      ? 'bg-mejunje-salvia/12 text-mejunje-salviaoscura border border-mejunje-salvia/30 font-semibold shadow-xs'
+                      : 'text-mejunje-griscalido hover:bg-mejunje-papel hover:text-mejunje-tinta'
                   }`}
                 >
-                  <Icon className={`w-3.5 h-3.5 ${isActive ? 'text-mejunje-salmon' : 'text-mejunje-arena'}`} />
+                  <Icon className={`w-3.5 h-3.5 ${isActive ? 'text-mejunje-salviaoscura' : 'text-mejunje-griscalido'}`} />
                   <span className="tracking-wide">{item.label}</span>
                   {hasBadge && (
-                    <span className="w-1.5 h-1.5 rounded-full bg-mejunje-salmon animate-pulse" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-mejunje-salvia animate-pulse" />
                   )}
                 </Link>
               );
@@ -66,9 +66,9 @@ export default function Navigation() {
           </nav>
 
           {/* Discrete Palermo Tag */}
-          <div className="hidden lg:flex items-center gap-2.5 bg-mejunje-tabaco/40 px-3 py-1 rounded-full border border-mejunje-arena/20 text-xs">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500/80" />
-            <span className="text-mejunje-arena font-typewriter text-[10px] tracking-wider uppercase">
+          <div className="hidden lg:flex items-center gap-2.5 bg-mejunje-papel px-3 py-1 rounded-full border border-mejunje-border text-xs">
+            <span className="w-1.5 h-1.5 rounded-full bg-mejunje-salvia" />
+            <span className="text-mejunje-salviaoscura font-typewriter text-[10px] tracking-widest uppercase font-medium">
               Palermo Soho · BS AS
             </span>
           </div>
@@ -76,7 +76,7 @@ export default function Navigation() {
       </div>
 
       {/* Mobile Navigation Bar */}
-      <div className="md:hidden bg-mejunje-espresso/95 border-t border-mejunje-tabaco/80 px-2 py-1.5 flex items-center justify-around overflow-x-auto">
+      <div className="md:hidden bg-white/95 border-t border-mejunje-border px-2 py-1.5 flex items-center justify-around overflow-x-auto">
         {navItems.map((item) => {
           const Icon = item.icon;
           const isActive = pathname === item.href;
@@ -86,8 +86,8 @@ export default function Navigation() {
               href={item.href}
               className={`flex flex-col items-center gap-0.5 px-2.5 py-1 rounded text-[11px] whitespace-nowrap transition-colors ${
                 isActive
-                  ? 'text-mejunje-salmon font-semibold'
-                  : 'text-mejunje-arena/70 hover:text-white'
+                  ? 'text-mejunje-salviaoscura font-semibold'
+                  : 'text-mejunje-griscalido hover:text-mejunje-tinta'
               }`}
             >
               <Icon className="w-4 h-4" />

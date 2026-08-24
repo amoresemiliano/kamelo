@@ -221,13 +221,13 @@ export default function MercadoPage() {
         title="Observatorio de Mercado & Benchmarking ARS"
         subtitle="Monitoreo de precios de referencia, materias primas botánicas y posicionamiento competitivo en perfumería de autor en Argentina."
         badgeText="MEJUNJE · OBSERVATORIO"
-        badgeIcon={<TrendingUp className="w-3.5 h-3.5 text-mejunje-salmon" />}
+        badgeIcon={<TrendingUp className="w-3.5 h-3.5 text-mejunje-salvia" />}
         bgImage="https://images.unsplash.com/photo-1616949755610-8c9bbc08f138?auto=format&fit=crop&w=1600&q=80"
         noticeText="posicionamiento de atelier · márgenes saludables"
       >
-        <div className="flex items-center gap-2 bg-mejunje-espresso/90 backdrop-blur-md px-3.5 py-2 rounded-2xl border border-mejunje-arena/20 text-xs shrink-0 shadow-atelier-md">
-          <Info className="w-4 h-4 text-mejunje-salmon shrink-0" />
-          <span className="text-mejunje-arena font-typewriter text-[10px] tracking-wider uppercase">
+        <div className="flex items-center gap-2 bg-white/95 backdrop-blur-md px-3.5 py-2 rounded-2xl border border-mejunje-border text-xs shrink-0 shadow-xs">
+          <Info className="w-4 h-4 text-mejunje-salvia shrink-0" />
+          <span className="text-mejunje-tinta font-typewriter text-[10px] tracking-wider uppercase">
             Relevamiento activo · ARS
           </span>
         </div>
@@ -236,11 +236,11 @@ export default function MercadoPage() {
       {/* --------------------------------------------------------------------- */}
       {/* 1. BLOQUE NUEVA CONSULTA DE MERCADO */}
       {/* --------------------------------------------------------------------- */}
-      <div className="bg-mejunje-card rounded-3xl p-6 sm:p-8 border border-mejunje-border shadow-atelier space-y-6">
+      <div className="bg-white rounded-3xl p-6 sm:p-8 border border-mejunje-border shadow-xs space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-mejunje-border">
           <div>
             <h2 className="font-serif italic text-2xl text-mejunje-tinta flex items-center gap-2">
-              <Sparkles className="w-5 h-5 text-mejunje-salmon" />
+              <Sparkles className="w-5 h-5 text-mejunje-salvia" />
               {editingQueryId ? 'Editar Consulta de Observatorio' : 'Nueva Consulta de Observatorio'}
             </h2>
             <p className="text-xs text-mejunje-griscalido mt-0.5 font-sans">
@@ -251,7 +251,7 @@ export default function MercadoPage() {
           {editingQueryId && (
             <button
               onClick={handleResetForm}
-              className="text-xs text-mejunje-salmon hover:underline flex items-center gap-1 font-medium font-sans"
+              className="text-xs text-mejunje-salviaoscura hover:underline flex items-center gap-1 font-medium font-sans"
             >
               <RotateCcw className="w-3.5 h-3.5" /> Cancelar edición
             </button>
@@ -265,14 +265,14 @@ export default function MercadoPage() {
             <div className="space-y-3 bg-mejunje-papel/30 p-5 rounded-2xl border border-mejunje-border">
               <div className="flex items-center justify-between">
                 <h3 className="font-typewriter text-xs font-bold uppercase tracking-wider text-mejunje-tinta flex items-center gap-2">
-                  <Package className="w-4 h-4 text-mejunje-salmon" /> Piezas Mejunje
+                  <Package className="w-4 h-4 text-mejunje-salvia" /> Piezas Mejunje
                 </h3>
 
                 <div className="flex items-center gap-2 text-[11px] font-sans">
                   <button
                     type="button"
                     onClick={handleSelectAllProducts}
-                    className="text-mejunje-salmon font-medium hover:underline"
+                    className="text-mejunje-salviaoscura font-medium hover:underline"
                   >
                     Seleccionar todas
                   </button>
@@ -298,13 +298,13 @@ export default function MercadoPage() {
                       onClick={() => handleToggleProduct(product.id)}
                       className={`p-3 rounded-xl border text-xs cursor-pointer transition-all flex items-start gap-2.5 ${
                         isSelected
-                          ? 'bg-white border-mejunje-salmon shadow-xs'
+                          ? 'bg-white border-mejunje-salvia shadow-xs'
                           : 'bg-white/60 border-mejunje-border hover:border-mejunje-arena'
                       }`}
                     >
-                      <div className="mt-0.5 text-mejunje-salmon">
+                      <div className="mt-0.5 text-mejunje-salvia">
                         {isSelected ? (
-                          <CheckSquare className="w-4 h-4 fill-mejunje-salmon/20" />
+                          <CheckSquare className="w-4 h-4 fill-mejunje-salvia/20" />
                         ) : (
                           <Square className="w-4 h-4 text-mejunje-arena" />
                         )}
@@ -316,16 +316,16 @@ export default function MercadoPage() {
                         </div>
 
                         <div className="flex flex-wrap gap-1 mt-1.5">
-                          <span className="px-2 py-0.5 rounded-md bg-mejunje-papel text-mejunje-tabaco font-typewriter text-[9px] uppercase">
+                          <span className="px-2 py-0.5 rounded-md bg-mejunje-papel text-mejunje-tinta font-typewriter text-[9px] uppercase">
                             {product.category}
                           </span>
                           {firstVariant?.size && (
-                            <span className="px-2 py-0.5 rounded-md bg-mejunje-salmon/15 text-mejunje-salmon text-[10px] font-medium font-sans">
+                            <span className="px-2 py-0.5 rounded-md bg-mejunje-salvia/15 text-mejunje-salviaoscura text-[10px] font-medium font-sans">
                               {firstVariant.size}
                             </span>
                           )}
                           {firstVariant?.aroma && (
-                            <span className="px-2 py-0.5 rounded-md bg-mejunje-arena/30 text-mejunje-tabaco text-[10px]">
+                            <span className="px-2 py-0.5 rounded-md bg-mejunje-arena/30 text-mejunje-tinta text-[10px]">
                               {firstVariant.aroma}
                             </span>
                           )}
@@ -341,7 +341,7 @@ export default function MercadoPage() {
             <div className="space-y-3 bg-mejunje-papel/30 p-5 rounded-2xl border border-mejunje-border">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                 <h3 className="font-typewriter text-xs font-bold uppercase tracking-wider text-mejunje-tinta flex items-center gap-2">
-                  <FlaskConical className="w-4 h-4 text-mejunje-ambar" /> Materias Primas & Insumos
+                  <FlaskConical className="w-4 h-4 text-mejunje-salvia" /> Materias Primas & Insumos
                 </h3>
 
                 {/* Quick Search */}
@@ -352,7 +352,7 @@ export default function MercadoPage() {
                     value={supplySearchTerm}
                     onChange={(e) => setSupplySearchTerm(e.target.value)}
                     placeholder="Buscar insumo..."
-                    className="pl-8 pr-3 py-1 bg-white border border-mejunje-border rounded-lg text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salmon w-full sm:w-44"
+                    className="pl-8 pr-3 py-1 bg-white border border-mejunje-border rounded-lg text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salvia w-full sm:w-44"
                   />
                 </div>
               </div>
@@ -367,13 +367,13 @@ export default function MercadoPage() {
                       onClick={() => handleToggleSupply(ing.id)}
                       className={`p-2.5 rounded-xl border text-xs cursor-pointer transition-all flex items-center gap-2.5 ${
                         isSelected
-                          ? 'bg-white border-mejunje-ambar shadow-xs'
+                          ? 'bg-white border-mejunje-salvia shadow-xs'
                           : 'bg-white/60 border-mejunje-border hover:border-mejunje-arena'
                       }`}
                     >
-                      <div className="text-mejunje-ambar">
+                      <div className="text-mejunje-salvia">
                         {isSelected ? (
-                          <CheckSquare className="w-4 h-4 fill-mejunje-ambar/20" />
+                          <CheckSquare className="w-4 h-4 fill-mejunje-salvia/20" />
                         ) : (
                           <Square className="w-4 h-4 text-mejunje-arena" />
                         )}
@@ -405,7 +405,7 @@ export default function MercadoPage() {
 - difusores de varillas ratán palermo
 - esencias aromáticas para perfumería por mayor
 - packaging botánico y cajas kraft`}
-                className="w-full bg-white border border-mejunje-border rounded-xl p-3 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salmon leading-relaxed"
+                className="w-full bg-white border border-mejunje-border rounded-xl p-3 text-xs text-mejunje-tinta focus:outline-none focus:border-mejunje-salvia leading-relaxed"
               />
               <p className="text-[11px] text-mejunje-griscalido font-sans">
                 Podés ingresar consultas libres adicionales para monitorear tendencias y nuevos competidores.
@@ -417,7 +417,7 @@ export default function MercadoPage() {
               {/* Ubicación */}
               <div className="bg-mejunje-papel/30 p-4 rounded-2xl border border-mejunje-border space-y-2">
                 <label className="font-typewriter text-xs font-bold uppercase tracking-wider text-mejunje-tinta flex items-center gap-1.5">
-                  <MapPin className="w-3.5 h-3.5 text-mejunje-salmon" /> Zona de Estudio
+                  <MapPin className="w-3.5 h-3.5 text-mejunje-salvia" /> Zona de Estudio
                 </label>
                 <select
                   value={selectedZone}
@@ -478,7 +478,7 @@ export default function MercadoPage() {
                       {selectedProducts.map((p) => (
                         <span
                           key={p.id}
-                          className="px-2 py-0.5 rounded-md bg-mejunje-salmon/15 text-mejunje-salmon font-medium text-[11px]"
+                          className="px-2 py-0.5 rounded-md bg-mejunje-salvia/15 text-mejunje-salviaoscura font-medium text-[11px]"
                         >
                           {p.name}
                         </span>
@@ -499,7 +499,7 @@ export default function MercadoPage() {
                       {selectedSupplies.map((ing) => (
                         <span
                           key={ing.id}
-                          className="px-2 py-0.5 rounded-md bg-mejunje-ambar/20 text-mejunje-tabaco font-medium text-[11px]"
+                          className="px-2 py-0.5 rounded-md bg-mejunje-salvia/10 text-mejunje-tinta font-medium text-[11px]"
                         >
                           {ing.name}
                         </span>
@@ -550,7 +550,7 @@ export default function MercadoPage() {
                 type="button"
                 onClick={handleExecuteCurrentQuery}
                 disabled={isRunningSimulation}
-                className="w-full py-3 bg-mejunje-salmon hover:bg-mejunje-terracota text-white text-xs font-medium rounded-xl flex items-center justify-center gap-2 shadow-xs transition-all active:scale-95 disabled:opacity-60"
+                className="w-full py-3 bg-mejunje-salvia hover:bg-mejunje-salviaoscura text-white text-xs font-medium rounded-xl flex items-center justify-center gap-2 shadow-xs transition-all active:scale-95 disabled:opacity-60"
               >
                 <Play className="w-4 h-4 fill-white" />
                 {isRunningSimulation ? 'Consultando...' : 'Relevar Precios de Mercado'}
@@ -571,7 +571,7 @@ export default function MercadoPage() {
                   />
                   <button
                     type="submit"
-                    className="px-3 py-1.5 bg-mejunje-espresso hover:bg-mejunje-tabaco text-white text-xs font-medium rounded-xl flex items-center gap-1 shrink-0 transition-colors"
+                    className="px-3 py-1.5 bg-mejunje-salviaoscura hover:bg-mejunje-tinta text-white text-xs font-medium rounded-xl flex items-center gap-1 shrink-0 transition-colors"
                   >
                     <Save className="w-3.5 h-3.5" /> Guardar
                   </button>
@@ -592,10 +592,10 @@ export default function MercadoPage() {
       {/* --------------------------------------------------------------------- */}
       {/* 4. SECCIÓN CONSULTAS GUARDADAS */}
       {/* --------------------------------------------------------------------- */}
-      <div className="bg-mejunje-card rounded-3xl p-6 sm:p-8 border border-mejunje-border shadow-atelier space-y-4">
+      <div className="bg-white rounded-3xl p-6 sm:p-8 border border-mejunje-border shadow-xs space-y-4">
         <div className="flex items-center justify-between pb-2 border-b border-mejunje-border">
           <h2 className="font-serif italic text-xl text-mejunje-tinta flex items-center gap-2">
-            <Save className="w-5 h-5 text-mejunje-salmon" /> Consultas Guardadas
+            <Save className="w-5 h-5 text-mejunje-salvia" /> Consultas Guardadas
           </h2>
           <span className="text-xs text-mejunje-griscalido font-typewriter">
             {marketQueries.length} consultas en archivo
@@ -610,7 +610,7 @@ export default function MercadoPage() {
             return (
               <div
                 key={query.id}
-                className="p-5 rounded-2xl bg-mejunje-papel/30 border border-mejunje-border space-y-3 hover:border-mejunje-salmon transition-all flex flex-col justify-between"
+                className="p-5 rounded-2xl bg-mejunje-papel/30 border border-mejunje-border space-y-3 hover:border-mejunje-salvia transition-all flex flex-col justify-between"
               >
                 <div className="space-y-2 font-sans">
                   <div className="flex items-start justify-between gap-2">
@@ -666,7 +666,7 @@ export default function MercadoPage() {
                 <div className="flex items-center justify-between pt-3 border-t border-mejunje-border text-xs gap-2">
                   <button
                     onClick={() => handleRunSavedQuery(query)}
-                    className="px-3 py-1.5 bg-mejunje-salmon hover:bg-mejunje-terracota text-white rounded-xl font-medium text-[11px] flex items-center gap-1 transition-colors shadow-xs"
+                    className="px-3 py-1.5 bg-mejunje-salvia hover:bg-mejunje-salviaoscura text-white rounded-xl font-medium text-[11px] flex items-center gap-1 transition-colors shadow-xs"
                   >
                     <Play className="w-3 h-3 fill-white" /> Ejecutar
                   </button>
@@ -707,7 +707,7 @@ export default function MercadoPage() {
       {/* 5. METRIC CARDS & COMPARATIVA DIRECTA BENCHMARKS */}
       {/* --------------------------------------------------------------------- */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div className="bg-mejunje-card p-5 rounded-3xl border border-mejunje-border shadow-atelier flex flex-col justify-between">
+        <div className="bg-white p-5 rounded-3xl border border-mejunje-border shadow-xs flex flex-col justify-between">
           <span className="font-typewriter text-[10px] uppercase text-mejunje-griscalido">Competitividad General</span>
           <div className="text-2xl font-serif italic text-emerald-800 mt-2 flex items-center gap-2 font-semibold">
             {competitiveCount} Alineados <CheckCircle2 className="w-5 h-5 text-emerald-600" />
@@ -715,17 +715,17 @@ export default function MercadoPage() {
           <p className="text-xs text-mejunje-griscalido mt-1 font-sans">Precios situados en el rango medio-alto de perfumería artesanal</p>
         </div>
 
-        <div className="bg-mejunje-card p-5 rounded-3xl border border-mejunje-border shadow-atelier flex flex-col justify-between">
+        <div className="bg-white p-5 rounded-3xl border border-mejunje-border shadow-xs flex flex-col justify-between">
           <span className="font-typewriter text-[10px] uppercase text-mejunje-griscalido">Oportunidad de Captura ARS</span>
-          <div className="text-2xl font-serif italic text-mejunje-ambar mt-2 flex items-center gap-2 font-semibold">
+          <div className="text-2xl font-serif italic text-mejunje-salviaoscura mt-2 flex items-center gap-2 font-semibold">
             {opportunitiesCount} Oportunidad(es) <ArrowUpRight className="w-5 h-5" />
           </div>
           <p className="text-xs text-mejunje-griscalido mt-1 font-sans">Brecha positiva contra el promedio de marcas similares</p>
         </div>
 
-        <div className="bg-mejunje-card p-5 rounded-3xl border border-mejunje-border shadow-atelier flex flex-col justify-between">
+        <div className="bg-white p-5 rounded-3xl border border-mejunje-border shadow-xs flex flex-col justify-between">
           <span className="font-typewriter text-[10px] uppercase text-mejunje-griscalido">Margen Comercial Promedio</span>
-          <div className="text-2xl font-serif italic text-mejunje-salmon mt-2 font-semibold">
+          <div className="text-2xl font-serif italic text-mejunje-salviaoscura mt-2 font-semibold">
             ~64.5% ARS
           </div>
           <p className="text-xs text-mejunje-griscalido mt-1 font-sans">Calculado sobre materias primas e insumos directos</p>
@@ -733,10 +733,10 @@ export default function MercadoPage() {
       </div>
 
       {/* Filter and Benchmark List */}
-      <div className="bg-mejunje-card rounded-3xl p-6 border border-mejunje-border shadow-atelier space-y-4">
+      <div className="bg-white rounded-3xl p-6 border border-mejunje-border shadow-xs space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-mejunje-border">
           <h2 className="font-serif italic text-xl text-mejunje-tinta flex items-center gap-2">
-            <BarChart3 className="w-5 h-5 text-mejunje-salmon" /> Comparativa Directa de Precios ARS
+            <BarChart3 className="w-5 h-5 text-mejunje-salvia" /> Comparativa Directa de Precios ARS
           </h2>
 
           <div className="flex items-center gap-3">
@@ -759,7 +759,7 @@ export default function MercadoPage() {
           {filteredBenchmarks.map((item) => (
             <div
               key={item.id}
-              className="p-5 rounded-2xl bg-mejunje-papel/30 border border-mejunje-border flex flex-col lg:flex-row lg:items-center justify-between gap-6 hover:border-mejunje-salmon transition-all"
+              className="p-5 rounded-2xl bg-mejunje-papel/30 border border-mejunje-border flex flex-col lg:flex-row lg:items-center justify-between gap-6 hover:border-mejunje-salvia transition-all"
             >
               <div className="space-y-1.5 lg:w-1/3">
                 <div className="flex items-center gap-2">
@@ -780,7 +780,7 @@ export default function MercadoPage() {
                   Categoría: <strong className="text-mejunje-tinta">{item.category}</strong> · Actualizado: {item.lastUpdated}
                 </p>
                 <div className="text-[11px] text-mejunje-griscalido font-sans">
-                  Margen Estimado Mejunje: <strong className="text-mejunje-salmon font-semibold">{item.kameloMarginPercent}%</strong>
+                  Margen Estimado Mejunje: <strong className="text-mejunje-salviaoscura font-semibold">{item.kameloMarginPercent}%</strong>
                 </div>
               </div>
 
@@ -788,7 +788,7 @@ export default function MercadoPage() {
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs lg:w-1/2">
                 <div className="bg-white p-3 rounded-xl border border-mejunje-border">
                   <span className="text-mejunje-griscalido text-[9px] uppercase font-typewriter block">Precio Mejunje</span>
-                  <span className="text-sm font-serif italic font-semibold text-mejunje-salmon">
+                  <span className="text-sm font-serif italic font-semibold text-mejunje-salviaoscura">
                     ${item.kameloPriceARS.toLocaleString('es-AR')} ARS
                   </span>
                 </div>
@@ -823,7 +823,7 @@ export default function MercadoPage() {
                       const suggestedPrice = item.competitorAverageARS - 1500;
                       updateBenchmarkPrice(item.id, suggestedPrice);
                     }}
-                    className="w-full px-3.5 py-2.5 bg-mejunje-ambar hover:bg-mejunje-tabaco text-white rounded-xl text-xs font-medium flex items-center justify-center gap-1.5 shadow-xs transition-all"
+                    className="w-full px-3.5 py-2.5 bg-mejunje-salviaoscura hover:bg-mejunje-tinta text-white rounded-xl text-xs font-medium flex items-center justify-center gap-1.5 shadow-xs transition-all"
                   >
                     <ArrowUpRight className="w-4 h-4" /> Ajustar a Mercado
                   </button>

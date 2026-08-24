@@ -68,18 +68,18 @@ export default function ComprasPage() {
         title="Abastecimiento & Directorio de Proveedores"
         subtitle="Consolidación de materias primas por proveedor para alcanzar mínimos de compra en ARS, emisor de órdenes de compra y contacto directo de taller."
         badgeText="MEJUNJE · ABASTECIMIENTO"
-        badgeIcon={<ShoppingBag className="w-3.5 h-3.5 text-mejunje-salmon" />}
+        badgeIcon={<ShoppingBag className="w-3.5 h-3.5 text-mejunje-salvia" />}
         bgImage="https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?auto=format&fit=crop&w=1600&q=80"
         noticeText="consolidación inteligente de pedidos · optimización de fletes"
       >
         {/* Tab Controls */}
-        <div className="flex items-center gap-1.5 bg-mejunje-espresso/90 backdrop-blur-md p-1.5 rounded-2xl border border-mejunje-arena/20 shadow-atelier-md">
+        <div className="flex items-center gap-1.5 bg-white/95 backdrop-blur-md p-1.5 rounded-2xl border border-mejunje-border shadow-xs">
           <button
             onClick={() => setActiveTab('necesidades')}
             className={`px-4 py-2 rounded-xl text-xs font-typewriter uppercase tracking-wider transition-all ${
               activeTab === 'necesidades'
-                ? 'bg-mejunje-salmon text-white shadow-xs'
-                : 'text-mejunje-arena/80 hover:text-white'
+                ? 'bg-mejunje-salvia text-white shadow-xs'
+                : 'text-mejunje-griscalido hover:text-mejunje-tinta'
             }`}
           >
             Necesidades ({requirements.length})
@@ -89,8 +89,8 @@ export default function ComprasPage() {
             onClick={() => setActiveTab('ordenes')}
             className={`px-4 py-2 rounded-xl text-xs font-typewriter uppercase tracking-wider transition-all ${
               activeTab === 'ordenes'
-                ? 'bg-mejunje-salmon text-white shadow-xs'
-                : 'text-mejunje-arena/80 hover:text-white'
+                ? 'bg-mejunje-salvia text-white shadow-xs'
+                : 'text-mejunje-griscalido hover:text-mejunje-tinta'
             }`}
           >
             Órdenes ({purchaseOrders.length})
@@ -100,8 +100,8 @@ export default function ComprasPage() {
             onClick={() => setActiveTab('proveedores')}
             className={`px-4 py-2 rounded-xl text-xs font-typewriter uppercase tracking-wider transition-all ${
               activeTab === 'proveedores'
-                ? 'bg-mejunje-salmon text-white shadow-xs'
-                : 'text-mejunje-arena/80 hover:text-white'
+                ? 'bg-mejunje-salvia text-white shadow-xs'
+                : 'text-mejunje-griscalido hover:text-mejunje-tinta'
             }`}
           >
             Proveedores ({suppliers.length})
@@ -114,14 +114,14 @@ export default function ComprasPage() {
       {/* =================================================================== */}
       {activeTab === 'necesidades' && (
         <div className="space-y-6">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-mejunje-card p-4 rounded-2xl border border-mejunje-border shadow-atelier">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white p-4 rounded-2xl border border-mejunje-border shadow-xs">
             <span className="text-xs text-mejunje-griscalido font-sans">
               Materias primas agrupadas dinámicamente por proveedor desde el Laboratorio de Fórmulas
             </span>
 
             <button
               onClick={() => setActiveModal('purchaseOrder')}
-              className="px-4 py-2 bg-mejunje-salmon hover:bg-mejunje-terracota text-white text-xs font-medium rounded-xl flex items-center gap-1.5 shadow-xs transition-all"
+              className="px-4 py-2 bg-mejunje-salvia hover:bg-mejunje-salviaoscura text-white text-xs font-medium rounded-xl flex items-center gap-1.5 shadow-xs transition-all"
             >
               <Plus className="w-4 h-4" /> Nueva Orden de Compra
             </button>
@@ -135,7 +135,7 @@ export default function ComprasPage() {
               return (
                 <div
                   key={group.supplierId}
-                  className="bg-mejunje-card rounded-3xl shadow-atelier border border-mejunje-border overflow-hidden transition-all"
+                  className="bg-white rounded-3xl shadow-xs border border-mejunje-border overflow-hidden transition-all"
                 >
                   {/* Card Header */}
                   <div
@@ -143,7 +143,7 @@ export default function ComprasPage() {
                     className="p-5 cursor-pointer flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:bg-mejunje-papel/30 transition-colors"
                   >
                     <div className="flex items-center gap-3.5">
-                      <div className="w-11 h-11 rounded-2xl bg-mejunje-espresso text-mejunje-salmon flex items-center justify-center font-bold shrink-0 border border-mejunje-tabaco">
+                      <div className="w-11 h-11 rounded-2xl bg-mejunje-salvia/10 text-mejunje-salviaoscura flex items-center justify-center font-bold shrink-0 border border-mejunje-salvia/25">
                         <Building2 className="w-5 h-5" />
                       </div>
                       <div>
@@ -168,7 +168,7 @@ export default function ComprasPage() {
                     <div className="flex items-center gap-6">
                       <div className="text-right">
                         <span className="font-typewriter text-[10px] uppercase text-mejunje-griscalido">Total Acumulado:</span>
-                        <div className="text-xl font-serif italic text-mejunje-salmon font-semibold">
+                        <div className="text-xl font-serif italic text-mejunje-salviaoscura font-semibold">
                           ${group.totalARS.toLocaleString('es-AR')} ARS
                         </div>
                       </div>
@@ -180,10 +180,10 @@ export default function ComprasPage() {
 
                   {/* Progress bar */}
                   <div className="px-5 pb-3">
-                    <div className="w-full bg-mejunje-arena/30 rounded-full h-2 overflow-hidden">
+                    <div className="w-full bg-mejunje-arena/40 rounded-full h-2 overflow-hidden">
                       <div
                         className={`h-2 rounded-full transition-all duration-500 ${
-                          group.meetsMinimum ? 'bg-mejunje-ambar' : 'bg-mejunje-salmon'
+                          group.meetsMinimum ? 'bg-mejunje-salviaoscura' : 'bg-mejunje-salvia'
                         }`}
                         style={{ width: `${percent}%` }}
                       />
@@ -192,7 +192,7 @@ export default function ComprasPage() {
 
                   {/* Collapsible Itemized Table */}
                   {isExpanded && (
-                    <div className="p-5 border-t border-mejunje-border space-y-4 bg-white">
+                    <div className="p-5 border-t border-mejunje-border space-y-4 bg-mejunje-card">
                       <h3 className="font-typewriter text-[10px] uppercase tracking-wider text-mejunje-griscalido">
                         Materias Primas Requeridas ({group.requirements.length} ítems)
                       </h3>
@@ -202,15 +202,15 @@ export default function ComprasPage() {
                       ) : (
                         <div className="overflow-x-auto border border-mejunje-border rounded-2xl">
                           <table className="w-full text-left text-xs">
-                            <thead className="bg-mejunje-espresso text-mejunje-marfil font-typewriter text-[10px] uppercase tracking-wider">
+                            <thead className="bg-mejunje-papel text-mejunje-tinta font-typewriter text-[10px] uppercase tracking-wider border-b border-mejunje-border">
                               <tr>
-                                <th className="p-3 font-normal">Materia Prima</th>
-                                <th className="p-3 font-normal">Fórmulas de Destino</th>
-                                <th className="p-3 font-normal text-center">Cantidad</th>
-                                <th className="p-3 font-normal text-right">Subtotal Estimado</th>
+                                <th className="p-3 font-semibold">Materia Prima</th>
+                                <th className="p-3 font-semibold">Fórmulas de Destino</th>
+                                <th className="p-3 font-semibold text-center">Cantidad</th>
+                                <th className="p-3 font-semibold text-right">Subtotal Estimado</th>
                               </tr>
                             </thead>
-                            <tbody className="divide-y divide-mejunje-border">
+                            <tbody className="divide-y divide-mejunje-border bg-white">
                               {group.requirements.map((req) => (
                                 <tr key={req.id} className="hover:bg-mejunje-papel/20 transition-colors">
                                   <td className="p-3 font-medium text-mejunje-tinta">{req.ingredientName}</td>
@@ -221,7 +221,7 @@ export default function ComprasPage() {
                                       </span>
                                     ))}
                                   </td>
-                                  <td className="p-3 text-center font-bold text-mejunje-salmon">
+                                  <td className="p-3 text-center font-bold text-mejunje-salviaoscura">
                                     {req.requiredQty} {req.unit}
                                   </td>
                                   <td className="p-3 text-right font-semibold text-mejunje-tinta">
@@ -241,7 +241,7 @@ export default function ComprasPage() {
                           onClick={() => createPurchaseOrderFromRequirements(group.supplierName)}
                           className={`px-5 py-2.5 rounded-xl text-xs font-medium flex items-center gap-2 shadow-xs transition-all ${
                             group.requirements.length > 0
-                              ? 'bg-mejunje-salmon hover:bg-mejunje-terracota text-white'
+                              ? 'bg-mejunje-salvia hover:bg-mejunje-salviaoscura text-white'
                               : 'bg-mejunje-papel text-mejunje-griscalido cursor-not-allowed border border-mejunje-border'
                           }`}
                         >
@@ -262,14 +262,14 @@ export default function ComprasPage() {
       {/* =================================================================== */}
       {activeTab === 'ordenes' && (
         <div className="space-y-6">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-mejunje-card p-4 rounded-2xl border border-mejunje-border shadow-atelier">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white p-4 rounded-2xl border border-mejunje-border shadow-xs">
             <span className="text-xs text-mejunje-griscalido font-sans">
               Historial y seguimiento de Órdenes de Compra emitidas a proveedores de materias primas
             </span>
 
             <button
               onClick={() => setActiveModal('purchaseOrder')}
-              className="px-4 py-2 bg-mejunje-salmon hover:bg-mejunje-terracota text-white text-xs font-medium rounded-xl flex items-center gap-1.5 shadow-xs"
+              className="px-4 py-2 bg-mejunje-salvia hover:bg-mejunje-salviaoscura text-white text-xs font-medium rounded-xl flex items-center gap-1.5 shadow-xs"
             >
               <Plus className="w-4 h-4" /> Crear Orden de Compra
             </button>
@@ -277,7 +277,7 @@ export default function ComprasPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {purchaseOrders.map((po) => (
-              <div key={po.id} className="bg-mejunje-card rounded-3xl p-6 shadow-atelier border border-mejunje-border space-y-4 text-xs">
+              <div key={po.id} className="bg-white rounded-3xl p-6 shadow-xs border border-mejunje-border space-y-4 text-xs">
                 <div className="flex items-center justify-between border-b border-mejunje-border pb-3">
                   <div className="flex items-center gap-2">
                     <span className="font-typewriter font-bold text-xs text-mejunje-tinta">{po.code}</span>
@@ -305,12 +305,12 @@ export default function ComprasPage() {
                 </div>
 
                 {/* Items preview */}
-                <div className="bg-mejunje-papel/30 p-3.5 rounded-2xl border border-mejunje-border space-y-1.5 font-sans">
+                <div className="bg-mejunje-papel/40 p-3.5 rounded-2xl border border-mejunje-border space-y-1.5 font-sans">
                   <span className="font-typewriter text-[9px] uppercase tracking-wider text-mejunje-griscalido">Ítems en Orden:</span>
                   {po.items.map((item, idx) => (
                     <div key={idx} className="flex items-center justify-between text-[11px]">
                       <span className="text-mejunje-tinta font-medium">{item.ingredientName} ({item.requiredQty} {item.unit})</span>
-                      <span className="font-semibold text-mejunje-salmon">${item.subtotalARS.toLocaleString('es-AR')} ARS</span>
+                      <span className="font-semibold text-mejunje-salviaoscura">${item.subtotalARS.toLocaleString('es-AR')} ARS</span>
                     </div>
                   ))}
                 </div>
@@ -327,14 +327,14 @@ export default function ComprasPage() {
                     <button
                       onClick={() => duplicatePurchaseOrder(po.id)}
                       title="Duplicar Orden"
-                      className="p-1.5 bg-mejunje-papel/50 hover:bg-mejunje-papel text-mejunje-tinta rounded-lg transition-colors border border-mejunje-border"
+                      className="p-1.5 bg-mejunje-papel hover:bg-mejunje-arena/50 text-mejunje-tinta rounded-lg transition-colors border border-mejunje-border"
                     >
                       <Copy className="w-3.5 h-3.5" />
                     </button>
                     <button
                       onClick={() => setPoToDelete(po)}
                       title="Eliminar Orden"
-                      className="p-1.5 bg-mejunje-papel/50 hover:bg-rose-50 text-rose-700 rounded-lg transition-colors border border-mejunje-border"
+                      className="p-1.5 bg-mejunje-papel hover:bg-rose-50 text-rose-700 rounded-lg transition-colors border border-mejunje-border"
                     >
                       <Trash2 className="w-3.5 h-3.5" />
                     </button>
@@ -351,14 +351,14 @@ export default function ComprasPage() {
       {/* =================================================================== */}
       {activeTab === 'proveedores' && (
         <div className="space-y-6">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-mejunje-card p-4 rounded-2xl border border-mejunje-border shadow-atelier">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white p-4 rounded-2xl border border-mejunje-border shadow-xs">
             <span className="text-xs text-mejunje-griscalido font-sans">
               Directorio comercial de proveedores, materias primas aprovisionadas y contacto de WhatsApp
             </span>
 
             <button
               onClick={() => setActiveModal('supplier')}
-              className="px-4 py-2 bg-mejunje-salmon hover:bg-mejunje-terracota text-white text-xs font-medium rounded-xl flex items-center gap-1.5 shadow-xs"
+              className="px-4 py-2 bg-mejunje-salvia hover:bg-mejunje-salviaoscura text-white text-xs font-medium rounded-xl flex items-center gap-1.5 shadow-xs"
             >
               <Plus className="w-4 h-4" /> Registrar Proveedor
             </button>
@@ -372,7 +372,7 @@ export default function ComprasPage() {
               )}`;
 
               return (
-                <div key={s.id} className="bg-mejunje-card rounded-3xl p-6 shadow-atelier border border-mejunje-border space-y-4 text-xs flex flex-col justify-between overflow-hidden">
+                <div key={s.id} className="bg-white rounded-3xl p-6 shadow-xs border border-mejunje-border space-y-4 text-xs flex flex-col justify-between overflow-hidden">
                   <div>
                     {s.imageUrl && (
                       <div className="h-32 -mx-6 -mt-6 mb-4 overflow-hidden relative">
@@ -381,12 +381,12 @@ export default function ComprasPage() {
                           alt={s.name}
                           className="w-full h-full object-cover filter saturate-90 brightness-95"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-mejunje-card via-transparent to-transparent" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent" />
                       </div>
                     )}
 
                     <div className="flex items-start justify-between">
-                      <div className="w-10 h-10 rounded-2xl bg-mejunje-espresso text-mejunje-salmon flex items-center justify-center font-bold border border-mejunje-tabaco">
+                      <div className="w-10 h-10 rounded-2xl bg-mejunje-salvia/10 text-mejunje-salviaoscura flex items-center justify-center font-bold border border-mejunje-salvia/25">
                         <Building2 className="w-5 h-5" />
                       </div>
 
@@ -404,11 +404,11 @@ export default function ComprasPage() {
                     <div className="mt-3 space-y-1.5 text-[11px] text-mejunje-griscalido font-sans">
                       {s.location && (
                         <div className="flex items-center gap-1.5">
-                          <MapPin className="w-3.5 h-3.5 text-mejunje-salmon" /> {s.location}
+                          <MapPin className="w-3.5 h-3.5 text-mejunje-salvia" /> {s.location}
                         </div>
                       )}
                       <div className="flex items-center gap-1.5">
-                        <Clock className="w-3.5 h-3.5 text-mejunje-ambar" /> Plazo de entrega: <strong className="text-mejunje-tinta">{s.deliveryTimeDays} días</strong>
+                        <Clock className="w-3.5 h-3.5 text-mejunje-salviaoscura" /> Plazo de entrega: <strong className="text-mejunje-tinta">{s.deliveryTimeDays} días</strong>
                       </div>
                       <div>
                         Compra Mínima ARS: <strong className="text-mejunje-tinta">${s.minPurchaseARS.toLocaleString('es-AR')}</strong>
@@ -416,7 +416,7 @@ export default function ComprasPage() {
                     </div>
 
                     {s.notes && (
-                      <p className="mt-3 p-3 rounded-2xl bg-mejunje-papel/40 border border-mejunje-border text-[10px] text-mejunje-tabaco italic">
+                      <p className="mt-3 p-3 rounded-2xl bg-mejunje-papel/40 border border-mejunje-border text-[10px] text-mejunje-griscalido italic">
                         {s.notes}
                       </p>
                     )}

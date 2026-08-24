@@ -6,8 +6,8 @@
 
 @layer base {
   body {
-    background-color: #F5EFE6;
-    color: #292622;
+    background-color: #FCFBF8;
+    color: #1C1917;
     font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     letter-spacing: -0.01em;
   }
@@ -21,15 +21,14 @@
 /* Authentic Antique Typewriter Ink Texture & analog effects */
 .typewriter-title {
   font-family: 'Special Elite', 'Courier Prime', Courier, monospace;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #292622;
-  text-shadow: 0.2px 0.2px 0 rgba(41, 38, 34, 0.2);
+  color: #1C1917;
 }
 
 .typewriter-sub {
   font-family: 'Courier Prime', 'Special Elite', Courier, monospace;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.06em;
 }
 
 .font-editorial {
@@ -38,26 +37,28 @@
 
 /* Subtle Atelier Card Style */
 .atelier-sheet {
-  background-color: #FAF6F0;
-  border: 1px solid #E5D9C8;
+  background-color: #FFFFFF;
+  border: 1px solid #E9E1D7;
   border-radius: 1.25rem;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.03), 0 1px 2px -1px rgba(0, 0, 0, 0.03);
   transition: all 0.2s ease-in-out;
 }
 .atelier-sheet:hover {
-  border-color: #D7C3A8;
+  border-color: #A6B39A;
+  box-shadow: 0 4px 12px -2px rgba(119, 134, 111, 0.08);
 }
 
 /* Discrete Stamp / Tag */
 .atelier-tag {
   font-family: 'Courier Prime', Courier, monospace;
   font-size: 0.6875rem;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  padding: 0.2rem 0.6rem;
+  padding: 0.25rem 0.65rem;
   border-radius: 9999px;
-  background-color: rgba(215, 195, 168, 0.35);
-  color: #5A4030;
-  border: 1px solid rgba(184, 160, 134, 0.4);
+  background-color: #F7F4EE;
+  color: #596454;
+  border: 1px solid #E9E1D7;
 }
 
 /* Minimalist Scrollbar */
@@ -66,18 +67,18 @@
   height: 5px;
 }
 ::-webkit-scrollbar-track {
-  background: #F5EFE6;
+  background: #FCFBF8;
 }
 ::-webkit-scrollbar-thumb {
-  background: #D7C3A8;
+  background: #E9E1D7;
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #B8A086;
+  background: #A6B39A;
 }
 
 /* Delicate selection styling */
 ::selection {
-  background-color: #D7C3A8;
-  color: #292622;
+  background-color: #F7F4EE;
+  color: #596454;
 }

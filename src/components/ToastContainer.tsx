@@ -19,20 +19,20 @@ export default function ToastContainer() {
         return (
           <div
             key={toast.id}
-            className={`pointer-events-auto flex items-start gap-3 p-4 rounded-2xl shadow-atelier-lg border text-xs font-sans font-medium transition-all transform translate-y-0 animate-in fade-in slide-in-from-bottom-2 bg-mejunje-card text-mejunje-tinta ${
+            className={`pointer-events-auto flex items-start gap-3 p-4 rounded-2xl shadow-xl border text-xs font-sans font-medium transition-all transform translate-y-0 animate-in fade-in slide-in-from-bottom-2 bg-white text-mejunje-tinta ${
               isSuccess
-                ? 'border-emerald-600/50'
+                ? 'border-emerald-500/40'
                 : isWarning
-                ? 'border-amber-500/50'
+                ? 'border-amber-500/40'
                 : isError
-                ? 'border-mejunje-salmon'
+                ? 'border-rose-500/40'
                 : 'border-mejunje-border'
             }`}
           >
             {isSuccess && <CheckCircle2 className="w-5 h-5 text-emerald-700 shrink-0 mt-0.5" />}
             {isWarning && <AlertCircle className="w-5 h-5 text-amber-700 shrink-0 mt-0.5" />}
-            {isError && <AlertCircle className="w-5 h-5 text-mejunje-salmon shrink-0 mt-0.5" />}
-            {!isSuccess && !isWarning && !isError && <Info className="w-5 h-5 text-mejunje-tabaco shrink-0 mt-0.5" />}
+            {isError && <AlertCircle className="w-5 h-5 text-rose-700 shrink-0 mt-0.5" />}
+            {!isSuccess && !isWarning && !isError && <Info className="w-5 h-5 text-mejunje-salviaoscura shrink-0 mt-0.5" />}
 
             <div className="flex-1 leading-relaxed">{toast.message}</div>
 

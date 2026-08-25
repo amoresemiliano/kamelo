@@ -55,6 +55,9 @@ import {
   Truck as LucideTruck,
   Phone as LucidePhone,
   Mail as LucideMail,
+  Menu as LucideMenu,
+  PanelLeft as LucidePanelLeft,
+  PanelLeftClose as LucidePanelLeftClose,
 } from 'lucide-react';
 
 export {
@@ -86,6 +89,9 @@ export {
   Scale,
 };
 
+export const Menu = LucideMenu;
+export const PanelLeft = LucidePanelLeft;
+export const PanelLeftClose = LucidePanelLeftClose;
 export const Users = LucideUsers;
 export const UserCheck = LucideUserCheck;
 export const UserPlus = LucideUserPlus;

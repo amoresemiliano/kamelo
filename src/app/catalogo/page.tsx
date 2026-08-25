@@ -243,7 +243,7 @@ export default function CatalogoPage() {
                       <h2 className="font-bold text-lg sm:text-xl text-white group-hover:text-mejunje-arena transition-colors drop-shadow-xs">
                         {product.name}
                       </h2>
-                      <p className="text-[11px] text-white/90 line-clamp-1">{product.shortDescription || 'Perfumería Artesanal'}</p>
+                      <p className="text-[11px] text-white/90 line-clamp-1">{product.shortDescription || 'Atelier de Aromas'}</p>
                     </div>
                   </div>
 
